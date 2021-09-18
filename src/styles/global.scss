@@ -1,0 +1,431 @@
+$background-color: #fbfffaff;
+$primary-color: #375037ff;
+$secondary-color: #5d985dff;
+$accent-one: #d6ffd6ff;
+$accent-two: #c8eaebff;
+$font-stack: "Montserrat", sans-serif;
+$breakpoint: 37.5rem;
+$content-max-width: 60rem;
+$h1-font-size: 3.25rem;
+$h2-font-size: 2.5rem;
+$h-margin-ratio: 0.67;
+
+html {
+  background-color: $background-color;
+  font: 100% $font-stack;
+}
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+.main {
+  max-width: $content-max-width;
+  margin: 0rem auto 3rem;
+  overflow: hidden;
+  padding: 0rem 1rem;
+}
+.fullScreen {
+  max-width: unset;
+}
+.sr-only {
+  position: absolute;
+  left: -999em;
+  right: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: $primary-color;
+}
+h1 {
+  font-size: $h1-font-size;
+  margin: $h-margin-ratio * $h1-font-size 0rem;
+}
+h2 {
+  font-size: $h2-font-size;
+  margin: $h-margin-ratio * $h2-font-size 0rem;
+}
+
+.blog-post {
+  a {
+    text-decoration: none;
+    color: $primary-color;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:visited {
+      color: $secondary-color;
+    }
+  }
+  p {
+    line-height: 1.3;
+  }
+  .blog-post-date {
+    font-size: 0.8rem;
+  }
+  .blog-post-content {
+    font-family: $font-stack;
+    font-size: 1.6rem;
+    margin: 1.5rem 0rem;
+  }
+}
+.blog-posts {
+  .blog-post {
+    margin-top: 1.5rem;
+    h1 {
+      margin: 0rem 0rem 1rem;
+    }
+  }
+  .blog-post-link {
+    text-decoration: none;
+    color: $primary-color;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:visited {
+      color: $secondary-color;
+    }
+  }
+}
+.tag-container a {
+  color: $background-color;
+}
+.tag {
+  font-family: $font-stack;
+  font-size: 1rem;
+  color: $background-color !important;
+  text-transform: lowercase;
+  font-weight: 500;
+  background-color: $secondary-color;
+  border-radius: 3px;
+  margin-right: 0.5rem;
+  padding: 0.5rem 0.5rem;
+  text-decoration: none;
+  float: left;
+  display: block;
+  &:hover {
+    background-color: $background-color;
+    color: $secondary-color !important;
+    font-weight: 600;
+    padding: 0.25rem;
+    border: 0.25rem solid $secondary-color;
+    text-decoration: none;
+  }
+}
+.tag-list ul {
+  padding-left: 0rem;
+}
+.tag-list li {
+  padding-bottom: 0.25rem;
+  list-style-type: none;
+}
+.tag-list a {
+  text-decoration: none;
+  color: $primary-color;
+  &:hover {
+    text-decoration: underline;
+  }
+  &:visited {
+    color: $secondary-color;
+  }
+}
+.subtitle {
+  font-style: "italic";
+  font-weight: 600;
+}
+
+header.header {
+  margin: 0.5rem 1rem;
+}
+
+.header {
+  .nav-container {
+    .nav-list-item {
+      text-decoration: none;
+      color: $primary-color;
+      font-weight: 600;
+      padding: 1rem 0.6rem;
+    }
+    .nav-list-item:first-child {
+      font-weight: 800;
+    }
+    .nav-list {
+      text-align: center;
+      padding-inline-start: 0rem;
+    }
+    a.nav-list-item {
+      line-height: 2.43rem;
+      &:hover {
+        background-color: $accent-two;
+      }
+    }
+  }
+}
+.search-input {
+  border: 0.2rem solid $primary-color;
+  border-radius: 0.333rem;
+  padding: 0.5rem;
+  background-color: $background-color;
+  font-family: $font-stack;
+  color: $primary-color;
+  box-sizing: border-box;
+}
+
+.footer {
+  background-color: $primary-color;
+  color: $background-color;
+  height: 10rem;
+  margin-top: 2rem;
+}
+.footer-container {
+  max-width: $content-max-width;
+  margin: 0 auto;
+  padding: 2rem 1rem 0rem;
+  .footer-nav-list {
+    .footer-nav-list-item {
+      line-height: 2.028rem;
+    }
+  }
+}
+.footer-foundation {
+  background-color: $secondary-color;
+  color: $accent-one;
+  .footer-container {
+    margin: 0 auto;
+    max-width: $content-max-width;
+    padding: 2rem 1rem;
+    a {
+      color: $accent-one;
+    }
+  }
+}
+.footer-social {
+  float: right;
+}
+.footer-nav-list {
+  padding-inline-start: 0rem;
+}
+.footer-nav-link {
+  text-decoration: none;
+  color: $background-color;
+  font-weight: 600;
+  display: block;
+  float: left;
+}
+.footer-nav-list-item {
+  padding: 1rem 0.6rem;
+  &:hover {
+    background-color: $accent-one;
+    color: $primary-color;
+  }
+}
+.footer-nav-list-item.icon {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+/* Desktop */
+@media screen and (min-width: $breakpoint) {
+  .header {
+    .nav-container {
+      height: 5rem;
+      max-width: $content-max-width;
+      margin: 0 auto;
+      border-bottom: 0.25rem solid $accent-two;
+    }
+    .nav-active {
+      border-bottom: 0.2rem solid $primary-color;
+    }
+    .nav-list-item.nav-hamburger {
+      display: none;
+    }
+    .nav-list-item {
+      float: left;
+      display: block;
+      a {
+        line-height: 2.413rem;
+      }
+    }
+    .nav-list-item.search-box {
+      display: block;
+      float: right;
+      text-align: left;
+    }
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: $breakpoint) {
+  h1 {
+    font-size: 2rem;
+    margin: 0rem 0rem 2rem * $h-margin-ratio;
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin: 1.5rem * $h-margin-ratio 0rem;
+  }
+  .header {
+    border-bottom: 0.1875rem solid $accent-two;
+    .nav-list {
+      overflow: hidden;
+    }
+    .nav-list.display {
+      border-bottom: 0.2rem solid $accent-two;
+    }
+    .nav-list-item {
+      text-align: left;
+    }
+    .nav-list-item:first-child {
+      font-size: 2rem;
+      float: left;
+    }
+    .nav-list-item:not(:first-child) {
+      display: none;
+    }
+    .nav-active:not(:first-child) {
+      border-left: 0.2rem solid $primary-color;
+    }
+    .nav-list-item.nav-hamburger {
+      float: right;
+      display: block;
+      height: 2rem;
+      width: 2rem;
+      margin-right: 1rem;
+      border: none;
+      background-color: transparent;
+    }
+    .nav-list-item.display {
+      display: block;
+      float: none;
+      padding-bottom: 0rem;
+    }
+    .nav-list-item.nav-hamburger.display {
+      position: absolute;
+      right: 1rem;
+      margin-right: 0rem;
+      top: 0;
+    }
+    .search-box {
+      display: none;
+    }
+    .search-box.display {
+      padding-bottom: 0.5rem;
+    }
+  }
+  .main {
+    margin: 0rem 0.5rem;
+    padding: 0rem 0.5rem;
+  }
+  .blog-post {
+    margin-top: 0rem;
+    .blog-post-date {
+      font-size: 0.8rem;
+    }
+    .blog-post-content {
+      font-size: 1rem;
+      ol {
+        padding-inline-start: 1rem;
+      }
+    }
+  }
+  .blog-post:first-child h1 {
+    margin-top: 0rem;
+  }
+  .tag-list {
+    overflow: hidden;
+  }
+  .tag {
+    margin-top: 1rem;
+  }
+  .footer {
+    overflow: hidden;
+    height: fit-content;
+    padding-bottom: 1rem;
+
+    .footer-container {
+      padding-top: 0rem;
+    }
+    .footer-nav-list {
+      display: block;
+    }
+    .footer-nav-link {
+      float: none;
+    }
+    .footer-nav-list-item {
+      padding: 1rem 0.6rem 0rem 0.6rem;
+    }
+    .footer-social {
+      float: left;
+    }
+  }
+}
+
+.caption {
+  font-size: 1rem;
+  font-style: italic;
+  text-align: center;
+}
+
+/* splash page */
+  //Primary-color
+  $fern-green: #4a744aff;
+  //secondary-color
+  $eton-blue: #9acc9aff;
+  $celadon: #b8e6b8ff;
+  // accent-one
+  $nyanza: #daffdaff;
+.body-splash {
+  background-color: $nyanza;
+	animation-name: backgroundColorPalette;
+	animation-duration: 5s;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+	animation-timing-function: linear; 
+	/* linear is enabled default, it’s not necessary to add it make it work but it can make your code more expressive */
+}
+
+@keyframes backgroundColorPalette {
+	0% {
+		background:$nyanza;
+	}
+	5% {
+background: $accent-one;
+	}
+	10% {
+background: $celadon;
+	}
+	20% {
+background: $eton-blue;
+	}
+	30% {
+background: $secondary-color;
+	}
+  40% {
+background: $fern-green;
+	}
+  50% {
+background: $primary-color;
+	}
+  60% {
+background: $fern-green;
+	}
+  70% {
+		background: $secondary-color;
+	}
+  80% {
+    background: $eton-blue;
+  }
+  90% {
+    background: $celadon;
+  }
+  95% {
+    background: $accent-one;
+  }
+  100% {
+    background: $nyanza;
+  }
+}
