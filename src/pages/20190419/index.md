@@ -11,7 +11,7 @@ slug: ""
 1. Stop people from banging their head against a brick wall
 1. Provide non-technical users the ability to manage a rich text e-mail template via Google Sheets without editing any Apps Script code.
 
-![Brick wall](../../images/robieHouse.jpeg)
+![Brick wall](../../images/posts/20190419/robieHouse.jpeg)
 <figcaption class="caption">“Robie House, Chicago, IL” by Mark Vogelgesang</figcaption>
 
 ## The Situation
