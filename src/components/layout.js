@@ -28,6 +28,7 @@ export default function Layout({ children }) {
     <div>
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="manifest" href="src/images/favicon/site.webmanifest"/>
       </Helmet>
       <Navigation props={data}/>
       
