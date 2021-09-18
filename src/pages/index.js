@@ -9,7 +9,7 @@ export default function IndexPage({ data }) {
 
   return (
     <Layout>
-      <Helmet title={`Mark Vogelgesang`} />
+      <Helmet title={`MV - Home`} />
       <div className="blog-posts">
         {posts
           .filter((post) => post.node.frontmatter.title.length > 0)

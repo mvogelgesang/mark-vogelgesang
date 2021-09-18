@@ -8,7 +8,7 @@ const NotFoundPage = () => {
   return (
     <Layout>
       <div>
-        <Helmet title="404 - Not found"></Helmet>
+        <Helmet title="MV - 404 Page Not found"></Helmet>
         <h1>Whoops</h1>
         <p>
           Looks like this page doesn't exist.

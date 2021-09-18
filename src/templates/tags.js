@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
 import Layout from "../components/layout";
 
@@ -15,6 +16,7 @@ const Tags = ({ pageContext, data }) => {
 
   return (
     <Layout>
+      <Helmet title={`MV - Tags`} />
       <div>
         <h1>{tagHeader}</h1>
         <p className="subtitle">{tagSubtitle}</p>
