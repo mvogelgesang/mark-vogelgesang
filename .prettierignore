@@ -2,5 +2,6 @@
 build
 coverage
 .cache
+.firebase
 node_modules
 public

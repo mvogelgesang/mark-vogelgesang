@@ -24,7 +24,7 @@ export default function Footer(props) {
         </div>
         <div className="footer-social">
           <div className="footer-nav-list">
-            <a className="footer-nav-link" href={metadata.socialMedia.linkedin}>
+            <a className="footer-nav-link" href={metadata.socialMedia.linkedin} aria-label="LinkedIn">
               <div className="footer-nav-list-item icon">
                 <FontAwesomeIcon icon={["fab", "linkedin"]} size="2x" />
               </div>
@@ -32,6 +32,7 @@ export default function Footer(props) {
             <a
               className="footer-nav-link"
               href={metadata.socialMedia.github}
+              aria-label="Github"
             >
               <div className="footer-nav-list-item icon">
                 <FontAwesomeIcon icon={["fab", "github"]} size="2x" />

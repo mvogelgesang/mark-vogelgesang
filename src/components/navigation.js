@@ -2,7 +2,6 @@ import React, { useState } from "react"; //
 import { Link} from "gatsby";
 import "./utils/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Search from "./search";
 
 const ListLink = (props) => (
   <Link to={props.to} className={props.className} activeClassName="nav-active" key={props.label}>
