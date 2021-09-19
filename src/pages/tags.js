@@ -6,8 +6,6 @@ import Layout from "../components/layout";
 
 const TagsPage = ({ data }) => {
   const allTags = data.allMarkdownRemark.group;
-  console.log(allTags);
-  console.log(allTags[0])
   return (
     <Layout>
       <div>

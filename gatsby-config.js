@@ -14,10 +14,6 @@ module.exports = {
         label: "Posts",
         path: "/posts",
       },
-      {
-        label: "About",
-        path: "/about",
-      }
     ],
     siteUrl: "https://mvogelgesang.com"
   },
@@ -53,7 +49,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        icon: "src/images/favicon/android-chrome-512x512.png",
+        theme_color: `#375037`,
+        icon: `src/images/favicon/android-chrome-512x512.png`,
         icons: [
           {
             src: `src/images/favicon/android-chrome-192x192.png`,
