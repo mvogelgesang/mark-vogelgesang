@@ -25,10 +25,6 @@ export default function Navigation(props) {
           </ListLink>
           );
           })}
-          <Search
-            className={`nav-list-item ${menuClosed ? "" : "display"}`}
-            searchText="Search"
-          />
           <button onClick={() => setActive(!menuClosed)} 
             className={`nav-list-item nav-hamburger ${
               menuClosed ? "" : "display"

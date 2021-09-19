@@ -10,7 +10,6 @@ const ListLink = (props) => (
 );
 
 export default function Footer(props) {
-  console.log(props);
     const metadata = props.props.site.siteMetadata; 
     return (
     <footer className="footer">
