@@ -26,8 +26,11 @@ export default function Layout({ children }) {
       `}
       render={(data) => (
     <div>
-      <Helmet>
+      <Helmet htmlAttributes={{
+          lang: 'en',
+        }}>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charSet="utf-8" />
         <link rel="manifest" href="src/images/favicon/site.webmanifest"/>
       </Helmet>
       <Navigation props={data}/>
