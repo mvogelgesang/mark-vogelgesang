@@ -39,7 +39,7 @@ module.exports = {
           cookie_expires: 0,
         },
       },
-    },
+    },  
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
@@ -82,6 +82,13 @@ module.exports = {
           },
         ],
       },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        sitemap: 'https://mvogelgesang.com/sitemap.xml',
+        policy: [{ userAgent: '*', allow: '/' }]
+      }
     },
     {
       resolve: `gatsby-transformer-remark`,
