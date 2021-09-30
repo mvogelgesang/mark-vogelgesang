@@ -5,6 +5,7 @@
   "requires": true,
   "packages": {
     "": {
+      "name": "mark-vogelgesang",
       "version": "1.0.0",
       "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.35",
@@ -34,7 +35,8 @@
         "react-burger-menu": "^3.0.6",
         "react-dom": "^17.0.2",
         "react-helmet": "^6.1.0",
-        "react-router-dom": "^5.2.0"
+        "react-router-dom": "^5.2.0",
+        "sass": "^1.42.1"
       },
       "devDependencies": {
         "pa11y-ci": "^2.4.2",
@@ -18190,7 +18192,6 @@
       "version": "1.42.1",
       "resolved": "https://registry.npmjs.org/sass/-/sass-1.42.1.tgz",
       "integrity": "sha512-/zvGoN8B7dspKc5mC6HlaygyCBRvnyzzgD5khiaCfglWztY99cYoiTUksVx11NlnemrcfH5CEaCpsUKoW0cQqg==",
-      "peer": true,
       "dependencies": {
         "chokidar": ">=3.0.0 <4.0.0"
       },
@@ -35457,7 +35458,6 @@
       "version": "1.42.1",
       "resolved": "https://registry.npmjs.org/sass/-/sass-1.42.1.tgz",
       "integrity": "sha512-/zvGoN8B7dspKc5mC6HlaygyCBRvnyzzgD5khiaCfglWztY99cYoiTUksVx11NlnemrcfH5CEaCpsUKoW0cQqg==",
-      "peer": true,
       "requires": {
         "chokidar": ">=3.0.0 <4.0.0"
       }
