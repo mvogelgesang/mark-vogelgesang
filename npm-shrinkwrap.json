@@ -1917,9 +1917,9 @@
       "integrity": "sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A=="
     },
     "node_modules/@graphql-tools/import": {
-      "version": "6.4.1",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/import/-/import-6.4.1.tgz",
-      "integrity": "sha512-nFWo2dI9XXs0hsBscHnTSJNfgFq2gA1bw0qbCXyQga1PJclZViO8SxcHqCf2JmShRpTFsyzsDjKA8xGKDDs8PQ==",
+      "version": "6.4.2",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/import/-/import-6.4.2.tgz",
+      "integrity": "sha512-FOiusunuS9STdF3mrnOTvNJauM/P85Sq3kVar8F0/OXyFL+AxuTCF/RKTXMUls2owSQN2VV53PCkzK9Rfg5S4A==",
       "dependencies": {
         "resolve-from": "5.0.0",
         "tslib": "~2.3.0"
@@ -10248,7 +10248,6 @@
       "version": "3.14.0",
       "resolved": "https://registry.npmjs.org/gatsby-transformer-sharp/-/gatsby-transformer-sharp-3.14.0.tgz",
       "integrity": "sha512-p0bBu4Sheo4MrrrTRXEu+jcOvsvKmzr1Wc/CQ9VD1U7vTPj74a8JiMJ9GrXrkei5qcXXeXACjBTu5F0Hyg6qMQ==",
-      "license": "MIT",
       "dependencies": {
         "@babel/runtime": "^7.15.4",
         "bluebird": "^3.7.2",
@@ -23131,9 +23130,9 @@
       }
     },
     "@graphql-tools/import": {
-      "version": "6.4.1",
-      "resolved": "https://registry.npmjs.org/@graphql-tools/import/-/import-6.4.1.tgz",
-      "integrity": "sha512-nFWo2dI9XXs0hsBscHnTSJNfgFq2gA1bw0qbCXyQga1PJclZViO8SxcHqCf2JmShRpTFsyzsDjKA8xGKDDs8PQ==",
+      "version": "6.4.2",
+      "resolved": "https://registry.npmjs.org/@graphql-tools/import/-/import-6.4.2.tgz",
+      "integrity": "sha512-FOiusunuS9STdF3mrnOTvNJauM/P85Sq3kVar8F0/OXyFL+AxuTCF/RKTXMUls2owSQN2VV53PCkzK9Rfg5S4A==",
       "requires": {
         "resolve-from": "5.0.0",
         "tslib": "~2.3.0"
