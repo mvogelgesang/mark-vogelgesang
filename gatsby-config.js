@@ -24,6 +24,7 @@ module.exports = {
     "gatsby-plugin-react-helmet",
     "react-burger-menu",
     "react-router-dom",
+    "gatsby-plugin-sass",
     "gatsby-plugin-sharp",
     "gatsby-plugin-sitemap",
     {
