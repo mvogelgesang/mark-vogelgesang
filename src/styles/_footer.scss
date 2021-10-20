@@ -52,10 +52,12 @@
 }
 .footer-nav-list-item {
   padding: 1rem 0.75rem;
-  animation: transform 0.4s;
-  &:hover {
-    color: $accent-one;
-    transform: scale(1.5);
+  @include desktop {
+    animation: transform 0.4s;
+    &:hover {
+      color: $accent-one;
+      transform: scale(1.5);
+    }
   }
   @include mobile {
     padding: 1rem 0.6rem 0rem 0.6rem;
