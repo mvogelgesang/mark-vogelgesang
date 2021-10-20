@@ -9,17 +9,15 @@ import { Link, graphql } from "gatsby";
 const Tags = ({ pageContext, data }) => {
   const { tag } = pageContext;
   const { edges, totalCount } = data.allMarkdownRemark;
-  const tagHeader = `"${tag}"`;
-  const tagSubtitle =`${totalCount} post${
-    totalCount === 1 ? "" : "s"
-  }`;
+  const tagHeader = `Tag - "${tag}"`;
+  const tagSubtitle = `${totalCount} post${totalCount === 1 ? "" : "s"}`;
 
   return (
     <Layout>
       <Helmet title={`MV - Tags`} />
       <div>
         <h1>{tagHeader}</h1>
-        <p className="subtitle">{tagSubtitle}</p>
+        <p className="tag-subtitle">{tagSubtitle}</p>
         <div className="tag-list">
           <ul>
             {edges.map(({ node }) => {
@@ -33,7 +31,7 @@ const Tags = ({ pageContext, data }) => {
               );
             })}
           </ul>
-        <Link to="/tags">All tags</Link>
+          <Link to="/tags">All tags</Link>
         </div>
       </div>
     </Layout>
@@ -66,7 +64,7 @@ Tags.propTypes = {
 export default Tags;
 
 export const pageQuery = graphql`
-  query($tag: String) {
+  query ($tag: String) {
     allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
