@@ -1,0 +1,26 @@
+.about-container {
+  @include desktop {
+    display: flex;
+  }
+  margin-top: 2rem;
+}
+.about-img {
+  @include desktop {
+    float: left;
+    width: 33%;
+    height: 100%;
+  }
+  @include mobile {
+    width: 100%;
+  }
+}
+.about-content {
+  @include desktop {
+    display: inline;
+    width: 67%;
+    padding-left: 2rem;
+  }
+  @include mobile {
+    width: 100%;
+  }
+}

@@ -21,10 +21,12 @@ $h-margin-ratio: 0.67;
   }
 }
 
+@import "about";
 @import "blog";
 @import "footer";
 @import "header";
 @import "tag";
+@import "utilities";
 
 html {
   background-color: $background-color;
