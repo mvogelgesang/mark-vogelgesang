@@ -1,11 +1,11 @@
 /*https://dennytek.com/blog/personal-site-with-gatsby-part-7*/
 import React from "react";
 import { Link, graphql } from "gatsby";
-import kebabCase from "lodash/kebabCase"
+import kebabCase from "lodash/kebabCase";
 import Layout from "../components/layout";
 
 const TagsPage = ({ data }) => {
-  const allTags = data.allMarkdownRemark.group;
+  const allTags = data.allMdx.group;
   return (
     <Layout>
       <div>
@@ -30,7 +30,7 @@ export default TagsPage;
 
 export const pageQuery = graphql`
   query {
-    allMarkdownRemark(limit: 2000, sort: {fields: frontmatter___tags, order: ASC}) {
+    allMdx(limit: 2000, sort: { fields: frontmatter___tags, order: ASC }) {
       group(field: frontmatter___tags) {
         fieldValue
         totalCount

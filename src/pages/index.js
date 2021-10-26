@@ -5,7 +5,7 @@ import Layout from "../components/layout";
 
 // markup
 export default function IndexPage({ data }) {
-  const { edges: posts } = data.allMarkdownRemark;
+  const { edges: posts } = data.allMdx;
 
   return (
     <Layout>
@@ -21,7 +21,6 @@ export default function IndexPage({ data }) {
                     {post.frontmatter.title}
                   </Link>
                 </h1>
-                <div className="blog-post-date">{post.frontmatter.date}</div>
                 <p className="blog-post-content">{post.frontmatter.slug}</p>
               </div>
             );
@@ -33,10 +32,10 @@ export default function IndexPage({ data }) {
 
 export const pageQuery = graphql`
   query IndexQuery {
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+    allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {
-          excerpt(pruneLength: 300, format:HTML)
+          excerpt(pruneLength: 300)
           id
           frontmatter {
             title

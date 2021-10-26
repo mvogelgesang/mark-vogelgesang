@@ -2,7 +2,7 @@
 path: "/2019-04-19/Sheets-to-Email-with-Google-Apps-Script"
 date: 2019-04-19
 title: "Sheets to Email with Google Apps Script"
-tags: ["apps script", "Google sheets"]
+tags: ["apps script", "google sheets"]
 slug: "Regularly scheduled program reviews should be an exercise in sharing the right information and discussing paths forward. Instead, too many teams are focusing on overly detailed power point criteria and manual processes. Automation with Google Apps Script can save everyone a lot of grief."
 ---
 
@@ -12,7 +12,8 @@ slug: "Regularly scheduled program reviews should be an exercise in sharing the 
 1. Provide non-technical users the ability to manage a rich text e-mail template via Google Sheets without editing any Apps Script code.
 
 ![Brick wall](../../images/posts/20190419/robieHouse.jpeg)
-<figcaption class="caption">“Robie House, Chicago, IL” by Mark Vogelgesang</figcaption>
+
+<figcaption className="caption">“Robie House, Chicago, IL” by Mark Vogelgesang</figcaption>
 
 ## The Situation
 
@@ -30,7 +31,7 @@ Workaround
 Build a converter! Everything needed exists within the `RichTextValue` class but it requires some elbow grease.
 A `RichTextValue` object is made up of one or more `RichTextValue` objects that can be broken down into what Google calls, Runs. Runs are segments of contiguous text that contain the same formatting. For instance, the following text sentence, “The **quick** brown **_fox ju_**mps…” would be segmented as follows:
 
-```[“The ”, ”quick ”, “brown ”, “fox ju”, “mps…”]```
+`[“The ”, ”quick ”, “brown ”, “fox ju”, “mps…”]`
 
 Since each Run is an instance of the `RichTextValue` class it contains attributes stored in the `TextStyle` class and are accessible via `getTextStyle()` method. `TextStyle` provides information about all of the styling attributes for a given Run. Using this information, the `RichTextValue` can be converted into a string of HTML which gets passed to `theMailApp.sendEmail()` function as an attribute of htmlBody.
 
@@ -41,5 +42,3 @@ The two relevant conversion functions are below along with more detailed comment
 `gist:mvogelgesang/8fe14931d79ed79d73154d969f02aada`
 
 This article originally appeared on Medium at https://medium.com/@mvogelgesang/sheets-to-email-with-google-apps-script-fa7eac0b90c5
-
-

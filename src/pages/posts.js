@@ -4,7 +4,7 @@ import { Link, graphql } from "gatsby";
 import Layout from "../components/layout";
 
 export default function Posts({ data }) {
-  const { edges: posts } = data.allMarkdownRemark;
+  const { edges: posts } = data.allMdx;
 
   return (
     <Layout>
@@ -32,16 +32,17 @@ export default function Posts({ data }) {
 }
 export const pageQuery = graphql`
   query PostQuery {
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+    allMdx(sort: { order: DESC, fields: frontmatter___date }) {
       edges {
         node {
-          excerpt(pruneLength: 250)
+          excerpt(pruneLength: 300)
           id
           frontmatter {
-            title
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "MMMM DD YYYY")
             path
             slug
+            tags
+            title
           }
         }
       }
