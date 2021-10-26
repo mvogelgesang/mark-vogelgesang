@@ -1,22 +1,28 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Link, graphql } from "gatsby";
-import kebabCase from "lodash/kebabCase"
+import { MDXRenderer } from "gatsby-plugin-mdx";
+import kebabCase from "lodash/kebabCase";
 import Layout from "../components/layout";
 
 export default function Template({ data }) {
-  const { markdownRemark: post } = data;
+  const post = data.mdx;
   return (
     <Layout>
       <article>
-        <Helmet title={`MV - ${post.frontmatter.title}`} />
+        <Helmet>
+          <title>{`MV - ${post.frontmatter.title}`} </title>
+          <style>
+            @import
+            url("https://github.githubassets.com/assets/gist-embed-b3b573358bfc66d89e1e95dbf8319c09.css");
+          </style>
+        </Helmet>
         <div className="blog-post">
           <h1>{post.frontmatter.title}</h1>
-          <div className="blog-post-date">{post.frontmatter.date} </div>
-          <div
-            className="blog-post-content"
-            dangerouslySetInnerHTML={{ __html: post.html }}
-          />
+          <div className="blog-post-date">{post.frontmatter.date}</div>
+          <div className="blog-post-content">
+            <MDXRenderer>{post.body}</MDXRenderer>
+          </div>
           {post.frontmatter.tags ? (
             <div className="tags-container">
               <div>
@@ -38,14 +44,14 @@ export default function Template({ data }) {
 
 export const pageQuery = graphql`
   query BlogPostByPath($path: String!) {
-    markdownRemark(frontmatter: { path: { eq: $path } }) {
-      html
+    mdx(frontmatter: { path: { eq: $path } }) {
+      body
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "MMMM DD YYYY")
         path
-        title
-        tags
         slug
+        tags
+        title
       }
     }
   }

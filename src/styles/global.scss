@@ -3,11 +3,12 @@ $primary-color: #375037ff;
 $secondary-color: #5d985dff;
 $accent-one: #d6ffd6ff;
 $accent-two: #c8eaebff;
+$white: #fff;
 $font-stack: "Montserrat", sans-serif;
 $breakpoint: 37.5rem;
 $content-max-width: 60rem;
-$h1-font-size: 3.25rem;
-$h2-font-size: 2.5rem;
+$h1-font-size: 2.25rem;
+$h2-font-size: 1.75rem;
 $h-margin-ratio: 0.67;
 
 @mixin mobile {

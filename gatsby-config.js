@@ -86,16 +86,13 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-robots-txt",
+      resolve: "gatsby-plugin-mdx",
       options: {
-        sitemap: "https://mvogelgesang.com/sitemap.xml",
-        policy: [{ userAgent: "*", allow: "/" }],
-      },
-    },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
+        defaultLayouts: {
+          default: require.resolve("./src/components/layout.js"),
+        },
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -106,7 +103,6 @@ module.exports = {
             resolve: "gatsby-remark-embed-gist",
             options: {
               // Optional:
-
               // the github handler whose gists are to be accessed
               username: "mvogelgesang",
 
@@ -121,6 +117,13 @@ module.exports = {
             },
           },
         ],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        sitemap: "https://mvogelgesang.com/sitemap.xml",
+        policy: [{ userAgent: "*", allow: "/" }],
       },
     },
     {
