@@ -16,8 +16,9 @@ export default function Layout({ children }) {
           site {
             siteMetadata {
               socialMedia {
-                github
-                linkedin
+                name
+                url
+                icon
               }
               navigation {
                 label

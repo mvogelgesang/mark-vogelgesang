@@ -1,10 +1,18 @@
 module.exports = {
   siteMetadata: {
     title: "Mark Vogelgesang",
-    socialMedia: {
-      linkedin: "https://www.linkedin.com/in/markovogelgesang/",
-      github: "https://github.com/mvogelgesang",
-    },
+    socialMedia: [
+      {
+        name: "linkedin",
+        url: "https://www.linkedin.com/in/markovogelgesang/",
+        icon: ["fab", "linkedin"],
+      },
+      {
+        name: "github",
+        url: "https://github.com/mvogelgesang",
+        icon: ["fab", "github"],
+      },
+    ],
     navigation: [
       {
         label: "MV",

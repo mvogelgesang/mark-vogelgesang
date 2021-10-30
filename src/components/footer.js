@@ -1,5 +1,5 @@
 import React from "react";
-import { Link} from "gatsby";
+import { Link } from "gatsby";
 import "./utils/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -10,40 +10,40 @@ const ListLink = (props) => (
 );
 
 export default function Footer(props) {
-    const metadata = props.props.site.siteMetadata; 
-    return (
+  const metadata = props.props.site.siteMetadata;
+  return (
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-nav-list">
-        {metadata.navigation.map((x) => { return (
-          <ListLink to={x.path} className="footer-nav-link" key={x.label}>
-            {x.label}
-          </ListLink>
-          );
+          {metadata.navigation.map((element) => {
+            return (
+              <ListLink
+                to={element.path}
+                className="footer-nav-link"
+                key={element.label}
+              >
+                {element.label}
+              </ListLink>
+            );
           })}
         </div>
         <div className="footer-social">
           <div className="footer-nav-list">
-            <a className="footer-nav-link" href={metadata.socialMedia.linkedin} aria-label="LinkedIn">
-              <div className="footer-nav-list-item icon">
-                <FontAwesomeIcon icon={["fab", "linkedin"]} size="2x" />
-              </div>
-            </a> 
-            <a
-              className="footer-nav-link"
-              href={metadata.socialMedia.github}
-              aria-label="Github"
-            >
-              <div className="footer-nav-list-item icon">
-                <FontAwesomeIcon icon={["fab", "github"]} size="2x" />
-              </div>
-            </a>
+            {metadata.socialMedia.map((element) => {
+              return (
+                <ListLink
+                  to={element.url}
+                  className="footer-nav-link"
+                  key={element.name}
+                  ariaLabel={element.name}
+                >
+                  <FontAwesomeIcon icon={element.icon} size="2x" />
+                </ListLink>
+              );
+            })}
           </div>
         </div>
       </div>
-     
     </footer>
-    )
-  }
-  
-
+  );
+}
