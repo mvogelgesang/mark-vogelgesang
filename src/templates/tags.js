@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
 import Layout from "../components/layout";
 
@@ -13,8 +12,7 @@ const Tags = ({ pageContext, data }) => {
   const tagSubtitle = `${totalCount} post${totalCount === 1 ? "" : "s"}`;
 
   return (
-    <Layout>
-      <Helmet title={`MV - Tags`} />
+    <Layout pageTitle={tagHeader}>
       <div>
         <h1>{tagHeader}</h1>
         <p className="tag-subtitle">{tagSubtitle}</p>

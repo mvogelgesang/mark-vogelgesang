@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Helmet } from "react-helmet";
 import { Link, graphql } from "gatsby";
 import Layout from "../components/layout";
 
@@ -8,8 +7,7 @@ export default function IndexPage({ data }) {
   const { edges: posts } = data.allMdx;
 
   return (
-    <Layout>
-      <Helmet title={`MV - Home`} />
+    <Layout pageTitle={`Pursuing better solutions`}>
       <div className="blog-posts">
         {posts
           .filter((post) => post.node.frontmatter.title.length > 0)

@@ -5,8 +5,7 @@ import Layout from "../components/layout";
 
 export default function About() {
   return (
-    <Layout>
-      <Helmet title={`MV - About`} />
+    <Layout pageTitle={`About`}>
       <div className="about-container">
         <img
           className="about-img"
