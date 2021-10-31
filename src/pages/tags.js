@@ -7,7 +7,7 @@ import Layout from "../components/layout";
 const TagsPage = ({ data }) => {
   const allTags = data.allMdx.group;
   return (
-    <Layout>
+    <Layout pageTitle={`Tags`}>
       <div>
         <h1>Tags</h1>
         <div className="tag-list">

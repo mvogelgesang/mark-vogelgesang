@@ -8,7 +8,7 @@ import Navigation from "./navigation";
 import Footer from "./footer";
 const shortcodes = { FontAwesomeIcon };
 
-export default function Layout({ children }) {
+export default function Layout({ pageTitle, children }) {
   return (
     <StaticQuery
       query={graphql`
@@ -24,6 +24,7 @@ export default function Layout({ children }) {
                 label
                 path
               }
+              title
             }
           }
         }
@@ -41,7 +42,11 @@ export default function Layout({ children }) {
             />
             <meta charSet="utf-8" />
             <link rel="manifest" href="src/images/favicon/site.webmanifest" />
+            <title>
+              {pageTitle} | {data.site.siteMetadata.title}
+            </title>
           </Helmet>
+
           <Navigation props={data} />
           <MDXProvider components={shortcodes}>
             <main className="main">{children}</main>

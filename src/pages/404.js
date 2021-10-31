@@ -6,9 +6,8 @@ import Layout from "../components/layout";
 // markup
 const NotFoundPage = () => {
   return (
-    <Layout>
+    <Layout pageTitle={`404 Page Not Found`}>
       <div>
-        <Helmet title="MV - 404 Page Not found"></Helmet>
         <h1>Whoops</h1>
         <p>
           Looks like this page doesn't exist.

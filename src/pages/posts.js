@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Helmet } from "react-helmet";
 import { Link, graphql } from "gatsby";
 import Layout from "../components/layout";
 
@@ -7,8 +6,7 @@ export default function Posts({ data }) {
   const { edges: posts } = data.allMdx;
 
   return (
-    <Layout>
-      <Helmet title={`MV - Posts`} />
+    <Layout pageTitle={`Posts`}>
       <h1>Posts</h1>
       <div className="blog-posts">
         {posts

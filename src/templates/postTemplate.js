@@ -8,14 +8,31 @@ import Layout from "../components/layout";
 export default function Template({ data }) {
   const post = data.mdx;
   return (
-    <Layout>
+    <Layout pageTitle={post.frontmatter.title}>
       <article>
         <Helmet>
-          <title>{`MV - ${post.frontmatter.title}`} </title>
           <style>
             @import
             url("https://github.githubassets.com/assets/gist-embed-b3b573358bfc66d89e1e95dbf8319c09.css");
           </style>
+          <script type="application/ld+json">
+            {`{
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://mvogelgesang.com/article"
+            },
+            "headline": "${post.frontmatter.title}",
+            "keywords": "${post.frontmatter.tags.join(",")}",
+            "wordCount": ${post.wordCount.words},
+            "url": "https://mvogelgesang${post.frontmatter.path}",
+            "author": {
+              "@type": "Person",
+              "name": "Mark Vogelgesang",
+              "url": "https://mvogelgesang.com/about"
+            }}`}
+          </script>
         </Helmet>
         <div className="blog-post">
           <h1>{post.frontmatter.title}</h1>
@@ -52,6 +69,9 @@ export const pageQuery = graphql`
         slug
         tags
         title
+      }
+      wordCount {
+        words
       }
     }
   }
