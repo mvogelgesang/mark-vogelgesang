@@ -67,6 +67,48 @@
         font-size: 0.8rem;
       }
     }
+    pre.prism-code {
+      border-radius: .5rem;
+      word-break: break-word;
+      word-wrap: break-word;
+    }
+    div.line {
+      display: table-row;
+    }
+    .line-no {
+      display: table-cell;
+      text-align: right;
+      padding-right: 1em;
+      user-select: none;
+      opacity: 0.5;
+    }
+    .line-content {
+      display: table-cell;
+      white-space: pre-wrap;
+    } 
+    .code-header {
+      border-bottom: .25rem solid $accent-one;
+      margin-bottom: 1rem;
+      padding-bottom: 20px;
+      text-align: right;
+    }
+    .language-name {
+      padding-right: 1rem;
+    }
+    .code-copy-button {
+      padding: 10px;
+      background: transparent;
+      border: 2px solid $accent-one;
+      border-radius: .25rem;
+      color: $accent-one;
+      cursor: pointer;
+    }
+    blockquote {
+      padding: 0rem 2rem;
+      border: 1px solid $primary-color;
+      border-left: 1rem solid $primary-color;
+      border-radius: .5rem;
+    }
   }
 }
 .blog-posts {
