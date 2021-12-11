@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "develop": "gatsby develop",
+    "pa11y-ci:sitemap": "pa11y-ci --sitemap http://localhost:8000/sitemap.xml --useChrome",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
