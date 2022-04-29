@@ -1,0 +1,78 @@
+---
+path: "/2022-04-23/Draw-Radial-Bar-Charts-with-SVG"
+date: 2022-04-23
+title: "Draw Radial Bar Charts with SVG"
+tags: ["svg", "data visualization", "charts"]
+slug: ""
+---
+
+I had a recent project at work which aimed to demonstrate characteristics of websites in visual form. Such a visual form would provide users a means to quickly view and compare the relative strengths and weaknesses of individual sites as broken out by categories. To accomplish this, we used radial bar charts which allowed each category to have a different scoring mechanism and we could display the values as a percentage of the whole.
+
+This article walks through the process of drawing a circle, creation of arcs, filling in those arcs with color, and drawing arcs of different radii to complete the visualization. Each CodePen is editable if you want to play with the values and properties. The math required for each portion is included but really centers around a single equation to calculate circumference, `circumference = 2πr`.
+
+## Why Bar Charts Don't Cut It
+
+Typically a bar chart would be used to compare a two or three people, offices, or teams across a handful of categories. More than three though and the chart becomes difficult to read and parse. Note how the third chart makes it easy to compare Team A and Team B while the fourth chart results in a mess of colors. Our goal was to provide consumers of this data a graphical form which made comparisons easier and could be stacked up on a page.
+
+<iframe height="527.272705078125" style="width: 100%;" scrolling="no" title="bar chart" src="https://codepen.io/mvogelgesang/embed/yLprdwG?default-tab=result&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/mvogelgesang/pen/yLprdwG">
+  Bar Charts Don't Cut It</a> by mark vogelgesang (<a href="https://codepen.io/mvogelgesang">@mvogelgesang</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+## Draw a Circle & an Arc
+
+We start by constructing an SVG with a height and width of 200. Within that, a `circle` is placed which has a radius of 80 and is centered within the SVG by CX & CY equalling 100 (1/2 height & width). We can skip over the `stroke-width` attribute and focus on the `stroke-dasharray` attribute which determines the length of the dash (line). In this instance, the length of the dash is the full circumference of the circle `2πr`.
+
+To construct an arc, we update the `stroke-dasharray` attribute and add a new param separated by a space before our existing value. We are going to draw an arc that is 33% the length of the circumference. To do so, we can multiply the circumference by .33, `2πr*0.33`. The second parameter determines the gap between dashes in the event that you want the dash to repeat. Since we don't want this arc to repeat, we can set the gap to the circumference of the circle which ensures only the single dash is drawn. If however, you do want to repeat the dash, you can set a value here that is less than the circumference of the circle. Similarly, if you wanted to create a dotted line, you could adjust the dash length to 2 and gap to repeat to 4.
+
+`stroke-dasharray = {dash length} {gap to repeat}`
+
+<iframe height="300" style="width: 100%;" scrolling="no" title="2 - Simple Circle and Arc" src="https://codepen.io/mvogelgesang/embed/yLprmzm?default-tab=html%2Cresult&editable=true&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/mvogelgesang/pen/yLprmzm">
+  2 - Simple Circle and Arc</a> by mark vogelgesang (<a href="https://codepen.io/mvogelgesang">@mvogelgesang</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+## Convert Arc to a Wedge
+
+While we ignored sroke-width previously, it is time to discuss. In the same way you might trace a line with a marker, the stroke-width performs a similar function as it applies equal amount of color above and below the line. The first chart shows an arc as a line with two separate arcs drawn on top with differing stroke widths.
+
+With this new information about `stroke-width` in mind, converting an arc to a wedge requires the radius value to be cut in half - otherwise, the wedge will be larger than the overall circle. In this instance, the light grey circle has a `radius` of 80 and the inner orange circle has a `radius` of 40. The `stroke-width` attribute, gets set to 80 which ensures the wedge is complete.
+
+<iframe height="300" style="width: 100%;" scrolling="no" title="3 - Converting an Arc to a Wedge &amp; Repeat" src="https://codepen.io/mvogelgesang/embed/vYpMqvy?default-tab=html%2Cresult&editable=true&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/mvogelgesang/pen/vYpMqvy">
+  3 - Converting an Arc to a Wedge &amp; Repeat</a> by mark vogelgesang (<a href="https://codepen.io/mvogelgesang">@mvogelgesang</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+## Rotate and Repeat Wedges of Different Colors
+
+Adding new arcs to the SVG can be done by adding additional `circle` tags within the existing SVG tag and applying colors as you see fit. Each arc must be rotated so as not to overlap with one and other. This can be done via the CSS `transform` and `transform-origin` properties. `Transform` allows you to set the number of degrees using the `rotate(##deg)` property. `Transform-origin` sets the point at which the transformation will take place. This, by default, is set at the point (0, 0) which is the top left corner of the SVG Viewbox. Since our circle is centered within the SVG, we use the "center" property. Try commenting out the `transform-origin` property and adjusting the `rotate()` value to 10 or so to see the effect.
+
+In our example, we have cut the circle into six wedges. The degrees rotation for each wedge is equivalent to the wedge index * 60 degrees (wedge 1, 60deg; wedge 2, 120deg; and so on). Performing this calculation can addressed by a SASS mixin which provides greater flexibility down the road. Additionally, we need to update our `stroke-dasharray` formula to account for an arc that is 1/6th the circumference (.1666666).   
+
+<iframe height="300" style="width: 100%;" scrolling="no" title="4 - Rotating Arcs" src="https://codepen.io/mvogelgesang/embed/KKZYOrP?default-tab=html%2Cresult&editable=true&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/mvogelgesang/pen/KKZYOrP">
+  4 - Rotating Arcs</a> by mark vogelgesang (<a href="https://codepen.io/mvogelgesang">@mvogelgesang</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+## Putting it Together
+
+So far, we have constructed a simple circle, cut the circle into arcs, and filled the arcs with color to create wedges. The next step is to adjust the radius of each wedge so as to represent the value of a given category. To do so, four values are needed: the maximum radius, the maximum bar value, bar value, and number of wedges. In the example below, each wedge is scored on a different scale which can help normalize values. For some, the maximum value is 100 while others have a max of 65 or 60. In this example the calculations are taken out of the HTML and conducted with a the `getArcAttributes` function.
+
+<iframe height="300" style="width: 100%;" scrolling="no" title="5 - drawing arcs w/ varying radius" src="https://codepen.io/mvogelgesang/embed/BaJEXGM?default-tab=html%2Cresult&editable=true&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/mvogelgesang/pen/BaJEXGM">
+  5 - drawing arcs w/ varying radius</a> by mark vogelgesang (<a href="https://codepen.io/mvogelgesang">@mvogelgesang</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+## In Conclusion
+
+A collection of these CodePens are available at https://codepen.io/collection/LPWpaj.
+
+In doing this project, I found the following resources helpful when learning about SVG circles and the construction of arcs.
+
+- https://markus.oberlehner.net/blog/pure-css-animated-svg-circle-chart/
+- https://sparkbox.com/foundry/how_to_code_an_SVG_pie_chart
