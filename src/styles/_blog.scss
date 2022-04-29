@@ -24,15 +24,20 @@
     font-family: $font-stack;
     font-size: 1.3rem;
     margin: 1.5rem 0rem;
-    line-height: 1.7rem;
+    line-height: 2rem;
+    max-width: 650px;
     @include mobile {
       font-size: 1rem;
-      line-height: 1.5rem;
+      line-height: 1.6rem;
     }
     ol {
       @include mobile {
         padding-inline-start: 1rem;
       }
+    }
+    em {
+      font-size: 1rem;
+      line-height: 1.5rem;
     }
     // table classes
     table {
