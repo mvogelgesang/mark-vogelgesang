@@ -1,0 +1,67 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+import { NAVIGATION } from "../config";
+---
+
+<header>
+  <div class="header">
+    <nav class="nav-container">
+      <div class="nav-list">
+        {
+          NAVIGATION.map((x) => {
+            return (
+              <HeaderLink href={x.path} class="nav-list-item">
+                {x.label}
+              </HeaderLink>
+            );
+          })
+        }
+        <button
+          id="navigationHamburgerButton"
+          class="nav-list-item nav-hamburger"
+          aria-label="Open Menu"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Find our component DOM on the page.
+  const button = document.getElementById("navigationHamburgerButton");
+  const navList = document.getElementsByClassName("nav-list");
+  const navListItem = document.querySelectorAll(".nav-list-item");
+  // Add event listeners to fire confetti when a button is clicked.
+  if (button) {
+    button.addEventListener("click", () => clickHamburger());
+  }
+
+  let menuClosed = true;
+  function clickHamburger() {
+    if (button) {
+      button.setAttribute(
+        "aria-label",
+        menuClosed ? "Open Menu" : "Close Menu"
+      );
+    }
+    const buttonIcon = document.querySelectorAll(
+      "#navigationHamburgerButton svg"
+    );
+    if (buttonIcon) {
+      buttonIcon.forEach((btn) => {
+        btn.classList.toggle("fa-rotate-90");
+      });
+    }
+    if (navList) {
+      navList[0].classList.toggle("display");
+    }
+    if (navListItem) {
+      navListItem.forEach((item) => {
+        item.classList.toggle("display");
+      });
+    }
+    menuClosed = !menuClosed;
+  }
+</script>

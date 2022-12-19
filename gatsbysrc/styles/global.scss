@@ -1,0 +1,153 @@
+$background-color: #fbfffaff;
+$primary-color: #375037ff;
+$secondary-color: #5d985dff;
+$accent-one: #d6ffd6ff;
+$accent-two: #c8eaebff;
+$white: #fff;
+$font-stack: "Montserrat", sans-serif;
+$breakpoint: 37.5rem;
+$content-max-width: 60rem;
+$h1-font-size: 2.25rem;
+$h2-font-size: 1.75rem;
+$h-margin-ratio: 0.67;
+
+@mixin mobile {
+  @media screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@import "about";
+@import "blog";
+@import "footer";
+@import "header";
+@import "tag";
+@import "utilities";
+
+html {
+  background-color: $background-color;
+  font: 100% $font-stack;
+}
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+.main {
+  max-width: $content-max-width;
+  margin: 0rem auto 3rem;
+  overflow: hidden;
+  padding: 0rem 1rem;
+}
+.fullScreen {
+  max-width: unset;
+}
+.sr-only {
+  position: absolute;
+  left: -999em;
+  right: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: $primary-color;
+}
+h1 {
+  font-size: $h1-font-size;
+  margin: $h-margin-ratio * $h1-font-size 0rem;
+}
+h2 {
+  font-size: $h2-font-size;
+  margin: $h-margin-ratio * $h2-font-size 0rem;
+}
+
+/* Mobile */
+@include mobile {
+  h1 {
+    font-size: 2rem;
+    margin: 0rem 0rem 2rem * $h-margin-ratio;
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin: 1.5rem * $h-margin-ratio 0rem;
+  }
+
+  .main {
+    margin: 0rem 0.5rem;
+    padding: 0rem 0.5rem;
+  }
+}
+
+.caption {
+  font-size: 1rem;
+  font-style: italic;
+  text-align: center;
+}
+
+/* splash page */
+//Primary-color
+$fern-green: #4a744aff;
+//secondary-color
+$eton-blue: #9acc9aff;
+$celadon: #b8e6b8ff;
+// accent-one
+$nyanza: #daffdaff;
+.body-splash {
+  background-color: $nyanza;
+  animation-name: backgroundColorPalette;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-timing-function: linear;
+  /* linear is enabled default, it’s not necessary to add it make it work but it can make your code more expressive */
+}
+
+@keyframes backgroundColorPalette {
+  0% {
+    background: $nyanza;
+  }
+  5% {
+    background: $accent-one;
+  }
+  10% {
+    background: $celadon;
+  }
+  20% {
+    background: $eton-blue;
+  }
+  30% {
+    background: $secondary-color;
+  }
+  40% {
+    background: $fern-green;
+  }
+  50% {
+    background: $primary-color;
+  }
+  60% {
+    background: $fern-green;
+  }
+  70% {
+    background: $secondary-color;
+  }
+  80% {
+    background: $eton-blue;
+  }
+  90% {
+    background: $celadon;
+  }
+  95% {
+    background: $accent-one;
+  }
+  100% {
+    background: $nyanza;
+  }
+}

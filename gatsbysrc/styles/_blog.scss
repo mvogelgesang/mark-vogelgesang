@@ -1,0 +1,136 @@
+.blog-post {
+  @include mobile {
+    margin-top: 0rem;
+    .blog-post:first-child h1 {
+      margin-top: 0rem;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: $primary-color;
+    word-wrap: break-word;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:visited {
+      color: $secondary-color;
+    }
+  }
+  .blog-post-date {
+    font-size: 0.8rem;
+  }
+
+  .blog-post-content {
+    font-family: $font-stack;
+    font-size: 1.3rem;
+    margin: 1.5rem 0rem;
+    line-height: 2rem;
+    max-width: 650px;
+    @include mobile {
+      font-size: 1rem;
+      line-height: 1.6rem;
+    }
+    ol {
+      @include mobile {
+        padding-inline-start: 1rem;
+      }
+    }
+    em {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+    // table classes
+    table {
+      width: 100%;
+      font-size: 1rem;
+    }
+    th {
+      background-color: $secondary-color;
+      color: $background-color;
+      padding: 0.5rem;
+    }
+    td {
+      padding: 0.25rem;
+    }
+    tr:nth-child(even) {
+      background-color: $accent-one;
+    }
+    tr:hover {
+      background-color: $accent-two;
+    }
+    .gist tr:nth-child(even) {
+      background-color: $white;
+    }
+    code {
+      border: 1px solid $primary-color;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.2rem;
+      background-color: $white;
+      font-size: 1rem;
+      @include mobile {
+        padding: 0.1rem 0.2rem;
+        font-size: 0.8rem;
+      }
+    }
+    pre.prism-code {
+      border-radius: .5rem;
+      word-break: break-word;
+      word-wrap: break-word;
+    }
+    div.line {
+      display: table-row;
+    }
+    .line-no {
+      display: table-cell;
+      text-align: right;
+      padding-right: 1em;
+      user-select: none;
+      opacity: 0.5;
+    }
+    .line-content {
+      display: table-cell;
+      white-space: pre-wrap;
+    } 
+    .code-header {
+      border-bottom: .25rem solid $accent-one;
+      margin-bottom: 1rem;
+      padding-bottom: 20px;
+      text-align: right;
+    }
+    .language-name {
+      padding-right: 1rem;
+    }
+    .code-copy-button {
+      padding: 10px;
+      background: transparent;
+      border: 2px solid $accent-one;
+      border-radius: .25rem;
+      color: $accent-one;
+      cursor: pointer;
+    }
+    blockquote {
+      padding: 0rem 2rem;
+      border: 1px solid $primary-color;
+      border-left: 1rem solid $primary-color;
+      border-radius: .5rem;
+    }
+  }
+}
+.blog-posts {
+  .blog-post {
+    margin-top: 1.5rem;
+    h1 {
+      margin: 0rem 0rem 1rem;
+    }
+  }
+  .blog-post-link {
+    text-decoration: none;
+    color: $primary-color;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:visited {
+      color: $secondary-color;
+    }
+  }
+}
