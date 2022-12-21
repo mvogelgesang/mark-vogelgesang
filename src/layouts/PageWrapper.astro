@@ -1,0 +1,25 @@
+---
+import "@fontsource/montserrat/400.css";
+import "@fontsource/montserrat/600.css";
+
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+
+const {	title=SITE_TITLE, description=SITE_DESCRIPTION} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body>
+		<Header />
+		<main class="main">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

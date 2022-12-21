@@ -1,6 +1,7 @@
 ---
+layout: "../../../layouts/BlogPost.astro"
 path: "/2019-04-19/Sheets-to-Email-with-Google-Apps-Script"
-date: 2019-04-19
+pubDate: 2019-04-19
 title: "Sheets to Email with Google Apps Script"
 tags: ["apps script", "google sheets"]
 slug: "Regularly scheduled program reviews should be an exercise in sharing the right information and discussing paths forward. Instead, too many teams are focusing on overly detailed power point criteria and manual processes. Automation with Google Apps Script can save everyone a lot of grief."

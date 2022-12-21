@@ -1,9 +1,10 @@
 ---
+layout: "../../../layouts/BlogPost.astro"
 path: "/2017-09-17/what-development-teams-can-learn-from-my-favorite-pizza-place"
-date: 2017-09-17
+pubDate: "Sep 17 2017"
 title: "what development teams can learn from my favorite pizza place"
 tags: ["agile", "pizza", "kanban"]
-slug: "Most folks have probably worked in a restaurant at one time or, they have watched enough Food Network and Netflix specials to get the idea. In the next few installments, I’ll demonstrate how a small pizza shop uses kanban, albeit unknowingly, to produce great pizza and how you can translate what they do into the work with your dev team."
+description: "Most folks have probably worked in a restaurant at one time or, they have watched enough Food Network and Netflix specials to get the idea. In the next few installments, I’ll demonstrate how a small pizza shop uses kanban, albeit unknowingly, to produce great pizza and how you can translate what they do into the work with your dev team."
 ---
 
 ![Brick pizza oven with pizza inside](../../images/posts/20170918/pizza_oven.jpeg)
