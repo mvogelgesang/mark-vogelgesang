@@ -1,21 +1,21 @@
 ---
+
 layout: "../../../layouts/BlogPost.astro"
-path: "/2021-10-25/Apps-Script-Company-Copy"
-pubDate: 2021-10-25
+pubDate: Oct 25, 2021
 title: "Apps Script: Company Copy"
 tags: ["apps script", "google drive", "google sheets"]
-slug: "Google Drive is great for collaborating even when all users do not belong to the same organization. However, taking ownership of files that were created by disparate organizations presents challenges within Drive. This utility provides a simple way to copy files into a companies domain and retain ownership."
+description: "Google Drive is great for collaborating even when all users do not belong to the same organization. However, taking ownership of files that were created by disparate organizations presents challenges within Drive. This utility provides a simple way to copy files into a companies domain and retain ownership."
 ---
 
 Since 2013, I have operated in offices where the primary tools for email, word processing, and spreadsheets has been Google Workspace (formerly Google Suite). The ability to quickly share documents, folders, and collaborate was a game changer when compared to the Sharepoint solutions of the past. In addition, folders and files could be shared with others who have Google accounts even if those accounts are not associated to a companies domain. Features like this were invaluable when collaborating with other vendors as it reduced the number of files in email and enabled everyone to work from a single source of truth. Over time though, each firm may start adding files to a folder and you'd end up with a situation like the following:
 
 | Type                                                                      | Folder/ File Name    | Owner           |
 | :------------------------------------------------------------------------ | :------------------- | :-------------- |
-| <FontAwesomeIcon icon="folder"  size="2x" className="text-gray-50" />     | Project Deliverables | Jane (XYZ Co)   |
-| <FontAwesomeIcon icon="file-alt"  size="2x" className="text-gray-50"/>    | Onboarding           | Margot (XYZ Co) |
-| <FontAwesomeIcon icon="file-alt" size="2x"  className="text-gray-50"/>    | Statement of Work    | Tina (XYZ Co)   |
-| <FontAwesomeIcon icon="file-excel"  size="2x" className="text-gray-50" /> | Team Contact Info    | Todd (ABC Inc)  |
-| <FontAwesomeIcon icon="file-alt"  size="2x" className="text-gray-50" />   | Team Notes           | Zeke (ABC Inc)  |
+| <i class="fa-solid fa-folder fa-xl text-gray-50" ></i>     | Project Deliverables | Jane (XYZ Co)   |
+| <i class="fas fa-file-alt fa-xl text-gray-50"></i>    | Onboarding           | Margot (XYZ Co) |
+| <i class="fas fa-file-alt fa-xl text-gray-50"></i>    | Statement of Work    | Tina (XYZ Co)   |
+| <i class="fas fa-file-excel fa-xl text-gray-50" ></i> | Team Contact Info    | Todd (ABC Inc)  |
+| <i class="fas fa-file-alt fa-xl text-gray-50" ></i>   | Team Notes           | Zeke (ABC Inc)  |
 
 At first blush, this may seem all well and good. All files appear to be in a central location and are well named. However, the two firms, XYZ Co and ABC Inc, own different portions of the folder and neither are in control of all files. What's more, ABC Inc may have only been on for a portion of the project and the primary vendor, XYZ Co, needs to retain all files. Transferring ownership of files in Drive is very straightforward but only for owners who reside on the same domain. In this scenario though, the files owned by ABC Inc cannot be transferred to XYZ Co due to limitations put in place by Google.
 
@@ -44,14 +44,14 @@ In the Base Folder, files owned by the other company will be prefixed with "DEL 
 
 | Type                                                                     | Folder/ File Name       | Owner           |
 | :----------------------------------------------------------------------- | :---------------------- | :-------------- |
-| <FontAwesomeIcon icon="folder" size="2x" className="text-gray-50" />     | Project Deliverables    | Jane (XYZ Co)   |
-| <FontAwesomeIcon icon="file-excel" size="2x" className="text-gray-50" /> | DEL - Team Contact Info | Todd (ABC Inc)  |
-| <FontAwesomeIcon icon="file-alt" size="2x" className="text-gray-50" />   | DEL - Team Notes        | Zeke (ABC Inc)  |
-| <FontAwesomeIcon icon="file-alt" size="2x" className="text-gray-50" />   | Onboarding              | Margot (XYZ Co) |
-| <FontAwesomeIcon icon="file-alt" size="2x" className="text-gray-50" />   | Statement of Work       | Tina (XYZ Co)   |
-| <FontAwesomeIcon icon="file-excel" size="2x" className="text-gray-50" /> | Team Contact Info       | Jane (XYZ Co)   |
-| <FontAwesomeIcon icon="file-alt" size="2x" className="text-gray-50" />   | Team Notes              | Jane (XYZ Co)   |
-
+| <i class="fa-solid fa-folder fa-xl text-gray-50" ></i>   | Project Deliverables    | Jane (XYZ Co)   |
+| <i class="fas fa-file-excel fa-xl text-gray-50" ></i> | DEL - Team Contact Info | Todd (ABC Inc)  |
+| <i class="fas fa-file-alt fa-xl text-gray-50"></i>  | DEL - Team Notes        | Zeke (ABC Inc)  |
+| <i class="fas fa-file-alt fa-xl text-gray-50"></i>  | Onboarding              | Margot (XYZ Co) |
+| <i class="fas fa-file-alt fa-xl text-gray-50"></i>  | Statement of Work       | Tina (XYZ Co)   |
+| <i class="fas fa-file-excel fa-xl text-gray-50" ></i>  | Team Contact Info       | Jane (XYZ Co)   |
+| <i class="fas fa-file-alt fa-xl text-gray-50"></i>   | Team Notes              | Jane (XYZ Co)   |
+ 
 The full source code is below and available as a Github Gist.
 
-`gist:mvogelgesang/e8c9e2df612fd533b55b6aed6da8ae4d`
+<script src="https://gist.github.com/mvogelgesang/e8c9e2df612fd533b55b6aed6da8ae4d.js"></script>

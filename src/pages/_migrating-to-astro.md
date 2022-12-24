@@ -15,6 +15,8 @@ What I wanted to keep the same
 - analytics
 - fonts
 
+Recommend starting by following the tutorial at https://docs.astro.build/en/tutorial/0-introduction/, this will simplify the process. Compared to other tutorials or "getting started" pages, this one gives you activities to complete and ways to test your knowledge. Much more interactive than the copy/paste tutorials.
+
 Steps
 - copied my gatsby src/ folder to a new folder called gatsbysrc/ `mv src/ gatsbysrc/`
   - also copied my gatsby-browser, gatsby-config, and gatsby-node, and package.json files into gatsbysrc
@@ -44,7 +46,7 @@ Fonts
 - Imported the desired font, Montserrat, and added its import statement to the BaseHead.astro file
 
 Home Body
-- Went to work on index.astro, I had a primary wrapper class for body main called "main" and added it.
+- Went to work on index.astro, I had a primary wrapper class for body main called "main" and added it. This started to make the site look more like my old one
 
 Blog Post Content 
 - Home content
@@ -52,6 +54,20 @@ Blog Post Content
 - Blog Post Page
   - Migrated styles into BlogPost.astro layout file
 - Updated BaseHead.astro to include site name along with page title in <title> as well as meta title  
+- At this point, I found inconsistent implementation between index.astro and layouts/BlogPost.astro- specifically with font variants.  In my case, the two layouts were not so different and could leverage a common layout.
+- I created a layout called PageWrapper, it took two props, title and description with defaults tied to site config values.
+- From there, I stripped down the BlogPost.astro layout that was auto generated and used PageWrapper around it.
+- Doing this simplified the BlogPost layout and made it easier to read
+
+Blog Post MDX, Embeds, and Images
+- A couple of my previous articles leveraged MDX, Prism, or github/gist embeds. This had to be resolved.
+
+- Use of FontAwesomeIcon component was switched for inline `<i>` tags
+- shorthand gist embeds were switched to inline `<script>` embeds
+- I ditched prism for shiki which is Astro's built in highlighter. I lost line numbers though. Down the road, I'd like to rebuild the CodeBlock.jsx component but that is for another day.
+
+Generating Tag pages
+- the tutorial at https://docs.astro.build/en/tutorial/5-astro-api/1/ explains it much better than I can. In short, this is very doable and the resulting code is much shorter than Gatsby
 
 Resources
 - Astro documentation

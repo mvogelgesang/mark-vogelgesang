@@ -1,20 +1,19 @@
 ---
 layout: "../../../layouts/BlogPost.astro"
-path: "/2019-04-19/Sheets-to-Email-with-Google-Apps-Script"
-pubDate: 2019-04-19
+pubDate: Apr 19, 2019
 title: "Sheets to Email with Google Apps Script"
 tags: ["apps script", "google sheets"]
-slug: "Regularly scheduled program reviews should be an exercise in sharing the right information and discussing paths forward. Instead, too many teams are focusing on overly detailed power point criteria and manual processes. Automation with Google Apps Script can save everyone a lot of grief."
+description: "Regularly scheduled program reviews should be an exercise in sharing the right information and discussing paths forward. Instead, too many teams are focusing on overly detailed power point criteria and manual processes. Automation with Google Apps Script can save everyone a lot of grief."
+hero:
+  alt: "Brick wall"
+  src: "/posts/20190419/robieHouse.jpeg"
 ---
+<figcaption class="caption">“Robie House, Chicago, IL” by Mark Vogelgesang</figcaption>
 
 ## The Goal
 
 1. Stop people from banging their head against a brick wall
 1. Provide non-technical users the ability to manage a rich text e-mail template via Google Sheets without editing any Apps Script code.
-
-![Brick wall](../../images/posts/20190419/robieHouse.jpeg)
-
-<figcaption className="caption">“Robie House, Chicago, IL” by Mark Vogelgesang</figcaption>
 
 ## The Situation
 
@@ -40,6 +39,6 @@ This is certainly not ideal and I would imagine that the Google Apps Script team
 
 The two relevant conversion functions are below along with more detailed comments in-line. Finally, if you’d like to get hands on, copy [this public Sheet](https://docs.google.com/spreadsheets/d/1ZWWJ6-CPAMOT_5iL2FuEX8wJ7muFicvbwqgNoEbUzjg/edit?usp=sharing) and give it a whirl. As with all things Apps Script related, it will not run without your explicit authorization and explanation of scopes involved.
 
-`gist:mvogelgesang/8fe14931d79ed79d73154d969f02aada`
+<script src="https://gist.github.com/mvogelgesang/8fe14931d79ed79d73154d969f02aada.js"></script>
 
 This article originally appeared on Medium at https://medium.com/@mvogelgesang/sheets-to-email-with-google-apps-script-fa7eac0b90c5

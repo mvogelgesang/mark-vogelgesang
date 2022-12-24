@@ -12,9 +12,12 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^0.13.0",
+    "@astrojs/prism": "^1.0.2",
     "@astrojs/rss": "^1.2.1",
     "@astrojs/sitemap": "^1.0.0",
-    "astro": "^1.7.1"
+    "@fontsource/montserrat": "^4.5.13",
+    "astro": "^1.7.1",
+    "prismjs": "^1.29.0"
   },
   "devDependencies": {
     "sass": "^1.57.0",

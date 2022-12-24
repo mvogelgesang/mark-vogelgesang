@@ -1,13 +1,15 @@
 ---
 layout: "../../../layouts/BlogPost.astro"
-path: "/2017-09-17/what-development-teams-can-learn-from-my-favorite-pizza-place"
 pubDate: "Sep 17 2017"
 title: "what development teams can learn from my favorite pizza place"
+hero: 
+  src: "/posts/20170918/pizza_oven.jpeg"
+  alt: "Brick pizza oven with pizza inside"
 tags: ["agile", "pizza", "kanban"]
 description: "Most folks have probably worked in a restaurant at one time or, they have watched enough Food Network and Netflix specials to get the idea. In the next few installments, I’ll demonstrate how a small pizza shop uses kanban, albeit unknowingly, to produce great pizza and how you can translate what they do into the work with your dev team."
 ---
 
-![Brick pizza oven with pizza inside](../../images/posts/20170918/pizza_oven.jpeg)
+
 <figcaption class="caption">“Pizza Oven” <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en">CCO 1.0 Universal</a> by <a href="https://pixabay.com/en/users/skeeze-272447/">skeeze</a></figcaption>
 
 Since kanban originated with the Toyota production system, many Agile coaches and educators like to use an auto production line as the example for why kanban is so efficient and powerful. While the example is valuable and illustrates basic tenants of kanban, many of the implementation details are lost on members of an agile team. Many, if not most IT folks have never worked in a factory setting before. It’s easy to say that if you are out of left rear car doors, the production line stops. But, the impacts on the rest of the production line are harder to grasp. Do the tires go on after the doors or are already on? Are there steps that can take place even without the doors? Without an example grounded in experience, kanban is left as a theory and you may as well be back in Principles of Economics learning a host of abstract ideas. However, most folks have probably worked in a restaurant at one time or, they have watched enough Food Network and Netflix specials to get the idea. In the next few installments, I’ll demonstrate how a small pizza shop uses kanban, albeit unknowingly, to produce great pizza and how you can translate what they do into the work with your dev team.

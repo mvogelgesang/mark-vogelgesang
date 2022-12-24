@@ -62,20 +62,21 @@
       background-color: $white;
     }
     code {
-      border: 1px solid $primary-color;
+      // border: 1px solid $primary-color;
       padding: 0.2rem 0.4rem;
-      border-radius: 0.2rem;
-      background-color: $white;
+      // border-radius: 0.2rem;
+      // background-color: $white;
       font-size: 1rem;
       @include mobile {
         padding: 0.1rem 0.2rem;
         font-size: 0.8rem;
       }
     }
-    pre.prism-code {
+    pre {
       border-radius: .5rem;
       word-break: break-word;
       word-wrap: break-word;
+      padding: 0.5rem 1rem;
     }
     div.line {
       display: table-row;
