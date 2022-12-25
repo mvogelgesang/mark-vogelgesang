@@ -4,6 +4,9 @@ pubDate: "May 4 2018"
 title: "Career is not Over"
 tags: ["it leadership", "government", "cio"]
 description: "It is a common joke amongst current and former CIO’s that their title does not stand for Chief Information Officer but Career is Over. The first time I heard this, I laughed it off- I mean, it’s a tough job, I can only imagine the stresses that come with it. However, the joke continued from one conference to another and CIO after CIO made the comment."
+hero:
+  src: ""
+  alt: ""
 ---
 
 *This week I had the opportunity to give a speech on behalf of my IT Leaders class at the Partnership for Public Service. A central theme of the IT Leaders program was to develop leaders who can “show folks the possibility of what they previously thought to be impossible.” For more information about the Partnership or the IT Leaders program, you can find them at https://ourpublicservice.org/issues/leadership-development/federal-it-leaders-program.php.*
