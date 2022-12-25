@@ -8,8 +8,8 @@ export const NAVIGATION = [{
     path: "/",
   },
   {
-    label: "Posts",
-    path: "/posts",
+    label: "Blog",
+    path: "/blog",
   },
   {
     label: "About",

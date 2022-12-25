@@ -1,0 +1,24 @@
+---
+import PageWrapper from "../layouts/PageWrapper.astro";
+---
+
+<PageWrapper title={`404 Page Not Found`}>
+  <div>
+    <h1>Whoops</h1>
+    <p>
+      Looks like this page doesn't exist.
+      <br />
+      {
+        process.env.NODE_ENV === "development" ? (
+          <>
+            <br />
+            Try creating a page in <code>src/pages/</code>.
+            <br />
+          </>
+        ) : null
+      }
+      <br />
+      <a href="/">Go home</a>
+    </p>
+  </div>
+</PageWrapper>

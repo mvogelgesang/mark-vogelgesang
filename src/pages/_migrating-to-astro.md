@@ -69,6 +69,16 @@ Blog Post MDX, Embeds, and Images
 Generating Tag pages
 - the tutorial at https://docs.astro.build/en/tutorial/5-astro-api/1/ explains it much better than I can. In short, this is very doable and the resulting code is much shorter than Gatsby
 
+Updating site manifest and favicon
+- I pulled all of the files from my favicon folder into Astro and then referenced the new favicon and site manifest in BaseHead.astro
+
+Updating Blog Posts
+- the paths for my blog posts changed with the switch- something I could have avoided but decided to change 
+- to ensure old links didn't break, I updated my firebase.json config to add redirects
+
+404 page
+- 404 pages are easy, just create 404.astro under /pages and you are good to go!
+
 Resources
 - Astro documentation
 - https://rodneylab.com/astro-js-sass-styling/
