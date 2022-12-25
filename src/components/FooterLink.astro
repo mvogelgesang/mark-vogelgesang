@@ -1,0 +1,10 @@
+---
+export interface Props extends astroHTML.JSX.AnchorHTMLAttributes {}
+
+const { href, class: className, ...props } = Astro.props;
+
+---
+
+<a href={href} class:list={[className]} {...props}>
+	<div class="footer-nav-list-item"><slot /></div>
+</a>

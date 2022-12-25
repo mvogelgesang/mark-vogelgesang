@@ -1,0 +1,32 @@
+---
+import PageWrapper from "./PageWrapper.astro";
+
+export interface Props {
+  content: {
+    title: string;
+    description: string;
+    pubDate?: string;
+    hero: {
+      alt?: string;
+      src?: string;
+    };
+  };
+}
+
+const {
+  content: { title, description, pubDate, hero },
+} = Astro.props;
+---
+
+<PageWrapper title={title} description={description}>
+  <article>
+    <div class="blog-post">
+      <h1>{title}</h1>
+      <div class="blog-post-date">{pubDate} </div>
+      <div class="blog-post-content">
+        {hero.src && <img width={720} height={360} src={hero.src} alt={hero.alt} />}
+        <slot />
+      </div>
+    </div>
+  </article>
+</PageWrapper>

@@ -1,0 +1,108 @@
+---
+layout: "../../../layouts/BlogPost.astro"
+pubDate: Nov 30, 2021
+title: "Refactor: Alphabet Position"
+tags: ["codewars", "refactoring", "javascript"]
+description: "I recently started completing regular katas on CodeWars and other platforms to improve my programming skills. The katas are revealing in that they show you the most elegant/ cleanest solutions after you submit your own. What's below is my original solution, the cleanest/ most upvoted solution, and an examination of the two."
+hero:
+  src: ""
+  alt: ""
+---
+I recently started completing regular katas on [CodeWars](https://www.codewars.com/kata/546f922b54af40e1e90001da) and other platforms to improve my programming skills. The katas are revealing in that they show you the most elegant/ cleanest solutions after you submit your own. What's below is my original solution, the cleanest/ most upvoted solution, and an examination of the two.
+
+The provided kata is called Replace With Alphabet Position and is presented as:
+
+> Welcome.
+>
+> In this kata you are required to, given a string, replace every letter with its position in the alphabet.
+>
+> If anything in the text isn't a letter, ignore it and don't return it.
+>
+> "a" = 1, "b" = 2, etc.
+>
+> Example
+> 
+> 
+> ```javascript
+> alphabetPosition("The sunset sets at twelve o' clock.");
+> ```
+>
+> Should return "20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11" (as a string)
+
+When first thinking about a potential solution, I focused on determining the position of a letter in the alphabet. I originally thought to create an object containing each letter as a key and the corresponding position as the value `{a:1, b:2}`. However, since we are dealing with a simple sequence, an ordered list of letters in an array seemed more straightforward. Using the `indexOf()` method would quickly tell me if the value was in the list or not as well as the position. The resulting set of functions ultimately passed the tests and was straightforward enough to read. However, the solution was not terribly efficient and after looking at other solutions, I found that there was a fair bit to be desired.
+
+{/* prettier-ignore-start */}
+```javascript
+function alphabetPosition(text) {
+  let newText = "";
+  for (let i = 0; i < text.length; i++) {
+    newText += getNumber(text.charAt(i));
+  }
+  return newText.trim();
+}
+function getNumber(letter) {
+  const alphabetArray = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+  const index = alphabetArray.indexOf(letter.toLowerCase());
+  return index == -1 ? "" : " " + (index + 1);
+}
+```
+{/* prettier-ignore-end */}
+
+As of the time of writing, [@hencethus](https://www.codewars.com/users/hencethus) had the solution with the most Best Practices and Clever upvotes.
+
+```javascript
+/* submitted by @hencethus */
+function alphabetPosition(text) {
+  return text
+    .toUpperCase()
+    .match(/[a-z]/gi)
+    .map((c) => c.charCodeAt() - 64)
+    .join(" ");
+}
+```
+
+After reviewing the solution from @hencethus, it was quickly apparent that my origial focus on the array of letters drove me down a path which produced more work than necessary. In short, my solution sought to address the requirements of the kata by performing the following operations:
+
+1. Establish new, empty string
+1. Loop content of text character by character
+1. Determine index of each character in the array
+1. If non-existent, return empty string, otherwise return index and a space
+1. Trim new string to get rid of any leading or trailing spaces
+
+In contrast, @hencethus tackled the problem in such a way that it reduced the amount of work from the very beginning and did not require any final cleanup (`trim()`) at the end.
+
+1. Make all characters uppercase as "A" and "a" are both the first letter in the alphabet. This simplifies math later on
+1. Match only letters a-z, as the solution does not need to worry about punctuation
+1. Uppercase characters start at charCode 65, a simple subtraction of 64 produces the correct value
+1. Create a new string from the array, separate values with a space
+
+I subsequently amended my submission to remove excess characters right off the bat and changed the order of the ternary operator since the first outcome was expected.
+
+```diff
+  function alphabetPosition(text) {
++   justLetters = text.replace(/[^a-z]/gi,"");
+    let newText = "";
+-   for (let i = 0; i<text.length; i++) {
+-     newText += getNumber(text.charAt(i));
++   for (let i = 0; i<justLetters.length; i++) {
++     newText += getNumber2(justLetters.charAt(i));
+    }
+    return newText.trim();
+  }
+  function getNumber2(letter) {
+    const alphabetArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    const index = alphabetArray.indexOf(letter.toLowerCase());
+-   return (index == -1) ? "" : " " + (index+1);
++   return (index >= 0) ? " " + (index+1) : "";
+  }
+```
+
+Comparing my orginal, my second, and @hencethus' solutions, I found that the removal of excess characters had a large effect on the efficiency of the code. Compared to my original submission, the solution from @hencethus is 50% faster. As a means of comparison, I grabbed 4,500 words from Lorem Ipsum and ran each function 500 times.
+
+| Solution       | Average Time (ms) |
+| -------------- | ----------------- |
+| My Original    | 15.397ms          |
+| My 2nd Attempt | 9.670ms           |
+| @hencethus     | 7.045ms           |
+
+Finally, a special thanks to [Fabio Rosado](https://fabiorosado.dev/) for his article, [Add Code Highlighting to MDX](https://fabiorosado.dev/blog/add-code-highlighting-to-mdx/) which simplified the process for adding code highlighting to my site.

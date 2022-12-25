@@ -1,11 +1,7 @@
 {
   "hosting": {
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "public": "dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "headers": [
       {
         "source": "**/*",
@@ -51,6 +47,33 @@
             "value": "public, max-age=0, must-revalidate"
           }
         ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/2017-09-17/what-development-teams-can-learn-from-my-favorite-pizza-place",
+        "destination": "/blog/20170918/what-development-teams-can-learn-from-my-favorite-pizza-place",
+        "type": 301
+      },
+      {
+        "source": "/2018-05-04/Career-is-not-Over",
+        "destination": "/blog/20180504/career-is-not-over",
+        "type": 301
+      },
+      {
+        "source": "/2019-04-19/Sheets-to-Email-with-Google-Apps-Script",
+        "destination": "/blog/20190419/sheets-to-email-with-google-apps-script",
+        "type": 301
+      },
+      {
+        "source": "/2021-10-25/Apps-Script-Company-Copy",
+        "destination": "/blog/20211025/apps-script-company-copy",
+        "type": 301
+      },
+      {
+        "source": "/2021-11-30/Refactor-Alphabet-Position",
+        "destination": "/blog/20211130/refactor-alphabet-position",
+        "type": 301
       }
     ]
   }
