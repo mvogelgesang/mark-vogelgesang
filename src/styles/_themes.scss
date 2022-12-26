@@ -1,0 +1,42 @@
+// https://medium.com/@katiemctigue/how-to-create-a-dark-mode-in-sass-609f131a3995
+$themes: (
+  default: (
+    background-color: $background-color--default,
+    text: $text--default,
+    primary-color: $primary-color--default,
+    secondary-color: $secondary-color--default,
+    accent-one: $accent-one--default,
+    accent-two: $accent-two--default,
+  ),
+  dark: (
+    background-color: $background-color--dark,
+    text: $text--dark,
+    primary-color: $primary-color--dark,
+    secondary-color: $secondary-color--dark,
+    accent-one: $accent-one--dark,
+    accent-two: $accent-two--dark,
+  ),
+);
+
+@mixin themed() {
+  @each $theme, $map in $themes {
+    .theme--#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function t($key) {
+  @return map-get($theme-map, $key);
+}
