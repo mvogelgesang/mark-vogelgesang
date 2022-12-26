@@ -1,6 +1,9 @@
 .footer {
-  background-color: $primary-color;
-  color: $background-color;
+  @include themed() {
+    // background-color: t($primary-color);
+    border-top: 0.25rem solid t($accent-two);
+    color: t($text);
+  }
   height: 10rem;
   margin-top: 2rem;
   @include mobile {
@@ -23,20 +26,26 @@
   }
 }
 .footer-foundation {
-  background-color: $secondary-color;
-  color: $accent-one;
+  @include themed() {
+    background-color: t($secondary-color);
+    color: t($accent-one);
+  }
   .footer-container {
     margin: 0 auto;
     max-width: $content-max-width;
     padding: 2rem 1rem;
     a {
-      color: $accent-one;
+      @include themed() {
+        color: t($accent-one);
+      }
     }
   }
 }
 .footer-nav-link {
   text-decoration: none;
-  color: $background-color;
+  @include themed() {
+    color: t($primary-color);
+  }
   font-weight: 600;
   display: block;
   float: left;
@@ -50,13 +59,14 @@
     display: block;
   }
 }
+
 .footer-nav-list-item {
-  padding: 1rem 0.75rem;
+  padding: 1rem 1.2rem 1rem 0;
   @include desktop {
-    animation: transform 0.4s;
     &:hover {
-      color: $accent-one;
-      transform: scale(1.5);
+      @include themed() {
+        color: t($secondary-color);
+      }
     }
   }
   @include mobile {

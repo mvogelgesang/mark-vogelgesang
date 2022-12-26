@@ -1,0 +1,76 @@
+@mixin mobile {
+  @media screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
+html {
+  font: 100% $font-stack;
+}
+body {
+  @include themed() {
+    background-color: t($background-color);
+    color: t($text)
+  }
+  min-height: 100vh;
+  margin: 0;
+}
+.main {
+  max-width: $content-max-width;
+  margin: 0rem auto 3rem;
+  overflow: hidden;
+  padding: 0rem 1rem;
+}
+.fullScreen {
+  max-width: unset;
+}
+.sr-only {
+  position: absolute;
+  left: -999em;
+  right: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  @include themed() {
+    color: t($primary-color);
+  }
+}
+h1 {
+  font-size: $h1-font-size;
+  margin: $h-margin-ratio * $h1-font-size 0rem;
+}
+h2 {
+  font-size: $h2-font-size;
+  margin: $h-margin-ratio * $h2-font-size 0rem;
+}
+
+/* Mobile */
+@include mobile {
+  h1 {
+    font-size: 2rem;
+    margin: 2rem 0rem 2rem * $h-margin-ratio;
+  }
+  h2 {
+    font-size: 1.5rem;
+    margin: 1.5rem * $h-margin-ratio 0rem;
+  }
+
+  .main {
+    margin: 0rem 0.5rem;
+    padding: 0rem 0.5rem;
+  }
+}
+
+.caption {
+  font-size: 1rem;
+  font-style: italic;
+  text-align: center;
+}

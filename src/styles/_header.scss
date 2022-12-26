@@ -3,31 +3,44 @@ header.header {
 }
 
 .header {
-  @include mobile {
-    border-bottom: 0.1875rem solid $accent-two;
-  }
+  /* @include mobile {
+    @include themed() {
+      border-bottom: 0.1875rem solid t($accent-two);
+    }
+  } */
   .nav-active {
     @include desktop {
-      border-bottom: 0.2rem solid $primary-color;
+      @include themed() {
+        border-bottom: 0.2rem solid t($primary-color);
+      }
     }
+    @include mobile
   }
   .nav-active:not(:first-child) {
     @include mobile {
-      border-left: 0.2rem solid $primary-color;
+      @include themed() {
+        border-left: 0.2rem solid t($primary-color);
+      }
     }
   }
   .nav-container {
+    padding: 0 1rem;
     @include desktop {
       height: 5rem;
       max-width: $content-max-width;
       margin: 0 auto;
-      border-bottom: 0.25rem solid $accent-two;
+      @include themed() {
+        border-bottom: 0.25rem solid t($accent-two);
+      }
     }
     .nav-list-item {
       text-decoration: none;
-      color: $primary-color;
+      @include themed() {
+        color: t($primary-color);
+      }
       font-weight: 600;
-      padding: 1rem 0.6rem;
+      padding: 1rem 0rem 0.5rem;
+      margin-right: 1.2rem;
       @include desktop {
         float: left;
         display: block;
@@ -37,6 +50,7 @@ header.header {
       }
       @include mobile {
         text-align: left;
+        padding: 0.5rem 0rem 0.5rem 1rem;
       }
     }
 
@@ -45,6 +59,7 @@ header.header {
       @include mobile {
         font-size: 2rem;
         float: left;
+        padding-left: 0rem;
       }
     }
     .nav-list-item:not(:first-child) {
@@ -56,7 +71,6 @@ header.header {
       @include mobile {
         display: block;
         float: none;
-        padding-bottom: 0rem;
       }
     }
     .nav-list-item.nav-hamburger {
@@ -97,13 +111,17 @@ header.header {
     }
     .nav-list.display {
       @include mobile {
-        border-bottom: 0.2rem solid $accent-two;
+        @include themed() {
+          border-bottom: 0.2rem solid t($accent-two);
+        }
       }
     }
-    a.nav-list-item {
+    .nav-list-item {
       line-height: 2.43rem;
       &:hover {
-        background-color: $accent-two;
+        @include themed() {
+          background-color: t($accent-two);
+        }
       }
     }
   }
@@ -119,11 +137,13 @@ header.header {
   }
 }
 .search-input {
-  border: 0.2rem solid $primary-color;
+  @include themed() {
+    border: 0.2rem solid t($primary-color);
+    background-color: t($background-color);
+    color: t($primary-color);
+  }
   border-radius: 0.333rem;
   padding: 0.5rem;
-  background-color: $background-color;
   font-family: $font-stack;
-  color: $primary-color;
   box-sizing: border-box;
 }

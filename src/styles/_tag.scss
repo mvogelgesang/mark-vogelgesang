@@ -1,13 +1,17 @@
 .tag-container a {
-  color: $background-color;
+  @include themed() {
+    color: t($background-color);
+  }
 }
 .tag {
   font-family: $font-stack;
   font-size: 1rem;
-  color: $background-color !important;
+  @include themed() {
+    color: t($background-color) !important;
+    background-color: $secondary-color;
+  }
   text-transform: lowercase;
   font-weight: 500;
-  background-color: $secondary-color;
   border-radius: 3px;
   margin-right: 0.5rem;
   padding: 0.5rem 0.5rem;
@@ -15,11 +19,13 @@
   float: left;
   display: block;
   &:hover {
-    background-color: $background-color;
-    color: $secondary-color !important;
+    @include themed() {
+      background-color: t($background-color);
+      color: t($secondary-color) !important;
+      border: 0.25rem solid t($secondary-color);
+    }
     font-weight: 600;
     padding: 0.25rem;
-    border: 0.25rem solid $secondary-color;
     text-decoration: none;
   }
   @include mobile {
@@ -40,12 +46,16 @@
 }
 .tag-list a {
   text-decoration: none;
-  color: $primary-color;
+  @include themed() {
+    color: t($primary-color);
+  }
   &:hover {
     text-decoration: underline;
   }
   &:visited {
-    color: $secondary-color;
+    @include themed() {
+      color: t($secondary-color);
+    }
   }
 }
 
