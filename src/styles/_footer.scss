@@ -1,6 +1,7 @@
 .footer {
   @include themed() {
     // background-color: t($primary-color);
+    border-top: 0.25rem solid t($accent-two);
     color: t($text);
   }
   height: 10rem;
@@ -43,7 +44,7 @@
 .footer-nav-link {
   text-decoration: none;
   @include themed() {
-    color: t($text);
+    color: t($primary-color);
   }
   font-weight: 600;
   display: block;
@@ -58,15 +59,14 @@
     display: block;
   }
 }
+
 .footer-nav-list-item {
-  padding: 1rem 0.75rem;
+  padding: 1rem 1.2rem 1rem 0;
   @include desktop {
-    animation: transform 0.4s;
     &:hover {
       @include themed() {
-        color: t($accent-one);
+        color: t($secondary-color);
       }
-      transform: scale(1.5);
     }
   }
   @include mobile {

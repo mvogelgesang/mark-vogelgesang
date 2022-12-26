@@ -40,3 +40,37 @@ $system-colors: (
     }
   }
 }
+
+/* margin and padding utilities */
+$units: (
+  '0': 0rem,
+  '025': 0.25rem,
+  '05': 0.50rem,
+  '1': 1rem,
+  '105': 1.5rem,
+  '2': 2rem,
+  '205': 2.5rem,
+  '3': 3rem,
+  '4': 4rem,
+  '5': 5rem,
+  '6': 6rem
+);
+
+$sides: ("top", "bottom", "right", "left");
+
+@each $unit, $value in $units {
+    .p-#{$unit} {
+      padding: #{$value};
+    }
+    .m-#{$unit} {
+      margin: #{$value};
+    }
+    @each $side in $sides {
+      .p-#{$side}-#{$unit} {
+        padding-#{$side}: #{$value};
+      }
+      .m-#{$side}-#{$unit} {
+        margin-#{$side}: #{$value};
+      }
+    }
+  }
