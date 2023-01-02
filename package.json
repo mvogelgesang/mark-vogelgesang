@@ -20,6 +20,13 @@
     "prismjs": "^1.29.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
+    "eslint": "^8.30.0",
+    "eslint-plugin-astro": "^0.21.1",
+    "eslint-plugin-mdx": "^2.0.5",
+    "prettier": "^2.8.1",
+    "prettier-plugin-astro": "^0.7.0",
     "sass": "^1.57.0",
     "stylelint": "^14.16.0",
     "stylelint-config-recommended-scss": "^8.0.0",

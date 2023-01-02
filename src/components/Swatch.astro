@@ -1,0 +1,14 @@
+---
+const { colorName, hexValue, class: className, ...props } = Astro.props;
+---
+
+<div style="margin-bottom: 1rem;">
+  <div
+    style=`height: 6rem; width: 6rem; background-color: ${hexValue}; margin-right: 0.5rem;`
+  >
+  </div>
+  <div style="max-width: 6rem; word-wrap: break-word; font-size:0.75rem; line-height: 1.5rem;">
+    {colorName}<br/>
+    {hexValue}
+  </div>
+</div>

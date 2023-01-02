@@ -53,13 +53,13 @@
     }
     th {
       @include themed() {
-        background-color: t($secondary-color);
-        color: t($background-color);
+        background-color: t($accent-two);
+        color: t($text);
       }
       padding: 0.5rem;
     }
     td {
-      padding: 0.25rem;
+      padding: 0.25rem 0.5rem;
     }
     tr:nth-child(even) {
       @include themed() {

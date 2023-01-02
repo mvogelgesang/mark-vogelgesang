@@ -1,20 +1,24 @@
+@use "_colors.scss" as colors;
+
 $background-color: "background-color";
 $text: "text";
 $primary-color: "primary-color";
 $secondary-color: "secondary-color";
 $accent-one: "accent-one";
 $accent-two: "accent-two";
-$background-color--default: #fbfffaff;
-$text--default: #1a1a1aff;
-$primary-color--default: #375037ff;
-$secondary-color--default: #5d985dff;
+/* core */
+
+$background-color--default: colors.colorT("neutral", 100);
+$text--default: colors.colorT("neutral", 1000);
+$primary-color--default: colors.colorT("green", 900);
+$secondary-color--default: colors.colorT("green", 600);
 $accent-one--default: #d6ffd6ff;
 $accent-two--default: #c8eaebff;
-$background-color--dark: rgb(32, 42, 32);
-$text--dark: #f2f2f2ff;
-$primary-color--dark: #fbfffaff;
-$secondary-color--dark: #c8eaebff; // #5d985dff;
-$accent-one--dark: #d6ffd6ff;
+$background-color--dark: colors.colorT("neutral", 1000);
+$text--dark: colors.colorT("neutral", 100);
+$primary-color--dark: colors.colorT("green", 100);
+$secondary-color--dark: colors.colorT("green", 400); // #5d985dff;
+$accent-one--dark: colors.colorT("neutral", 800);
 $accent-two--dark: #496a49ff; //#c8eaebff;
 $white: #fff;
 $font-stack: "Montserrat", sans-serif;
@@ -23,3 +27,4 @@ $content-max-width: 60rem;
 $h1-font-size: 2.25rem;
 $h2-font-size: 1.75rem;
 $h-margin-ratio: 0.67;
+

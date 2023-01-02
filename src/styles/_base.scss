@@ -14,7 +14,7 @@ html {
 body {
   @include themed() {
     background-color: t($background-color);
-    color: t($text)
+    color: t($text);
   }
   min-height: 100vh;
   margin: 0;

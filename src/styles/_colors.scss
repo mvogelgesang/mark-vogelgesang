@@ -1,0 +1,67 @@
+
+$system-colors: (
+/* Adopted from https://github.com/uswds/uswds/blob/1908d1391bc59410624ca1934cc70b7404e8f443/src/stylesheets/core/system-tokens/_gray.scss */
+  "gray": (
+    100: #e6e6e6,
+    200: #c9c9c9,
+    300: #adadad,
+    400: #919191,
+    500: #757575,
+    600: #5c5c5c,
+    700: #454545,
+    800: #2e2e2e,
+    900: #1b1b1b,
+    1000: #000000,
+  ),
+  "neutral": (
+    1000: #4e5655,
+    900: #6a7773,
+    800: #86988f,
+    700: #a1baaa,
+    600: #bcdcc1,
+    500: #d6ffd6,
+    400: #e6ffdb,
+    300: #f5ffe2,
+    200: #ffffea,
+    100: #fffff4,
+  ),
+  "green": (
+    1000: #2e3836,
+    900: #384742,
+    800: #41574b,
+    700: #4a6751,
+    600: #537853,
+    500: #74906c,
+    400: #95a787,
+    300: #b4bda2,
+    200: #d0d2bd,
+    100: #e7e5da,
+  ),
+  "aqua": (
+    1000: #4c4a6a,
+    900: #596088,
+    800: #667ea7,
+    700: #72a4c8,
+    600: #7cd4eb,
+    500: #8af5f3,
+    400: #9bfce5,
+    300: #afffdb,
+    200: #c5ffd8,
+    100: #ddffe0,
+  ),
+);
+
+
+@function colorT($color,$value) {
+    @return map-get(map-get($system-colors, $color), $value);
+  }
+@each $name, $colorValues in $system-colors {
+  @each $value, $hex in $colorValues {
+    .text-#{$name}-#{$value} {
+      color: #{$hex};
+    }
+    .bg-#{$name}-#{$value} {
+        background-color: #{$hex};
+    }
+  }
+}
