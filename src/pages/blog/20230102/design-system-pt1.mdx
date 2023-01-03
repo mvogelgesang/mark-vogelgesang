@@ -1,12 +1,16 @@
 ---
 layout: "../../../layouts/BlogPost.astro"
-pubDate: "Dec 30, 2022"
+pubDate: "Jan 2, 2023"
 title: "Making a Design System, Part 1"
 tags: ["design system", "SASS"]
-description: "How does someone who is not a visual designer take on the task of creatign a design system?"
+description:
+  "How does someone who is not a visual designer take on the task of creating a
+  design system?"
 hero:
-  src: ""
-  alt: ""
+  src: "/posts/20230102/Design-System.png"
+  alt:
+    "Grid of colors ascending and decending in saturation on the left with
+    typography in light and dark varieties to the right."
 ---
 
 import Swatch from "../../../components/Swatch.astro";
@@ -71,16 +75,16 @@ export const aqua = [
   { value: 100, hex: "#ddffe0" },
 ];
 
-Over the holidays, I spent some time to switch the site from Gatsby to Astro and
-add a dark mode toggle (see <i class="fas fa-adjust"></i> above). The switch
-from Gatsby to Astro was fairly straight forward and resulted in a codebase that
-will be easier to maintain. In the process of implementing the dark mode toggle,
-I found inconsistencies with my original SASS which made the conversion harder
-than it had to be. In response, I wanted to create something that was easier to
-extend while also looking less thrown together. This post will cover the visual
-design choices for the site including an 8pt grid, color swatches, and site
-typography. I hesitate to call it a "design-system" but these are some baby
-steps in that direction.
+Over the holidays, I spent some time switching the site from Gatsby to Astro and
+add a dark mode toggle (see <i class="fas fa-adjust"></i> above). The switch was
+fairly straightforward and resulted in a codebase that will be easier to
+maintain. In the process of implementing the dark mode toggle, I found
+inconsistencies with my original SASS which made the conversion harder than it
+had to be. In response, I wanted to create something that was easier to extend
+while also looking less thrown together. This post will cover the visual design
+choices for the site including an 8pt grid, color swatches, and site typography.
+I hesitate to call it a "design-system" but these are some baby steps in that
+direction.
 
 ## Principles
 
@@ -90,7 +94,7 @@ designs, research was required to learn how a design-system comes together.
 Going into the research phase, I laid out a few key factors that were important
 to my site:
 
-1. **Readability** - the primary reason for the site is to publish content. Font
+1. **Readability** - The primary reason for the site is to publish content. Font
    choice, line height, and line length are important factors to ensure folks
    can focus on the content rather than getting lost in the layout.
 1. **Pattern-based** - I am not a visual designer by trade, if there are
@@ -107,17 +111,13 @@ implementation guidance for large scale design systems. Many blogs cited
 [Atlassian](https://atlassian.design),
 [Google Material](https://m3.material.io/styles), and
 [IBM's Carbon](https://carbondesignsystem.com/guidelines/2x-grid/overview/)
-design system documentation. I found Atlassian and IBM's documentation to
-explain the theory and practice of implementing a design system in a way that is
-consumable by a wide audience. The
-[Foundations](https://atlassian.design/foundations/) section of Atlassian's
-website was a source I went back to again and again.
+design system documentation. I found Atlassian and IBM's documentation to be quite consumable and explained both the theory and practice of implementing a design system.
 
-The more I read about design systems, the more I saw mentiones of using an 8pt
+The more I read about design systems, the more I saw mentions of using an 8pt
 grid system which was a new concept to me. Both IBM and Atlassian utilize 8pt
-grids as cornerstones to their designs. In addition to reading their content,
-Vitsky discusses the topic and provides examples in Figma. Both links are
-member-only Medium posts.
+grids as cornerstones to their designs. In addition to reading their content, I
+found a series of Medium posts by Vitsky where they discuss the topic and
+provide examples in Figma. Both links are member-only Medium posts:
 [Design System based on the 8pt Grid](https://medium.com/@VitskyDS/design-system-based-on-the-8pt-grid-2473ca5f0ae1)
 and
 [The Comprehensive 8pt Grid Guide](https://medium.com/swlh/the-comprehensive-8pt-grid-guide-aa16ff402179).
@@ -132,19 +132,19 @@ larger layout grid system and how components fit into it.
 
 The existing site leverages Montserrat but the font sizing, line height, and
 weight lacked a coherent strategy beyond h1 being larger than h2 and so on.
-Following many of the principles of the 8pt grid, I established a typography
-leveraging Montserrat in various weights and sizes.
+Following many of the principles of the 8pt grid, I adjusted font sizes and line heights of each major element. To do so, I leveraged Montserrat in various weights and sizes.
 
-![mvogelgesang.com typography on a light background](/posts/20221230/Light.png)
-![mvogelgesang.com typography on a dark background](/posts/20221230/Dark.png)
+<img src="/posts/20230102/Light.png" width="49%" alt="mvogelgesang.com typography on a light background"></img>
+<img src="/posts/20230102/Dark.png" width="49%" alt="mvogelgesang.com typography on a dark background"></img>
 
 | Font            | Variable     | Element/ Purpose | Font Size (px) | Line Height (px) |
 | --------------- | ------------ | ---------------- | -------------- | ---------------- |
 | Montserrat      | SemiBold 600 | h1               | 40             | 48               |
 | Montserrat      | SemiBold 600 | h2               | 32             | 40               |
-| Montserrat      | SemiBold 600 | h3               | 24             | 28               |
-| Montserrat      | SemiBold 600 | h4               | 16             | 24               |
-| Montserrat      | Regular 400  | p / prose        | 16             | 24               |
+| Montserrat      | SemiBold 600 | h3               | 28             | 28               |
+| Montserrat      | SemiBold 600 | h4               | 24             | 24               |
+| Montserrat      | SemiBold 600 | h5               | 20             | 24               |
+| Montserrat      | Regular 400  | p / prose        | 20             | 24               |
 | Montserrat      | Regular 400  | prose small      | 12             | 24               |
 | Source Code Pro | Regular 400  | pre, code        | 12             | 20               |
 
@@ -194,9 +194,12 @@ total swatches.
 
 ## What's Next
 
-As it stands, the switch to color swatches and typography settings are  incomplete and the SASS files are a mix between the old and new. A subsequent update using design tokens should make hte switch complete. In subsequent updates, I hope to address the following:
+As it stands, the switch to color swatches and typography settings are
+incomplete and the SASS files are a mix between the old and new. A subsequent
+update using design tokens should make the switch complete. In subsequent
+updates, I hope to address the following:
 
-- Design tokens 
+- Design tokens
 - Content grid
 - Accessibility
 - Theming

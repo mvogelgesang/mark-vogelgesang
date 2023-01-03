@@ -1,9 +1,7 @@
 /* establish font-weight utility classes */
 $font-weights: (
-  "light": 300,
   "normal": 400,
   "semibold": 600,
-  "heavy": 900,
 );
 @each $weight, $value in $font-weights {
   .text-#{$weight} {
@@ -17,8 +15,6 @@ $alignment: ("left", "center", "right");
     text-align: #{$value};
   }
 }
-
-
 
 /* margin and padding utilities */
 $units: (
