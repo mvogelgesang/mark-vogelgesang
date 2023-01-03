@@ -1,9 +1,7 @@
 /* establish font-weight utility classes */
 $font-weights: (
-  "light": 300,
   "normal": 400,
   "semibold": 600,
-  "heavy": 900,
 );
 @each $weight, $value in $font-weights {
   .text-#{$weight} {
@@ -15,29 +13,6 @@ $alignment: ("left", "center", "right");
 @each $value in $alignment {
   .text-#{$value} {
     text-align: #{$value};
-  }
-}
-
-/* Adopted from https://github.com/uswds/uswds/blob/1908d1391bc59410624ca1934cc70b7404e8f443/src/stylesheets/core/system-tokens/_gray.scss */
-$system-colors: (
-  "gray": (
-    10: #e6e6e6,
-    20: #c9c9c9,
-    30: #adadad,
-    40: #919191,
-    50: #757575,
-    60: #5c5c5c,
-    70: #454545,
-    80: #2e2e2e,
-    90: #1b1b1b,
-    100: #000000,
-  ),
-);
-@each $color, $shades in $system-colors {
-  @each $value, $hex in $shades {
-    .text-#{$color}-#{$value} {
-      color: #{$hex};
-    }
   }
 }
 

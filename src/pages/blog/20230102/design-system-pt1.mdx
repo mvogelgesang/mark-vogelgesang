@@ -1,0 +1,224 @@
+---
+layout: "../../../layouts/BlogPost.astro"
+pubDate: "Jan 2, 2023"
+title: "Making a Design System, Part 1"
+tags: ["design system", "SASS"]
+description:
+  "Previous iterations of my site leveraged SASS but the patterns were thrown
+  together and lacked consistency. My recent introduction of a dark mode exposed
+  many inconsistencies in the original setup. Rather than putting band-aids on
+  the styles, I wanted to push in the direction of a design system, but how?"
+hero:
+  src: "/posts/20230102/Design-System.png"
+  alt:
+    "Grid of colors ascending and decending in saturation on the left with
+    typography in light and dark varieties to the right."
+---
+
+import Swatch from "../../../components/Swatch.astro";
+export const startingColors = [
+  { value: "Green", hex: "#74906c" },
+  { value: "Neutral", hex: "#e6ffdb" },
+  { value: "Aqua", hex: "#7CD4EB" },
+];
+
+export const green = [
+  { value: 1000, hex: "#2e3836" },
+  { value: 900, hex: "#384742" },
+  { value: 800, hex: "#41574b" },
+  { value: 700, hex: "#4a6751" },
+  {
+    value: 600,
+    hex: "#537853",
+  },
+  { value: 500, hex: "#74906c" },
+  { value: 400, hex: "#95a787" },
+  { value: 300, hex: "#b4bda2" },
+  { value: 200, hex: "#d0d2bd" },
+  {
+    value: 100,
+    hex: "#e7e5da",
+  },
+];
+export const neutral = [
+  { value: 1000, hex: "#4e5655" },
+  { value: 900, hex: "#6a7773" },
+  { value: 800, hex: "#86988f" },
+  {
+    value: 700,
+    hex: "#a1baaa",
+  },
+  { value: 600, hex: "#bcdcc1" },
+  { value: 500, hex: "#d6ffd6" },
+  { value: 400, hex: "#e6ffdb" },
+  { value: 300, hex: "#f5ffe2" },
+  {
+    value: 200,
+    hex: "#ffffea",
+  },
+  { value: 100, hex: "#fffff4" },
+];
+export const aqua = [
+  { value: 1000, hex: "#4c4a6a" },
+  { value: 900, hex: "#596088" },
+  {
+    value: 800,
+    hex: "#667ea7",
+  },
+  { value: 700, hex: "#72a4c8" },
+  { value: 600, hex: "#7cd4eb" },
+  { value: 500, hex: "#8af5f3" },
+  { value: 400, hex: "#9bfce5" },
+  {
+    value: 300,
+    hex: "#afffdb",
+  },
+  { value: 200, hex: "#c5ffd8" },
+  { value: 100, hex: "#ddffe0" },
+];
+
+Over the holidays, I spent some time switching the site from Gatsby to Astro and
+add a dark mode toggle (see <i class="fas fa-adjust"></i> above). The switch was
+fairly straightforward and resulted in a codebase that will be easier to
+maintain. In the process of implementing the dark mode toggle, I found
+inconsistencies with my original SASS which made the conversion harder than it
+had to be. In response, I wanted to create something that was easier to extend
+while also looking less thrown together. This post will cover the visual design
+choices for the site including an 8pt grid, color swatches, and site typography.
+I hesitate to call it a "design-system" but these are some baby steps in that
+direction.
+
+## Principles
+
+I have used both mature and project-specific design systems in the past but had
+never been involved in the early stages. Before I started creating any visual
+designs, research was required to learn how a design-system comes together.
+Going into the research phase, I laid out a few key factors that were important
+to my site:
+
+1. **Readability** - The primary reason for the site is to publish content. Font
+   choice, line height, and line length are important factors to ensure folks
+   can focus on the content rather than getting lost in the layout.
+1. **Pattern-based** - I am not a visual designer by trade, if there are
+   patterns or rules I can follow to make color or visual design decisions, I am
+   game.
+1. **Extendable** - Over time, I will want to add new components and features.
+   Whatever solution I choose should enable me to build the new stuff in a
+   simplified way.
+
+## Research
+
+With the principles in place, I started searching for blog posts or
+implementation guidance for large scale design systems. Many blogs cited
+[Atlassian](https://atlassian.design),
+[Google Material](https://m3.material.io/styles), and
+[IBM's Carbon](https://carbondesignsystem.com/guidelines/2x-grid/overview/)
+design system documentation. I found Atlassian and IBM's documentation to be
+quite consumable and explained both the theory and practice of implementing a
+design system.
+
+The more I read about design systems, the more I saw mentions of using an 8pt
+grid system which was a new concept to me. Both IBM and Atlassian utilize 8pt
+grids as cornerstones to their designs. In addition to reading their content, I
+found a series of Medium posts by Vitsky where they discuss the topic and
+provide examples in Figma. Both links are member-only Medium posts:
+[Design System based on the 8pt Grid](https://medium.com/@VitskyDS/design-system-based-on-the-8pt-grid-2473ca5f0ae1)
+and
+[The Comprehensive 8pt Grid Guide](https://medium.com/swlh/the-comprehensive-8pt-grid-guide-aa16ff402179).
+
+With a conceptual understanding of the 8pt grid system, I decided to tackle
+typography and colors first. Subsequent articles will be written about the
+larger layout grid system and how components fit into it.
+
+## Putting It Together
+
+### Typography
+
+The existing site leverages Montserrat but the font sizing, line height, and
+weight lacked a coherent strategy beyond h1 being larger than h2 and so on.
+Following many of the principles of the 8pt grid, I adjusted font sizes and line
+heights of each major element. To do so, I leveraged Montserrat in various
+weights and sizes.
+
+<img
+  src="/posts/20230102/Light.png"
+  width="49%"
+  alt="mvogelgesang.com typography on a light background"
+></img>
+<img
+  src="/posts/20230102/Dark.png"
+  width="49%"
+  alt="mvogelgesang.com typography on a dark background"
+></img>
+
+<br /><br />
+
+| Font            | Variable     | Element/ Purpose | Font Size (px) | Line Height (px) |
+| --------------- | ------------ | ---------------- | -------------- | ---------------- |
+| Montserrat      | SemiBold 600 | h1               | 40             | 48               |
+| Montserrat      | SemiBold 600 | h2               | 32             | 40               |
+| Montserrat      | SemiBold 600 | h3               | 28             | 28               |
+| Montserrat      | SemiBold 600 | h4               | 24             | 24               |
+| Montserrat      | SemiBold 600 | h5               | 20             | 24               |
+| Montserrat      | Regular 400  | p / prose        | 20             | 24               |
+| Montserrat      | Regular 400  | prose small      | 12             | 24               |
+| Source Code Pro | Regular 400  | pre, code        | 12             | 20               |
+
+### Colors
+
+I liked many of the colors used on the current site and wanted to use those as
+starting points. Atlassian uses 10 or more swatches per palette which
+conveniently enables symmetrical colors when switching between
+[light and dark modes](https://atlassian.design/foundations/color-new/color-palette-new/#picking-colors-for-dark-mode).
+Per their example, a 10 swatch palette creates natural color pairs which offer
+light/dark mode equivalents. To start, I picked three colors which produced 30
+total swatches.
+
+#### Starting Colors
+
+<div style="display:flex; flex-wrap: wrap;">
+  {startingColors.map((item) => {
+    return <Swatch hexValue={item.hex} colorName={item.value} />;
+  })}
+</div>
+
+#### Swatches
+
+##### Neutral
+
+<div style="display:flex; flex-wrap: wrap;">
+  {neutral.map((item) => {
+    return <Swatch hexValue={item.hex} colorName={"neutral" + item.value} />;
+  })}
+</div>
+
+##### Green
+
+<div style="display:flex; flex-wrap: wrap;">
+  {green.map((item) => {
+    return <Swatch hexValue={item.hex} colorName={"green" + item.value} />;
+  })}
+</div>
+
+##### Aqua
+
+<div style="display:flex; flex-wrap: wrap;">
+  {aqua.map((item) => {
+    return <Swatch hexValue={item.hex} colorName={"aqua" + item.value} />;
+  })}
+</div>
+
+## What's Next
+
+As it stands, the switch to color swatches and typography settings are
+incomplete and the SASS files are a mix between the old and new. A subsequent
+update using design tokens should make the switch complete. In subsequent
+updates, I hope to address the following:
+
+- Design tokens
+- Content grid
+- Accessibility
+- Theming
+- Components (GitHub/Gist embed, inline code, block quotes, tables)
+- Elevation/ shadows
+- Animations

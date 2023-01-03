@@ -2,11 +2,13 @@
 import PageWrapper from "../layouts/PageWrapper.astro";
 
 // Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await Astro.glob("./blog/**/*.{md,mdx}")).sort(
+const posts = (await Astro.glob("./blog/**/*.{astro,md,mdx}")).sort(
   (a, b) =>
     new Date(b.frontmatter.pubDate).valueOf() -
     new Date(a.frontmatter.pubDate).valueOf()
 );
+
+
 ---
 
 <PageWrapper title="Home">
