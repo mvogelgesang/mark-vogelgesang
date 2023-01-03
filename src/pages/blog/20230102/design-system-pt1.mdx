@@ -4,8 +4,10 @@ pubDate: "Jan 2, 2023"
 title: "Making a Design System, Part 1"
 tags: ["design system", "SASS"]
 description:
-  "How does someone who is not a visual designer take on the task of creating a
-  design system?"
+  "Previous iterations of my site leveraged SASS but the patterns were thrown
+  together and lacked consistency. My recent introduction of a dark mode exposed
+  many inconsistencies in the original setup. Rather than putting band-aids on
+  the styles, I wanted to push in the direction of a design system, but how?"
 hero:
   src: "/posts/20230102/Design-System.png"
   alt:
@@ -111,7 +113,9 @@ implementation guidance for large scale design systems. Many blogs cited
 [Atlassian](https://atlassian.design),
 [Google Material](https://m3.material.io/styles), and
 [IBM's Carbon](https://carbondesignsystem.com/guidelines/2x-grid/overview/)
-design system documentation. I found Atlassian and IBM's documentation to be quite consumable and explained both the theory and practice of implementing a design system.
+design system documentation. I found Atlassian and IBM's documentation to be
+quite consumable and explained both the theory and practice of implementing a
+design system.
 
 The more I read about design systems, the more I saw mentions of using an 8pt
 grid system which was a new concept to me. Both IBM and Atlassian utilize 8pt
@@ -132,10 +136,20 @@ larger layout grid system and how components fit into it.
 
 The existing site leverages Montserrat but the font sizing, line height, and
 weight lacked a coherent strategy beyond h1 being larger than h2 and so on.
-Following many of the principles of the 8pt grid, I adjusted font sizes and line heights of each major element. To do so, I leveraged Montserrat in various weights and sizes.
+Following many of the principles of the 8pt grid, I adjusted font sizes and line
+heights of each major element. To do so, I leveraged Montserrat in various
+weights and sizes.
 
-<img src="/posts/20230102/Light.png" width="49%" alt="mvogelgesang.com typography on a light background"></img>
-<img src="/posts/20230102/Dark.png" width="49%" alt="mvogelgesang.com typography on a dark background"></img>
+<img
+  src="/posts/20230102/Light.png"
+  width="49%"
+  alt="mvogelgesang.com typography on a light background"
+></img>
+<img
+  src="/posts/20230102/Dark.png"
+  width="49%"
+  alt="mvogelgesang.com typography on a dark background"
+></img>
 
 | Font            | Variable     | Element/ Purpose | Font Size (px) | Line Height (px) |
 | --------------- | ------------ | ---------------- | -------------- | ---------------- |
