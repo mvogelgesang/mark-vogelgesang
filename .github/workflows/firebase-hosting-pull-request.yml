@@ -20,4 +20,4 @@ jobs:
       - name: lighthouse CI
         run: |
          npm install -g @lhci/cli@0.3.x
-         lhci autorun --no-lighthouserc --upload.target=temporary-public-storage --url=${{steps.firebase_output.outputs.urls}} || echo "LHCI failed!"
+         lhci autorun --config=./lighthouserc_firebase.json --upload.target=temporary-public-storage --url=${{steps.firebase_output.outputs.urls}} || echo "LHCI failed!"
