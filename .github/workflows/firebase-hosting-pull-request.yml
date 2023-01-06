@@ -16,6 +16,5 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MVOGELGESANG }}'
           projectId: mvogelgesang
-  lighhouse_ci:
       - run: npm install -g @lhci/cli@0.3.x
       - run: lhci autorun --upload.target=temporary-public-storage --serverBaseUrl=${{needs.build_and_preview.outputs.urls}} || echo "LHCI failed!"
