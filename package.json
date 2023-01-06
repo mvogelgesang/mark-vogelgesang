@@ -7,8 +7,11 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:preview": "astro build && astro preview",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "pa11y-ci": "start-server-and-test build:preview http://localhost:3000 pa11y-ci:sitemap",
+    "pa11y-ci:sitemap": "pa11y-ci -f mvogelgesang.com -r localhost:3000 --sitemap http://localhost:3000/sitemap-0.xml"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.13.0",
@@ -29,6 +32,7 @@
     "prettier": "^2.8.1",
     "prettier-plugin-astro": "^0.7.0",
     "sass": "^1.57.0",
+    "start-server-and-test": "^1.15.2",
     "stylelint": "^14.16.0",
     "stylelint-config-recommended-scss": "^8.0.0",
     "stylelint-config-standard": "^29.0.0"
