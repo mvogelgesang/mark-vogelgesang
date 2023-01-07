@@ -10,8 +10,7 @@
     "build:preview": "astro build && astro preview",
     "preview": "astro preview",
     "astro": "astro",
-    "pa11y-ci": "start-server-and-test build:preview http://localhost:3000 pa11y-ci:sitemap",
-    "pa11y-ci:sitemap": "pa11y-ci -f mvogelgesang.com -r localhost:3000 --sitemap http://localhost:3000/sitemap-0.xml"
+    "prerelease": "astro build && lhci autorun --config=lighthouserc_local.json"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.13.0",
