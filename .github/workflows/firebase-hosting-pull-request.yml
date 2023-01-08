@@ -3,7 +3,8 @@
 name: Pull Request Deploy and Lighthouse CI
 on: pull_request
 jobs:
-  build_and_preview:
+  build_preview_lighthouse:
+    name: Build Preview Lighthouse
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
