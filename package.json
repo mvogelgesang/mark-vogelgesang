@@ -7,8 +7,10 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:preview": "astro build && astro preview",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prerelease": "astro build && lhci autorun --config=lighthouserc_local.json"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.13.0",
@@ -29,6 +31,7 @@
     "prettier": "^2.8.1",
     "prettier-plugin-astro": "^0.7.0",
     "sass": "^1.57.0",
+    "start-server-and-test": "^1.15.2",
     "stylelint": "^14.16.0",
     "stylelint-config-recommended-scss": "^8.0.0",
     "stylelint-config-standard": "^29.0.0"

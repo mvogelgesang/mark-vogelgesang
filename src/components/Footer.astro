@@ -21,7 +21,7 @@ import FooterLink from "./FooterLink.astro";
 			{
 				SOCIAL_MEDIA.map((item) => {
 				return ( 
-					<FooterLink href={item.url} class="footer-nav-link">
+					<FooterLink href={item.url} class="footer-nav-link" aria-label={item.name}>
 						<i class={item.icon + ' fa-xl'}/>
 						</FooterLink>
 				)})
