@@ -24,14 +24,15 @@ header.header {
     }
   }
   .nav-container {
-    padding: 0 1rem;
+    @include themed() {
+      border-bottom: 0.25rem solid t($accent-two);
+    }
     @include desktop {
-      height: 5rem;
+      height: 3.5rem;
       max-width: $content-max-width;
       margin: 0 auto;
-      @include themed() {
-        border-bottom: 0.25rem solid t($accent-two);
-      }
+      padding-top: 0.5rem;
+      
     }
     .nav-list-item {
       text-decoration: none;
@@ -39,8 +40,7 @@ header.header {
         color: t($primary-color);
       }
       font-weight: 600;
-      padding: 1rem 0rem 0.5rem;
-      margin-right: 1.2rem;
+      padding: 1rem;
       @include desktop {
         float: left;
         display: block;
@@ -49,8 +49,19 @@ header.header {
         }
       }
       @include mobile {
+        padding: 1rem 0rem 1rem 1rem;
         text-align: left;
-        padding: 0.5rem 0rem 0.5rem 1rem;
+      }
+      &:hover {
+        @include themed() {
+          background-color: t($secondary-color);
+          color: t($background-color)
+        }
+      }
+      &:focus {
+        @include themed() {
+          outline: solid thick t($accent-one);
+        }
       }
     }
 
@@ -59,7 +70,7 @@ header.header {
       @include mobile {
         font-size: 2rem;
         float: left;
-        padding-left: 0rem;
+        padding-left: 1rem;
       }
     }
     .nav-list-item:not(:first-child) {
@@ -107,21 +118,6 @@ header.header {
       padding-inline-start: 0rem;
       @include mobile {
         overflow: hidden;
-      }
-    }
-    .nav-list.display {
-      @include mobile {
-        @include themed() {
-          border-bottom: 0.2rem solid t($accent-two);
-        }
-      }
-    }
-    .nav-list-item {
-      line-height: 2.43rem;
-      &:hover {
-        @include themed() {
-          background-color: t($accent-two);
-        }
       }
     }
   }

@@ -1,3 +1,5 @@
+@use "_colors.scss" as colors;
+
 .blog-post {
   max-width: 650px;
   @include mobile {
@@ -7,17 +9,19 @@
     }
   }
   a {
-    text-decoration: none;
+    text-decoration: underline;
     @include themed() {
-      color: t($primary-color);
+      color: t($text);
     }
     word-wrap: break-word;
     &:hover {
-      text-decoration: underline;
+      @include themed() {
+      color: t($accent-one)
+      }
     }
     &:visited {
       @include themed() {
-        color: t($secondary-color);
+        color: t($accent-two);
       }
     }
   }
@@ -50,8 +54,8 @@
     }
     th {
       @include themed() {
-        background-color: t($accent-two);
-        color: t($text);
+        background-color: t($secondary-color);
+        color: t($background-color);
       }
       padding: 0.5rem;
     }
@@ -60,12 +64,13 @@
     }
     tr:nth-child(even) {
       @include themed() {
-        background-color: t($accent-one);
+        background-color: colors.colorT("neutral", 800);
       }
     }
     tr:hover {
       @include themed() {
-        background-color: t($accent-two);
+        background-color: t($accent-one);
+        color: t($background-color)
       }
     }
     .gist tr:nth-child(even) {

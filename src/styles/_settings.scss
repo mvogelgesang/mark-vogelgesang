@@ -12,14 +12,14 @@ $background-color--default: colors.colorT("neutral", 100);
 $text--default: colors.colorT("neutral", 1000);
 $primary-color--default: colors.colorT("green", 900);
 $secondary-color--default: colors.colorT("green", 600);
-$accent-one--default: #d6ffd6ff;
-$accent-two--default: #c8eaebff;
+$accent-one--default: colors.colorT("aqua", 700);
+$accent-two--default: colors.colorT("aqua",400);
 $background-color--dark: colors.colorT("neutral", 1000);
-$text--dark: colors.colorT("neutral", 100);
+$text--dark: colors.colorT("neutral", 300);
 $primary-color--dark: colors.colorT("green", 100);
 $secondary-color--dark: colors.colorT("green", 400); // #5d985dff;
-$accent-one--dark: colors.colorT("neutral", 800);
-$accent-two--dark: #496a49ff; //#c8eaebff;
+$accent-one--dark: colors.colorT("aqua", 400);
+$accent-two--dark: colors.colorT("aqua",200); //#c8eaebff;
 $white: #fff;
 
 
