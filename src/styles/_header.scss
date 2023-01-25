@@ -35,6 +35,7 @@ header.header {
       
     }
     .nav-list-item {
+      cursor: pointer;
       text-decoration: none;
       @include themed() {
         color: t($primary-color);
