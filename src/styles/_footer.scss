@@ -4,8 +4,9 @@
     border-top: 0.25rem solid t($accent-two);
     color: t($text);
   }
+  flex: 0 1 auto;
   height: 10rem;
-  margin-top: 2rem;
+  margin-top: auto;
   @include mobile {
     overflow: hidden;
     height: fit-content;

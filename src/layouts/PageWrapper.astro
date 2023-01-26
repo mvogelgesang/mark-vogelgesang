@@ -1,27 +1,35 @@
 ---
 import "@fontsource/montserrat/400.css";
 import "@fontsource/montserrat/600.css";
-import "@fontsource/source-code-pro"; 
+import "@fontsource/source-code-pro";
 
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 
-const {	title=SITE_TITLE, description=SITE_DESCRIPTION} = Astro.props;
+const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
 ---
+
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
-	<body>
-		<Header />
-		<main class="main">
-			<slot />
-		</main>
-		<Footer />
-		<script src="https://kit.fontawesome.com/d0a03e8794.js" crossorigin="anonymous"></script>
-	</body>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <div class="flexwrapper">
+      <Header />
+      <main class="main">
+        <div>
+          <slot />
+        </div>
+      </main>
+      <Footer />
+      <script
+        src="https://kit.fontawesome.com/d0a03e8794.js"
+        crossorigin="anonymous"
+      ></script>
+    </div>
+  </body>
 </html>

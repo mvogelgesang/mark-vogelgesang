@@ -16,15 +16,23 @@ body {
     background-color: t($background-color);
     color: t($text);
   }
+}
+.flexwrapper {
+  display: flex;
+  flex-flow: column;
   min-height: 100vh;
-  margin: 0;
 }
 .main {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: left;
+  width: 100%;
   max-width: $content-max-width;
   margin: 0rem auto 3rem;
   overflow: hidden;
   padding: 0rem 1rem;
 }
+
 .fullScreen {
   max-width: unset;
 }
@@ -70,6 +78,9 @@ h5 {
 
 /* Mobile */
 @include mobile {
+  body {
+    margin: 0;
+  }
   h1 {
     // font-size: 2rem;
     // margin: 2rem 0rem 2rem * $h-margin-ratio;
@@ -82,6 +93,7 @@ h5 {
   .main {
     margin: 0rem 0.5rem;
     padding: 0rem 0.5rem;
+    width: unset;
   }
 }
 

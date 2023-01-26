@@ -25,7 +25,7 @@ const {
       <h1>{title}</h1>
       <div class="blog-post-date">{pubDate} </div>
       <div class="blog-post-content">
-        {hero.src && <img width={720} height={360} src={hero.src} alt={hero.alt} />}
+        {hero.src && <img src={hero.src} alt={hero.alt} />}
         <slot />
       </div>
       <!-- tags -->

@@ -3,11 +3,7 @@ header.header {
 }
 
 .header {
-  /* @include mobile {
-    @include themed() {
-      border-bottom: 0.1875rem solid t($accent-two);
-    }
-  } */
+  flex: 0 1 auto;
   .nav-active {
     @include desktop {
       @include themed() {
