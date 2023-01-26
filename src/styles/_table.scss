@@ -1,0 +1,88 @@
+@use "_colors.scss" as colors;
+
+/* based on https://blog.apps.npr.org/2014/05/09/responsive-data-tables.html */
+
+table {
+  border-collapse: collapse;
+  font-size: $prose-font-size;
+  margin: 0 0 11px 0;
+  padding: 0;
+
+  width: 100%;
+}
+
+table th {
+  @include themed() {
+    background-color: t($secondary-color);
+    color: t($background-color);
+  }
+
+  padding: 0.5rem;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+table td {
+    padding: 0.25rem 0.5rem;
+    text-align: right;
+  vertical-align: top;
+}
+@include desktop {
+tr:nth-child(even) {
+    @include themed() {
+      background-color: colors.colorT("neutral", 800);
+    }
+  }
+  tr:hover {
+    @include themed() {
+      background-color: t($accent-one);
+      color: t($background-color)
+    }
+  }
+}
+/* responsive table */
+@include mobile {
+  table,
+  tbody {
+    display: block;
+    width: 100%;
+  }
+
+  thead {
+    display: none;
+  }
+
+  table tr,
+  table th,
+  table td {
+    display: block;
+    padding: 0;
+    text-align: left;
+    white-space: normal;
+  }
+
+  table tr {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  table th[data-label]:before,
+  table td[data-label]:before {
+    content: attr(data-label) ":\00A0";
+    font-weight: bold;
+  }
+
+  table td {
+    border: none;
+    margin-bottom: 0.5rem;
+  }
+
+  table td:empty {
+    display: none;
+  }
+
+  table td:first-child {
+    font-size: $prose-font-size;
+    margin-bottom: 0.5rem;
+  }
+}

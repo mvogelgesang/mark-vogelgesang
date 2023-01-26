@@ -1,0 +1,93 @@
+---
+interface TableData {
+  [key: string]: string 
+}
+// const data:TableData[] = [{name: "Mark", hobby: "sports"},{name: "Dave", hobby: "golf"},{name: "Sue", hobby: "IPAs"}];
+
+const data:TableData[] = [
+ {
+   "Font": "Montserrat",
+   "Variable": "SemiBold 600",
+   "Element Purpose": "h1",
+   "Font Size (px)": "40",
+   "Line Height (px)": "48",
+ },
+ {
+   "Font": "Montserrat",
+   "Variable": "SemiBold 600",
+   "Element Purpose": "h2",
+   "Font Size (px)": "32",
+   "Line Height (px)": "40",
+ },
+ {
+   "Font": "Montserrat",
+   "Variable": "SemiBold 600",
+   "Element Purpose": "h3",
+   "Font Size (px)": "28",
+   "Line Height (px)": "28",
+ },
+ {
+   "Font": "Montserrat",
+   "Variable": "SemiBold 600",
+   "Element Purpose": "h4",
+   "Font Size (px)": "24",
+   "Line Height (px)": "24",
+ },
+ {
+   "Font": "Montserrat",
+   "Variable": "SemiBold 600",
+   "Element Purpose": "h5",
+   "Font Size (px)": "20",
+   "Line Height (px)": "24",
+ },
+ {
+   "Font": "Montserrat",
+   "Variable": "Regular 400",
+   "Element Purpose": "p prose",
+   "Font Size (px)": "20",
+   "Line Height (px)": "24",
+ },
+ {
+   "Font": "Montserrat",
+   "Variable": "Regular 400",
+   "Element Purpose": "prose small",
+   "Font Size (px)": "12",
+   "Line Height (px)": "24",
+ },
+ {
+   "Font": "Source Code Pro",
+   "Variable": "Regular 400",
+   "Element Purpose": "pre code",
+   "Font Size (px)": " 12",
+   "Line Height (px)": "20",
+ }
+]
+// const { data:TableData[]} = Astro.props;
+const keys = Object.keys(data[0])
+---
+
+<table>
+    <thead>
+        <tr>
+            {keys.map((key) => (
+                <th>{key}</th>
+            ))}
+        </tr>
+    </thead>
+    <tbody>
+        {
+            data.map((row) => {
+                return (
+                <tr>
+                {Object.entries(row).map(([key]) => {
+                    return (
+                        <td data-label={key}>{row[key]}</td>
+                    )
+                }
+                )}
+            </tr>
+                )
+            })
+          }
+    </tbody>
+</table>
