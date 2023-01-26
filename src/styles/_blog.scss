@@ -53,32 +53,7 @@
       font-size: $prose-font-size;
     line-height: $prose-line-height;
     }
-    // table classes
-    table {
-      width: 100%;
-      font-size: $prose-font-size;
-    }
-    th {
-      @include themed() {
-        background-color: t($secondary-color);
-        color: t($background-color);
-      }
-      padding: 0.5rem;
-    }
-    td {
-      padding: 0.25rem 0.5rem;
-    }
-    tr:nth-child(even) {
-      @include themed() {
-        background-color: colors.colorT("neutral", 800);
-      }
-    }
-    tr:hover {
-      @include themed() {
-        background-color: t($accent-one);
-        color: t($background-color)
-      }
-    }
+    
     .gist tr:nth-child(even) {
       background-color: $white;
     }
