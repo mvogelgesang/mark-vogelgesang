@@ -23,8 +23,8 @@ table th {
 }
 
 table td {
-    padding: 0.25rem 0.5rem;
-    text-align: right;
+  padding: 0.25rem 0.5rem;
+  text-align: left;
   vertical-align: top;
 }
 @include desktop {
@@ -57,24 +57,31 @@ tr:nth-child(even) {
   table td {
     display: block;
     padding: 0;
-    text-align: left;
+    text-align: right;
     white-space: normal;
   }
 
   table tr {
-    padding-bottom: 1rem;
+    @include themed() {
+        border: 2px solid t($accent-two)
+        }
     margin-bottom: 1rem;
   }
 
   table th[data-label]:before,
   table td[data-label]:before {
     content: attr(data-label) ":\00A0";
+    float: left;
+    font-size: 1rem;
     font-weight: bold;
+    text-transform: uppercase;
   }
 
   table td {
-    border: none;
-    margin-bottom: 0.5rem;
+    @include themed() {
+        border-bottom: 1px dotted t($accent-one)
+        }
+        padding: 0.5rem;
   }
 
   table td:empty {
@@ -84,5 +91,8 @@ tr:nth-child(even) {
   table td:first-child {
     font-size: $prose-font-size;
     margin-bottom: 0.5rem;
+  }
+  table td:last-child {
+    border-bottom: none;
   }
 }
