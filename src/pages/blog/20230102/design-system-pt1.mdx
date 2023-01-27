@@ -16,6 +16,8 @@ hero:
 ---
 
 import Swatch from "../../../components/Swatch.astro";
+import Table, {TableData} from "../../../components/Table.astro";
+
 export const startingColors = [
   { value: "Green", hex: "#74906c" },
   { value: "Neutral", hex: "#e6ffdb" },
@@ -75,6 +77,64 @@ export const aqua = [
   },
   { value: 200, hex: "#c5ffd8" },
   { value: 100, hex: "#ddffe0" },
+];
+export const data = [
+  {
+    "Element/ Purpose": "h1",
+    "Font": "Montserrat",
+    "Variable": "SemiBold 600",
+    "Font Size (px)": "40",
+    "Line Height (px)": "48",
+  },
+  {
+    "Element/ Purpose": "h2",
+    "Font": "Montserrat",
+    "Variable": "SemiBold 600",
+    "Font Size (px)": "32",
+    "Line Height (px)": "40",
+  },
+  {
+    "Element/ Purpose": "h3",
+    "Font": "Montserrat",
+    "Variable": "SemiBold 600",
+    "Font Size (px)": "28",
+    "Line Height (px)": "28",
+  },
+  {
+    "Element/ Purpose": "h4",
+    "Font": "Montserrat",
+    "Variable": "SemiBold 600",
+    "Font Size (px)": "24",
+    "Line Height (px)": "24",
+  },
+  {
+    "Element/ Purpose": "h5",
+    "Font": "Montserrat",
+    "Variable": "SemiBold 600",
+    "Font Size (px)": "20",
+    "Line Height (px)": "24",
+  },
+  {
+    "Element/ Purpose": "p prose",
+    "Font": "Montserrat",
+    "Variable": "Regular 400",
+    "Font Size (px)": "20",
+    "Line Height (px)": "24",
+  },
+  {
+    "Element/ Purpose": "prose small",
+    "Font": "Montserrat",
+    "Variable": "Regular 400",
+    "Font Size (px)": "12",
+    "Line Height (px)": "24",
+  },
+  {
+    "Element/ Purpose": "pre code",
+    "Font": "Source Code Pro",
+    "Variable": "Regular 400",
+    "Font Size (px)": " 12",
+    "Line Height (px)": "20",
+  },
 ];
 
 Over the holidays, I spent some time switching the site from Gatsby to Astro and
@@ -153,16 +213,7 @@ weights and sizes.
 
 <br /><br />
 
-| Font            | Variable     | Element/ Purpose | Font Size (px) | Line Height (px) |
-| --------------- | ------------ | ---------------- | -------------- | ---------------- |
-| Montserrat      | SemiBold 600 | h1               | 40             | 48               |
-| Montserrat      | SemiBold 600 | h2               | 32             | 40               |
-| Montserrat      | SemiBold 600 | h3               | 28             | 28               |
-| Montserrat      | SemiBold 600 | h4               | 24             | 24               |
-| Montserrat      | SemiBold 600 | h5               | 20             | 24               |
-| Montserrat      | Regular 400  | p / prose        | 20             | 24               |
-| Montserrat      | Regular 400  | prose small      | 12             | 24               |
-| Source Code Pro | Regular 400  | pre, code        | 12             | 20               |
+<Table data={data}></Table>
 
 ### Colors
 
