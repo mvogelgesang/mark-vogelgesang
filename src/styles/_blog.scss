@@ -40,9 +40,12 @@
     margin: 1.5rem 0rem;
       
     img {
-      max-width: 720px;
-      width: 100%;
+      //max-width: 650px;
       max-height: 360px;
+      @include mobile {
+          max-height: none;
+          width: 100%;
+        }
     }
     ol {
       @include mobile {
