@@ -25,10 +25,31 @@ $white: #fff;
 
 $font-stack: "Montserrat", sans-serif;
 $font-code: "Source Code Pro";
+$font-weights: (
+  "normal": 400,
+  "semibold": 600,
+);
 $breakpoint: 37.5rem;
 $content-max-width: 60rem;
 $max-width: 75rem;
+$grid-unit: 0.5rem;
 
+$unit-increments: (
+    "0": 0,
+    "05": 0.5 * $grid-unit,
+    "1": 1 * $grid-unit,
+    "105": 1.5 * $grid-unit,
+    "2": 2 * $grid-unit,
+    "205": 2.5 * $grid-unit,
+    "3": 3 * $grid-unit,
+    "305": 3.5 * $grid-unit,
+    "4": 4 * $grid-unit,
+    "5": 5 * $grid-unit,
+    "6": 6 * $grid-unit
+);
+
+$alignment: ("left", "center", "right");
+$sides: ("top", "bottom", "right", "left");
 
 $h1-font-size: 2.5rem;
 $h1-line-height: 3rem;
