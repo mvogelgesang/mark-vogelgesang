@@ -1,15 +1,10 @@
 /* establish font-weight utility classes */
-$font-weights: (
-  "normal": 400,
-  "semibold": 600,
-);
 @each $weight, $value in $font-weights {
   .text-#{$weight} {
     font-weight: $value;
   }
 }
 
-$alignment: ("left", "center", "right");
 @each $value in $alignment {
   .text-#{$value} {
     text-align: #{$value};
@@ -17,35 +12,68 @@ $alignment: ("left", "center", "right");
 }
 
 /* margin and padding utilities */
-$units: (
-  '0': 0rem,
-  '025': 0.25rem,
-  '05': 0.50rem,
-  '1': 1rem,
-  '105': 1.5rem,
-  '2': 2rem,
-  '205': 2.5rem,
-  '3': 3rem,
-  '4': 4rem,
-  '5': 5rem,
-  '6': 6rem
-);
-
-$sides: ("top", "bottom", "right", "left");
-
-@each $unit, $value in $units {
-    .p-#{$unit} {
-      padding: #{$value};
+@each $unit, $value in $unit-increments {
+  .p-#{$unit} {
+    padding: #{$value};
+  }
+  .m-#{$unit} {
+    margin: #{$value};
+  }
+  @each $side in $sides {
+    .p-#{$side}-#{$unit} {
+      padding-#{$side}: #{$value};
     }
-    .m-#{$unit} {
-      margin: #{$value};
-    }
-    @each $side in $sides {
-      .p-#{$side}-#{$unit} {
-        padding-#{$side}: #{$value};
-      }
-      .m-#{$side}-#{$unit} {
-        margin-#{$side}: #{$value};
-      }
+    .m-#{$side}-#{$unit} {
+      margin-#{$side}: #{$value};
     }
   }
+}
+
+$border-increments: (
+  "0": 0,
+  "1px": 1px,
+  "2px": 2px,
+  "05": 0.5 * $grid-unit,
+  "1": 1 * $grid-unit,
+  "105": 1.5 * $grid-unit,
+  "2": 2 * $grid-unit,
+  "205": 2.5 * $grid-unit,
+  "3": 3 * $grid-unit,
+  "305": 3.5 * $grid-unit,
+  "4": 4 * $grid-unit,
+  "5": 5 * $grid-unit,
+  "6": 6 * $grid-unit,
+);
+$border-sides: (
+  "border",
+  "border-top",
+  "border-bottom",
+  "border-left",
+  "border-right"
+);
+/* borders */
+/* defaults */
+.border {
+  border-style: solid;
+  border-width: 1px;
+}
+.border-top {
+  border-top: 1px solid;
+}
+.border-bottom {
+  border-bottom: 1px solid;
+}
+.border-left {
+  border-left: 1px solid;
+}
+.border-right {
+  border-right: 1px solid;
+}
+/* variants */
+@each $bval in $border-sides {
+  @each $unit, $value in $border-increments {
+    .#{$bval}-#{$unit} {
+      #{$bval}: $value solid;
+    }
+  }
+}
