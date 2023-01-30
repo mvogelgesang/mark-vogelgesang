@@ -3,6 +3,9 @@
 $background-color: "background-color";
 $text: "text";
 $primary-color: "primary-color";
+$primary: "primary";
+$primary-200: "primary-200";
+$primary-400: "primary-400";
 $secondary-color: "secondary-color";
 $accent-one: "accent-one";
 $accent-two: "accent-two";
@@ -11,12 +14,16 @@ $accent-two: "accent-two";
 $background-color--default: colors.colorT("neutral", 100);
 $text--default: colors.colorT("neutral", 1000);
 $primary-color--default: colors.colorT("green", 900);
+$primary-200--default: colors.colorT("green", 700);
+$primary-400--default: colors.colorT("green", 500);
 $secondary-color--default: colors.colorT("green", 600);
 $accent-one--default: colors.colorT("aqua", 700);
 $accent-two--default: colors.colorT("aqua",200);
 $background-color--dark: colors.colorT("neutral", 1000);
 $text--dark: colors.colorT("neutral", 300);
 $primary-color--dark: colors.colorT("green", 100);
+$primary-200--dark: colors.colorT("green", 300);
+$primary-400--dark: colors.colorT("green", 500);
 $secondary-color--dark: colors.colorT("green", 400); // #5d985dff;
 $accent-one--dark: colors.colorT("aqua", 400);
 $accent-two--dark: colors.colorT("aqua",200); //#c8eaebff;
@@ -31,7 +38,7 @@ $font-weights: (
 );
 $breakpoint: 37.5rem;
 $content-max-width: 60rem;
-$max-width: 75rem;
+$max-width: 60rem;
 $grid-unit: 0.5rem;
 
 $unit-increments: (
@@ -51,6 +58,7 @@ $unit-increments: (
 $alignment: ("left", "center", "right");
 $sides: ("top", "bottom", "right", "left");
 
+$h-margin-ratio: 0.667;
 $h1-font-size: 2.5rem;
 $h1-line-height: 3rem;
 $h2-font-size: 2rem;
