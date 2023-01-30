@@ -10,7 +10,6 @@ header.header {
         border-bottom: 0.2rem solid t($primary-color);
       }
     }
-    @include mobile
   }
   .nav-active:not(:first-child) {
     @include mobile {
@@ -25,7 +24,7 @@ header.header {
     }
     @include desktop {
       height: 3.5rem;
-      max-width: $content-max-width;
+      max-width: $max-width;
       margin: 0 auto;
       padding-top: 0.5rem;
       

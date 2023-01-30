@@ -8,7 +8,11 @@ $layout-vals: flex-start, flex-end, center, space-between, space-around;
   width: 100%;
   max-width: $max-width;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 $grid-unit;
+  @include lg {
+    padding: 0;
+  }
+  
   box-sizing: border-box;
 }
 .row {
@@ -17,67 +21,58 @@ $layout-vals: flex-start, flex-end, center, space-between, space-around;
 }
 
 @each $key, $val in $unit-increments {
-    .grid-gap-#{$key} > *{
-        padding: $val;
-    }
-    // this counters the start and end padding
-    .grid-gap-#{$key} {
-        margin-left: -$val;
-        margin-right: -$val;
-    }
+  .grid-gap-#{$key} > * {
+    padding: 0 $val;
+  }
+  // this counters the start and end padding
+  // .grid-gap-#{$key} {
+  //   margin-left: -$val;
+  //   margin-right: -$val;
+  // }
 }
 
 // justify content
 @each $val in $layout-vals {
-    .justify-#{$val} {
-        justify-content: $val;
-    }
+  .justify-#{$val} {
+    justify-content: $val;
+  }
 }
 
 // cols
-  @include xs {
-    @for $i from 1 through $grid-columns {
-      .col-#{$i} {
-        box-sizing: border-box;
-        flex-grow: 0;
-        width: math.div($i * 100%, $grid-columns);
-      }
+@include xs {
+  @for $i from 1 through $grid-columns {
+    .col-#{$i} {
+      box-sizing: border-box;
+      flex-grow: 0;
+      width: math.div($i * 100%, $grid-columns);
     }
   }
+}
 
-  @include sm {
-    @for $i from 1 through $grid-columns {
-      .col-#{$i}-sm {
-        box-sizing: border-box;
-        flex-grow: 0;
-        width: math.div($i * 100%, $grid-columns);
-      }
+@include sm {
+  @for $i from 1 through $grid-columns {
+    .col-#{$i}-sm {
+      box-sizing: border-box;
+      flex-grow: 0;
+      width: math.div($i * 100%, $grid-columns);
     }
   }
-  @include md {
-    @for $i from 1 through $grid-columns {
-      .col-#{$i}-md {
-        box-sizing: border-box;
-        flex-grow: 0;
-        width: math.div($i * 100%, $grid-columns);
-      }
+}
+@include md {
+  @for $i from 1 through $grid-columns {
+    .col-#{$i}-md {
+      box-sizing: border-box;
+      flex-grow: 0;
+      width: math.div($i * 100%, $grid-columns);
     }
   }
-  @include lg {
-    @for $i from 1 through $grid-columns {
-      .col-#{$i}-lg {
-        box-sizing: border-box;
-        flex-grow: 0;
-        width: math.div($i * 100%, $grid-columns);
-      }
+}
+@include lg {
+  @for $i from 1 through $grid-columns {
+    .col-#{$i}-lg {
+      box-sizing: border-box;
+      flex-grow: 0;
+      width: math.div($i * 100%, $grid-columns);
     }
   }
-  @include xl {
-    @for $i from 1 through $grid-columns {
-      .col-#{$i}-xl {
-        box-sizing: border-box;
-        flex-grow: 0;
-        width: math.div($i * 100%, $grid-columns);
-      }
-    }
-  }
+}

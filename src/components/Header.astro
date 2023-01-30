@@ -1,33 +1,38 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import { NAVIGATION } from "../config";
-import ThemeIcon from './ThemeIcon.astro';
-
+import ThemeIcon from "./ThemeIcon.astro";
 ---
 
 <header>
-  <div class="header">
-    <nav class="nav-container">
-      <div class="nav-list">
-        {
-          NAVIGATION.map((x) => {
-            return (
-              <HeaderLink href={x.path} class="nav-list-item">
-                {x.label}
-              </HeaderLink>
-            );
-          })
-        }
-         <ThemeIcon class="nav-list-item" />
-        <button
-          id="navigationHamburgerButton"
-          class="nav-list-item nav-hamburger"
-          aria-label="Open Menu"
-        >
-          <i class="fa-solid fa-bars fa-lg"></i>
-        </button>
+  <div class="row">
+    <!-- class="header"> -->
+    <div class="col-12">
+      <!-- class="nav-container"> -->
+      <div class="header">
+        <nav class="nav-container">
+          <div class="nav-list">
+            {
+              NAVIGATION.map((x) => {
+                return (
+                  <HeaderLink href={x.path} class="nav-list-item">
+                    {x.label}
+                  </HeaderLink>
+                );
+              })
+            }
+            <ThemeIcon class="nav-list-item" />
+            <button
+              id="navigationHamburgerButton"
+              class="nav-list-item nav-hamburger"
+              aria-label="Open Menu"
+            >
+              <i class="fa-solid fa-bars fa-lg"></i>
+            </button>
+          </div>
+        </nav>
       </div>
-    </nav>
+    </div>
   </div>
 </header>
 

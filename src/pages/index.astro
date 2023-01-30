@@ -12,7 +12,7 @@ const posts = (await Astro.glob("./blog/**/*.{astro,md,mdx}")).sort(
 ---
 
 <PageWrapper title="Home">
-      <div class="blog-posts">
+      <div class="col-12 col-8-md blog-posts">
         {
           posts.map((post) => (
             <>
