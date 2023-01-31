@@ -82,10 +82,15 @@ h5 {
 
 }
 p {
+  font-size: $prose-font-size;
   padding: 0 0 $grid-unit * 2;
 }
 strong {
   font-weight: bold;
+}
+
+.prose {
+  font-size: $prose-font-size;
 }
 /* Mobile */
 @include mobile {
