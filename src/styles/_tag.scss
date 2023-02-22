@@ -1,7 +1,5 @@
-.tag-container a {
-  @include themed() {
-    color: t($secondary-color);
-  }
+.tag-container {
+  overflow: hidden;
 }
 .tag {
   font-family: $font-stack;
