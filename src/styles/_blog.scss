@@ -15,7 +15,7 @@
     word-wrap: break-word;
     &:hover {
       @include themed() {
-      color: t($primary-200)
+        color: t($primary-200);
       }
     }
     &:visited {
@@ -36,14 +36,14 @@
     font-size: $prose-font-size;
     line-height: $prose-line-height;
     margin: 1.5rem 0rem;
-      
+
     img {
       max-height: 360px;
       width: 100%;
       @include mobile {
-          max-height: none;
-          width: 100%;
-        }
+        max-height: none;
+        width: 100%;
+      }
     }
     ol {
       @include mobile {
@@ -55,7 +55,7 @@
       font-size: $prose-font-size;
       line-height: $prose-line-height;
     }
-    
+
     .gist tr:nth-child(even) {
       background-color: $white;
     }
@@ -66,7 +66,7 @@
       font-family: $font-code;
       font-size: 1rem;
       padding: 0.2rem 0.4rem;
-      
+
       @include mobile {
         font-size: 0.8rem;
         padding: 0.1rem 0.2rem;
@@ -76,6 +76,11 @@
       border-radius: 0.5rem;
       word-break: break-word;
       word-wrap: break-word;
+      white-space: pre-wrap; /* css-3 */
+      white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+      white-space: -pre-wrap; /* Opera 4-6 */
+      white-space: -o-pre-wrap; /* Opera 7 */
+      word-wrap: break-word; /* Internet Explorer 5.5+ */
       padding: 0.5rem 1rem;
     }
     div.line {
