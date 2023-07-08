@@ -1,0 +1,18 @@
+---
+import PageWrapper from "./PageWrapper.astro";
+const {
+  content: { title, description, imgSrc, imgAlt },
+} = Astro.props;
+---
+
+<PageWrapper title={title} description={description}>
+  <div class="blog-post">
+    <div class="col-12 col-4-md m-top-2 blog-post-content">
+      <img src={imgSrc} alt={imgAlt} style="" />
+    </div>
+
+    <div class="col-12 col-8-md m-top-2 blog-post-content">
+      <slot />
+    </div>
+  </div>
+</PageWrapper>
