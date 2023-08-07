@@ -18,8 +18,8 @@ const sortedTags = Array.from(uniqueTags).sort();
       <ul>
         {
           sortedTags.map((tag) => (
-            <li>
-              <a href={"/tags/" + tag}>{tag}</a>
+            <li style="padding-bottom: 0.5rem;">
+              <a href={"/tags/" + tag}><i class="fa-solid fa-hashtag"></i>{tag}</a>
             </li>
           ))
         }

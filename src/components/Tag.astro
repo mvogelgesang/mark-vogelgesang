@@ -4,6 +4,6 @@ const { class: className, tag, ...props } = Astro.props;
 
 <div class="tag-item">
     <a class="tag" href={`/tags/${tag}/`}>
-        {tag}
+        <i class="fa-solid fa-hashtag"></i>{tag}
     </a>
 </div>

@@ -27,6 +27,9 @@
   @include mobile {
     margin-bottom: 1rem;
   }
+  &:first-child {
+    padding-left: 0;
+  }
 }
 .tag-list {
   @include mobile {

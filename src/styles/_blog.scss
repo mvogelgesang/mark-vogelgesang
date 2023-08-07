@@ -9,6 +9,8 @@
   }
   a {
     text-decoration: underline;
+    text-decoration-thickness: 0.0625rem;
+    text-underline-offset: 0.25rem;
     @include themed() {
       color: t($text);
     }
