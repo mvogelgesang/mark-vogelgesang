@@ -9,7 +9,8 @@
   }
 }
 html {
-  font: 100% $font-stack;
+  font-family: $font-stack;
+  font-size: 1rem;
 }
 body {
   @include themed() {
@@ -47,38 +48,40 @@ h2,
 h3,
 h4,
 h5 {
+  font-family: $header-font-stack;
+  font-weight: 600;
   @include themed() {
     color: t($primary-color);
   }
-  font-weight: 600;
+  margin-bottom: 1rem;
 }
 h1 {
   font-size: $h1-font-size;
   line-height: $h1-line-height;
-  margin: $h-margin-ratio * $h1-font-size 0rem;
+ //margin: $h-margin-ratio * $h1-font-size 0rem;
 }
 h2 {
   font-size: $h2-font-size;
   line-height: $h2-line-height;
-  margin: $h-margin-ratio * $h2-font-size 0rem;
+  //margin: $h-margin-ratio * $h2-font-size 0rem;
 }
 h3 {
   font-size: $h3-font-size;
   line-height: $h3-line-height;
-  margin: $h-margin-ratio * $h3-font-size 0rem;
+  //margin: $h-margin-ratio * $h3-font-size 0rem;
 
 }
 h4 {
   font-size: $h4-font-size;
   line-height: $h4-line-height;
-  margin: $h-margin-ratio * $h4-font-size 0rem;
+  //margin: $h-margin-ratio * $h4-font-size 0rem;
 
 }
 h5 {
   font-size: $h4-font-size;
   line-height: $h4-line-height;
   text-transform: uppercase;
-  margin: $h-margin-ratio * $h4-font-size 0rem;
+  //margin: $h-margin-ratio * $h4-font-size 0rem;
 
 }
 p {
