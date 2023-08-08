@@ -7,6 +7,9 @@
       margin-top: 0rem;
     }
   }
+  h1:first-of-type {
+    margin-top: 4 * $grid-unit;
+  }
   a {
     text-decoration: underline;
     text-decoration-thickness: 0.0625rem;
@@ -28,6 +31,7 @@
   }
   .blog-post-date {
     font-size: 0.8rem;
+    margin-bottom: $grid-unit;
   }
 
   .blog-post-content {
@@ -37,9 +41,15 @@
     font-family: $font-stack;
     font-size: $prose-font-size;
     line-height: $prose-line-height;
-    margin: 1.5rem 0rem;
 
     img {
+      @include themed() {
+        border-color: t($accent-one);
+      }
+      border-radius: $grid-unit;
+      border-style: solid;
+      border-width: 0.5 * $grid-unit;
+      margin-bottom: 2 * $grid-unit;
       max-height: 360px;
       width: 100%;
       @include mobile {
@@ -48,9 +58,19 @@
       }
     }
     ol {
+      margin-bottom: 2 * $grid-unit;
       @include mobile {
         padding-inline-start: 1rem;
       }
+    }
+    table {
+      margin-bottom: 2 * $grid-unit;
+    }
+    th {
+      font-weight: bold;
+    }
+    ul {
+      margin-bottom: 2 * $grid-unit;
     }
     em {
       font-style: italic;
@@ -61,13 +81,19 @@
     .gist tr:nth-child(even) {
       background-color: $white;
     }
+    p code, li  code {
+      border-style: dotted;
+      border-style: dashed;
+      border-width: 0.0625rem;
+      padding: 0.125rem 0.25rem;
+      border-radius: 0.25rem;
+      @include themed() {
+        border-color: t($text);
+      }
+    }
     code {
-      // background-color: $white;
-      // border: 1px solid $primary-color;
-      // border-radius: 0.2rem;
       font-family: $font-code;
       font-size: 1rem;
-      padding: 0.2rem 0.4rem;
 
       @include mobile {
         font-size: 0.8rem;
@@ -84,6 +110,7 @@
       white-space: -o-pre-wrap; /* Opera 7 */
       word-wrap: break-word; /* Internet Explorer 5.5+ */
       padding: 0.5rem 1rem;
+      margin-bottom: 2 * $grid-unit;
     }
     div.line {
       display: table-row;
@@ -132,6 +159,9 @@
   }
 }
 .blog-posts {
+  :first-child {
+    margin-top: 4 * $grid-unit;
+  }
   .blog-post {
     margin-top: 1.5rem;
     h1 {

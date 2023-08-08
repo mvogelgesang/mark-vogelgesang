@@ -30,7 +30,8 @@ $accent-two--dark: colors.colorT("aqua",200); //#c8eaebff;
 $white: #fff;
 
 
-$font-stack: "Montserrat", sans-serif;
+$font-stack: "Inconsolata Variable", "Poppins", "Montserrat", sans-serif;
+$header-font-stack: 'Karla Variable', sans-serif;
 $font-code: "Source Code Pro";
 $font-weights: (
   "normal": 400,
@@ -58,7 +59,7 @@ $unit-increments: (
 $alignment: ("left", "center", "right");
 $sides: ("top", "bottom", "right", "left");
 
-$h-margin-ratio: 0.667;
+$h-margin-ratio: 0.5;
 $h1-font-size: 2.5rem;
 $h1-line-height: 3rem;
 $h2-font-size: 2rem;
