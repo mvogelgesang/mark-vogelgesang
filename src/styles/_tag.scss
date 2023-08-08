@@ -1,7 +1,5 @@
-.tag-container a {
-  @include themed() {
-    color: t($secondary-color);
-  }
+.tag-container {
+  overflow: hidden;
 }
 .tag {
   font-family: $font-stack;
@@ -28,6 +26,9 @@
   }
   @include mobile {
     margin-bottom: 1rem;
+  }
+  &:first-child {
+    padding-left: 0;
   }
 }
 .tag-list {

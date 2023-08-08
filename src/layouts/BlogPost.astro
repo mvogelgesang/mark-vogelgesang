@@ -22,25 +22,27 @@ const {
 <PageWrapper title={title} description={description}>
   <article>
     <div class="col-12 col-8-md">
-    <div class="blog-post">
-      <h1>{title}</h1>
-      <div class="blog-post-date">{pubDate} </div>
-      <div class="blog-post-content">
-        {hero.src && <img src={hero.src} alt={hero.alt} />}
-        <slot />
+      <div class="blog-post">
+        <h1>{title}</h1>
+        <div class="blog-post-date">{pubDate}</div>
+        <div class="blog-post-content">
+          {hero.src && <img src={hero.src} alt={hero.alt} />}
+          <slot />
+        </div>
+        <!-- tags -->
+        {
+          tags && (
+            <>
+              <h3>Tagged</h3>
+              <div class="tag-container m-bottom-4">
+                {tags.map((item) => {
+                  return <Tag tag={item} />;
+                })}
+              </div>
+            </>
+          )
+        }
       </div>
-      <!-- tags -->
-      {tags && 
-        <div class="tags-container">
-          <div>
-            <h3>Tagged</h3>
-            {tags.map((item) => {
-              return <Tag tag={item} />
-            })}
-            </div>
-          </div>
-      }
     </div>
-  </div>
   </article>
 </PageWrapper>

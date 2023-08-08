@@ -10,16 +10,20 @@ const sortedTags = Array.from(uniqueTags).sort();
 ---
 
 <PageWrapper title="Tags">
-  <h1>Tags</h1>
-  <div class="tag-list">
-    <ul>
-      {
-        sortedTags.map((tag) => (
-          <li>
-            <a href={"/tags/" + tag}>{tag}</a>
-          </li>
-        ))
-      }
-    </ul>
+  <div class="col-12">
+    <h1>Tags</h1>
+  </div>
+  <div class="col-12 m-bottom-4">
+    <div class="tag-list">
+      <ul>
+        {
+          sortedTags.map((tag) => (
+            <li style="padding-bottom: 0.5rem;">
+              <a href={"/tags/" + tag}><i class="fa-solid fa-hashtag"></i>{tag}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
 </PageWrapper>

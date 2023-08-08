@@ -1,0 +1,91 @@
+---
+layout: "../../../layouts/BlogPost.astro"
+pubDate: "Feb 21, 2023"
+title: "Tiny Example: managing state in oclif"
+tags: ["oclif", "CLI", "state management"]
+description:
+  "A quick and extensible prototype demonstrating how to save, restore, and update the state of long running operations in oclif."
+hero:
+  src: "/posts/20230221/ampelmannchen.jpg"
+  alt:
+    "Ampelmännchen in Berlin signaling to stop at the crosswalk."
+---
+
+*This is the first of what I hope to be many 'Tiny Example' posts where I describe the implementation details of a discreet piece of functionality. The Tiny Examples grew out of a desire to to better understand specific coding concepts and patterns. Existing examples can be found on GitHub at [mvogelgesang/tiny-examples](https://github.com/mvogelgesang/tiny-examples).*
+
+___
+
+In many instances, CLI operations return results or execute a task rather quickly. However, ther are times when operations may have to iterate through a list of files, sync data, or make a series of API calls. In these instances, it can be helpful to pause operations and later resume the job. This _Tiny Example_ prototypes start, stop, and resume functionality using an oclif-based CLI. 
+
+## Getting started
+
+This _Tiny Example_ is built using [oclif](https://oclif.io/) which is an open source CLI framework maintained by Salesforce. To get up and running quickly, we leverage the starter code produced by `npx oclif generate myexamplecli` which creates a simple CLI with a `hello` command. Later on, we will add a new command, `hello everyone` which iterates over a list of names printing `hello {name}` to the console. Between each print to the console, the CLI pauses for one second. 
+
+## Considerations
+
+- Needs to save state in a place that will persist between runs
+- After each iteration, state should update
+- If previous state does not exist, should run without issue
+- Should have the ability to restart the operation entirely and ignore the previously saved state
+
+## About oclif Hooks
+
+oclif offers a hook framework allowing the injection of code at various stages of the command lifecycle. Four lifecycle events are included (source [oclif Hooks](https://oclif.io/docs/hooks#lifecycle-events)):
+
+- `init` - runs when the CLI is initialized before a command is found to run
+- `prerun` - runs after `init` and after the command is found, but just before running the command itself
+- `postrun` - runs after the command only if the command finishes with no error
+- `command_not_found` - runs if a command is not found before the error is displayed
+
+These are great for times when you want to run an action with every command in your CLI- think checking for updates, ensuring config is set, etc. However, this example seeks to apply hooks only on a specific command and will leverage custom hooks. Hooks take any string value as their name. Three distinct hooks are required: create, retrieve, and update. Prefixing each file with "state-manager" ensured the hooks were easy to identify and reference. 
+
+## Putting it together
+
+At a high level, the following steps will need to be coded for this to work.
+
+<img
+  src="/posts/20230221/mermaid-diagram.png"
+  alt="Flowchart showing the logical steps to implement the three hooks. If resume flag is set, attempt to retrieve list. If list length is greater than zero, load list. Iterate over list, updating after each iteration until list length = 0. If resume flag is not set, create a new list and store in cache. Iterate over list, updating after each iteration until list length = 0." style="max-height: unset; width: unset;"
+></img>
+
+The new `hello everyone` command and three hooks can be scaffolded via:
+
+```sh
+oclif generate command hello:everyone
+oclif generate hook state-manager:create
+oclif generate hook state-manager:retrieve
+oclif generate hook state-manager:update
+```
+
+After producing the initial working version, I removed the hard-coded reference to the file name and passed it into each hook as a variable. Doing so enables this hook structure to be used elsewhere in the application.
+
+### Hook create
+
+In order to save a local copy of the list between runs, we make use of the [cache directory](https://oclif.io/docs/config) which is automatically configured with oclif. Doing so keeps it out of the way of our repository files and enables users to customize it if necessary.
+
+Since this is a simple list of names, we can save the file as JSON.
+
+### Hook retrieve
+
+The retrieve hook returns an array whether there is a list of names or not. The underlying function is placed in `helper.ts` since I also use it in the update hook.
+
+### Hook update
+
+The update hook reads in the file, extracts the array, drops the first element from the array, and writes the resulting array back to disk.
+
+## Running it
+
+```sh
+yarn run prepack
+bin/run hello everyone
+```
+
+Names will print each second. Break the loop with `ctrl+c`. Resume the operation by adding the `-r` flag.
+
+```sh
+bin/run hello everyone -r
+```
+
+## Full code
+
+A working example of this functionality can be found on [GitHub](https://github.com/mvogelgesang/tiny-examples/tree/main/typescript/cli-resume-activity).

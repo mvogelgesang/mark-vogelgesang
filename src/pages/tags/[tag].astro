@@ -24,7 +24,11 @@ const { posts } = Astro.props;
 ---
 
 <PageWrapper title={tag}>
+  <div class="col-12">
     <h1>Tags | {tag}</h1>
+  </div>
+
+  <div class="col-12 m-bottom-4">
     <div class="tag-list">
       <ul>
         {
@@ -41,4 +45,5 @@ const { posts } = Astro.props;
         }
       </ul>
     </div>
+  </div>
 </PageWrapper>

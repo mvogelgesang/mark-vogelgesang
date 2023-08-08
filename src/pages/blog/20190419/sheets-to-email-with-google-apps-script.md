@@ -23,7 +23,9 @@ A team I work with uses a spreadsheet to track upcoming project reviews across a
 
 Sheets and Gmail require different encoding to manage rich text. In Sheets, the `RichTextValue` class is used to manage the text and related styling for a given cell or cells. Meanwhile, Gmail requires any rich text to be written as HTML. Passing a `RichTextValue` object to Gmail results in the following:
 
-`com.google.apps.maestro.server.beans.trix.impl.RichTextValueApiAdapter@1f447bd0`
+```
+com.google.apps.maestro.server.beans.trix.impl.RichTextValueApiAdapter@1f447bd0
+```
 
 Yea, not helpful. Converting that value to text via `getText()` results in plain text. Again, not helpful. Looking at the `RichTextValue` class and other related classes, an HTML conversion method did not exist.
 Workaround

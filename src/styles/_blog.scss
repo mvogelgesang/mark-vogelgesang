@@ -9,13 +9,15 @@
   }
   a {
     text-decoration: underline;
+    text-decoration-thickness: 0.0625rem;
+    text-underline-offset: 0.25rem;
     @include themed() {
       color: t($text);
     }
     word-wrap: break-word;
     &:hover {
       @include themed() {
-      color: t($primary-200)
+        color: t($primary-200);
       }
     }
     &:visited {
@@ -26,6 +28,7 @@
   }
   .blog-post-date {
     font-size: 0.8rem;
+    margin-bottom: $grid-unit;
   }
 
   .blog-post-content {
@@ -35,37 +38,60 @@
     font-family: $font-stack;
     font-size: $prose-font-size;
     line-height: $prose-line-height;
-    margin: 1.5rem 0rem;
-      
+
     img {
+      @include themed() {
+        border-color: t($accent-one);
+      }
+      border-radius: $grid-unit;
+      border-style: solid;
+      border-width: 0.5 * $grid-unit;
+      margin-bottom: 2 * $grid-unit;
       max-height: 360px;
       width: 100%;
       @include mobile {
-          max-height: none;
-          width: 100%;
-        }
+        max-height: none;
+        width: 100%;
+      }
     }
     ol {
+      margin-bottom: 2 * $grid-unit;
       @include mobile {
         padding-inline-start: 1rem;
       }
     }
+    table {
+      margin-bottom: 2 * $grid-unit;
+    }
+    th {
+      font-weight: bold;
+    }
+    ul {
+      margin-bottom: 2 * $grid-unit;
+    }
     em {
+      font-style: italic;
       font-size: $prose-font-size;
       line-height: $prose-line-height;
     }
-    
+
     .gist tr:nth-child(even) {
       background-color: $white;
     }
+    p code, li  code {
+      border-style: dotted;
+      border-style: dashed;
+      border-width: 0.0625rem;
+      padding: 0.125rem 0.25rem;
+      border-radius: 0.25rem;
+      @include themed() {
+        border-color: t($text);
+      }
+    }
     code {
-      // background-color: $white;
-      // border: 1px solid $primary-color;
-      // border-radius: 0.2rem;
       font-family: $font-code;
       font-size: 1rem;
-      padding: 0.2rem 0.4rem;
-      
+
       @include mobile {
         font-size: 0.8rem;
         padding: 0.1rem 0.2rem;
@@ -75,7 +101,13 @@
       border-radius: 0.5rem;
       word-break: break-word;
       word-wrap: break-word;
+      white-space: pre-wrap; /* css-3 */
+      white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+      white-space: -pre-wrap; /* Opera 4-6 */
+      white-space: -o-pre-wrap; /* Opera 7 */
+      word-wrap: break-word; /* Internet Explorer 5.5+ */
       padding: 0.5rem 1rem;
+      margin-bottom: 2 * $grid-unit;
     }
     div.line {
       display: table-row;
@@ -124,6 +156,9 @@
   }
 }
 .blog-posts {
+  :first-child {
+    margin-top: 4 * $grid-unit;
+  }
   .blog-post {
     margin-top: 1.5rem;
     h1 {
