@@ -12,8 +12,10 @@ $layout-vals: flex-start, flex-end, center, space-between, space-around;
   @include lg {
     padding: 0;
   }
-  
   box-sizing: border-box;
+  h1:first-of-type {
+    margin-top: 4 * $grid-unit;
+  }
 }
 .row {
   display: flex;
