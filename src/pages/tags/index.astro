@@ -6,7 +6,16 @@ const allPosts = await Astro.glob("../blog/**/*.{md,mdx}");
 const uniqueTags = [
   ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
 ];
-const sortedTags = Array.from(uniqueTags).sort();
+
+const sortedTags = Array.from(uniqueTags).sort((a, b) => {
+  if (a.toLowerCase() < b.toLowerCase()) {
+    return -1;
+  } else if (a.toLowerCase() > b.toLowerCase()) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
+});
 ---
 
 <PageWrapper title="Tags">
@@ -19,7 +28,7 @@ const sortedTags = Array.from(uniqueTags).sort();
         {
           sortedTags.map((tag) => (
             <li style="padding-bottom: 0.5rem;">
-              <a href={"/tags/" + tag}><i class="fa-solid fa-hashtag"></i>{tag}</a>
+              <a href={"/tags/" + tag}><i class="fa-solid fa-hashtag p-right-05" style="vertical-align: middle;"></i>{tag}</a>
             </li>
           ))
         }
