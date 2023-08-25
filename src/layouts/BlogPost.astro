@@ -17,6 +17,16 @@ export interface Props {
 const {
   content: { title, description, pubDate, hero, tags },
 } = Astro.props;
+
+const sortedTags = Array.from(tags).sort((a, b) => {
+  if (a.toLowerCase() < b.toLowerCase()) {
+    return -1;
+  } else if (a.toLowerCase() > b.toLowerCase()) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
+});
 ---
 
 <PageWrapper title={title} description={description}>
@@ -26,7 +36,9 @@ const {
         <h1>{title}</h1>
         <div class="blog-post-date">{pubDate}</div>
         <div class="blog-post-content">
-          {hero.src && <img src={hero.src} alt={hero.alt} />}
+          <div class="p-right-1">
+            {hero.src && <img src={hero.src} alt={hero.alt} />}
+          </div>
           <slot />
         </div>
         <!-- tags -->
@@ -35,7 +47,7 @@ const {
             <>
               <h3>Tagged</h3>
               <div class="tag-container m-bottom-4">
-                {tags.map((item) => {
+                {sortedTags.map((item) => {
                   return <Tag tag={item} />;
                 })}
               </div>

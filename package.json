@@ -23,6 +23,7 @@
     "@fontsource/poppins": "^5.0.8",
     "@fontsource/source-code-pro": "^4.5.12",
     "astro": "^2.0.2",
+    "astro-compress": "^2.0.14",
     "prismjs": "^1.29.0"
   },
   "devDependencies": {
