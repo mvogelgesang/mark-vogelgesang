@@ -13,16 +13,16 @@
     "prerelease": "astro build && lhci autorun --config=lighthouserc_local.json"
   },
   "dependencies": {
-    "@astrojs/mdx": "^0.19.0",
-    "@astrojs/partytown": "^1.2.0",
-    "@astrojs/prism": "^1.0.2",
-    "@astrojs/rss": "^1.2.1",
-    "@astrojs/sitemap": "^1.3.0",
+    "@astrojs/mdx": "^1.1.0",
+    "@astrojs/partytown": "^2.0.0",
+    "@astrojs/prism": "^3.0.0",
+    "@astrojs/rss": "^3.0.0",
+    "@astrojs/sitemap": "^3.0.0",
     "@fontsource-variable/inconsolata": "^5.0.8",
     "@fontsource-variable/karla": "^5.0.9",
     "@fontsource/poppins": "^5.0.8",
     "@fontsource/source-code-pro": "^4.5.12",
-    "astro": "^2.0.2",
+    "astro": "^3.1.2",
     "astro-compress": "^2.0.14",
     "prismjs": "^1.29.0"
   },
@@ -38,6 +38,7 @@
     "start-server-and-test": "^1.15.2",
     "stylelint": "^15.10.1",
     "stylelint-config-recommended-scss": "^12.0.0",
-    "stylelint-config-standard": "^34.0.0"
+    "stylelint-config-standard": "^34.0.0",
+    "typescript": "^5.2.2"
   }
 }
