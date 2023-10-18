@@ -5,23 +5,25 @@ on: pull_request
 jobs:
   build_preview_lighthouse:
     name: Build Preview Lighthouse
-    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    if:
+      "${{ github.event.pull_request.head.repo.full_name == github.repository }}"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: npm install
       - run: npm run build
       - name: Deploy to firebase
         id: firebase_output
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MVOGELGESANG }}'
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount:
+            "${{ secrets.FIREBASE_SERVICE_ACCOUNT_MVOGELGESANG }}"
           projectId: mvogelgesang
       - name: lighthouse CI
         run: |
-         npm install -g @lhci/cli@0.3.x
-         lhci collect --config=lighthouserc_firebase.json --url=${{steps.firebase_output.outputs.details_url}} --no-lighthouserc || echo "LHCI failed!"
-         lhci upload --target=temporary-public-storage
+          npm install -g @lhci/cli@0.3.x
+          lhci collect --config=lighthouserc_firebase.json --url=${{steps.firebase_output.outputs.details_url}} --no-lighthouserc || echo "LHCI failed!"
+          lhci upload --target=temporary-public-storage
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

@@ -1,36 +1,44 @@
 ---
-import PageWrapper from '../layouts/PageWrapper.astro';
+import PageWrapper from "../layouts/PageWrapper.astro";
 
 // Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await Astro.glob('./blog/**/*.{astro,md,mdx}')).sort(
-	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+const posts = (await Astro.glob("./blog/**/*.{astro,md,mdx}")).sort(
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).valueOf() -
+    new Date(a.frontmatter.pubDate).valueOf()
 );
 ---
+
 <PageWrapper title="Posts">
-	<div class="col-12 col-8-md blog-posts">
-		<h1>Posts</h1>
-					{
-						posts.map((post) => (
-							/* <li>
-								<time datetime={post.frontmatter.pubDate}>
-									{new Date(post.frontmatter.pubDate).toLocaleDateString('en-us', {
-										year: 'numeric',
-										month: 'short',
-										day: 'numeric',
-									})}
-								</time>
-								<a href={post.url}>{post.frontmatter.title}</a>
-							</li> */
-							<div class="blog-post" >
-                <h2>
-                  <a class="blog-post-link" href={post.url}>
-                    {post.frontmatter.title}
-                  </a>
-                </h2>
-                <div class="blog-post-date">{post.frontmatter.pubDate}</div>
-                <p class="blog-post-content">{post.frontmatter.description}</p>
-              </div>
-						))
-					}
-			</div>
+  <div class="col-12 col-8-md blog-posts">
+    <h1>Posts</h1>
+    {
+      posts.map((post) => (
+        <div class="blog-post">
+          <h2>
+            <a
+              class="blog-post-link"
+              href={
+                post.frontmatter.externalUrl
+                  ? post.frontmatter.externalUrl
+                  : post.url
+              }
+            >
+              {post.frontmatter.title}
+              {post.frontmatter.externalUrl ? (
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square fa-xs p-left-105"
+                  style="margin-top: 0rem;"
+                />
+              ) : (
+                ""
+              )}
+            </a>
+          </h2>
+          <div class="blog-post-date">{post.frontmatter.pubDate}</div>
+          <p class="blog-post-content">{post.frontmatter.description}</p>
+        </div>
+      ))
+    }
+  </div>
 </PageWrapper>
