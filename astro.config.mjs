@@ -10,8 +10,13 @@ import compress from "astro-compress";
 // https://astro.build/config
 export default defineConfig({
   site: "https://mvogelgesang.com",
-  integrations: [mdx({
-    extendDefaultPlugins: true,
-    syntaxHighlight: "prism"
-  }), sitemap(), partytown(), compress()]
+  integrations: [
+    mdx({
+      extendDefaultPlugins: true,
+      syntaxHighlight: "prism",
+    }),
+    sitemap(),
+    partytown(),
+    compress(),
+  ],
 });
