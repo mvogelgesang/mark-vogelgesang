@@ -1,39 +1,58 @@
 ---
-const {class: className} = Astro.props;
+const { class: className } = Astro.props;
 ---
+
 <div id="themeToggle" class:list={[className]} tabindex="0">
   <i id="sunMoon" class="fas fa-adjust"></i>
-  </div>
-<script>
-    const theme = (() => {
-      if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-        return localStorage.getItem('theme') || 'light';
-      }
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
-      }
-        return 'light';
-    })();
-        
-    if (theme === 'light') {
-      document.documentElement.classList.remove('theme--dark');
-      document.documentElement.classList.add('theme--default');
+</div>
+<script is:inline>
+  let theme = "light";
+
+  const handleToggleClick = () => {
+    console.log("toggle click");
+    const element = document.documentElement;
+    element.classList.toggle("theme--dark");
+    element.classList.toggle("theme--default");
+    document.getElementById("sunMoon")?.classList.toggle("fa-flip-horizontal");
+
+    const isDark = element.classList.contains("theme--dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  };
+
+  const observer = new MutationObserver((mutations, obs) => {
+    const docElement = document.documentElement;
+    if (docElement) {
+      enableTheme();
+      obs.disconnect();
+      return;
+    }
+  });
+  observer.observe(document, {
+    childList: true,
+    subtree: true,
+  });
+
+  const enableTheme = () => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      theme = localStorage.getItem("theme") || "light";
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      theme = "dark";
+    }
+    if (theme === "light") {
+      document.documentElement.classList.remove("theme--dark");
+      document.documentElement.classList.add("theme--default");
     } else {
-      document.documentElement.classList.remove('theme--default');
-      document.documentElement.classList.add('theme--dark');
+      document.documentElement.classList.remove("theme--default");
+      document.documentElement.classList.add("theme--dark");
     }
-  
-    window.localStorage.setItem('theme', theme);
-  
-    const handleToggleClick = () => {
-      const element = document.documentElement;
-      element.classList.toggle("theme--dark");
-      element.classList.toggle("theme--default");
-      document.getElementById("sunMoon")?.classList.toggle("fa-flip-horizontal")
-      
-      const isDark = element.classList.contains("theme--dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-    }
-  
-    document.getElementById("themeToggle")?.addEventListener("click", handleToggleClick);
-  </script>
+
+    window.localStorage.setItem("theme", theme);
+
+    document
+      .getElementById("themeToggle")
+      ?.addEventListener("click", handleToggleClick);
+  };
+
+  document.addEventListener("astro:page-load", enableTheme, { once: true });
+  document.addEventListener("astro:after-swap", enableTheme);
+</script>

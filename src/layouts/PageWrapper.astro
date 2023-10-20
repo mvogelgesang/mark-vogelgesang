@@ -24,7 +24,7 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
   <body>
     <div class="flexwrapper">
       <Header />
-      <main class="container">
+      <main class="container" transition:animate="slide">
         <div class="row">
           <slot />
         </div>
