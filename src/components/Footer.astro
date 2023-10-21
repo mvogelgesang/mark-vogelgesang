@@ -1,32 +1,37 @@
 ---
-import {  NAVIGATION, SOCIAL_MEDIA } from "../config";
+import { NAVIGATION, SOCIAL_MEDIA } from "../config";
 import FooterLink from "./FooterLink.astro";
 ---
 
 <footer class="footer">
-	<div class="footer-container">
-	  <div class="footer-nav-list">
-	{
-		NAVIGATION.map((x) => {
-		  return (
-			<FooterLink href={x.path} class="footer-nav-link">
-			  {x.label}
-			</FooterLink>
-		  );
-		})
-	  }
-	  </div>
-	  <div class="footer-social">
-		<div class="footer-nav-list">
-			{
-				SOCIAL_MEDIA.map((item) => {
-				return ( 
-					<FooterLink href={item.url} class="footer-nav-link" aria-label={item.name}>
-						<i class={item.icon + ' fa-xl'}/>
-						</FooterLink>
-				)})
-			}
-			</div>
-        </div>
+  <div class="footer-container">
+    <div class="footer-nav-list">
+      {
+        NAVIGATION.map((x) => {
+          return (
+            <FooterLink href={x.path} class="footer-nav-link">
+              {x.label}
+            </FooterLink>
+          );
+        })
+      }
+    </div>
+    <div class="footer-social">
+      <div class="footer-nav-list">
+        {
+          SOCIAL_MEDIA.map((item) => {
+            return (
+              <FooterLink
+                href={item.url}
+                class="footer-nav-link"
+                aria-label={item.name}
+              >
+                {item.name}
+              </FooterLink>
+            );
+          })
+        }
       </div>
-    </footer>
+    </div>
+  </div>
+</footer>

@@ -27,7 +27,6 @@ header.header {
       max-width: $max-width;
       margin: 0 auto;
       padding-top: 0.5rem;
-      
     }
     .nav-list-item {
       cursor: pointer;
@@ -51,7 +50,7 @@ header.header {
       &:hover {
         @include themed() {
           background-color: t($secondary-color);
-          color: t($background-color)
+          color: t($background-color);
         }
       }
       &:focus {
@@ -89,7 +88,7 @@ header.header {
         display: block;
         height: 2rem;
         width: 2rem;
-        margin-right: 1rem;
+        margin-right: 2.5rem;
         border: none;
         background-color: transparent;
       }
@@ -97,9 +96,10 @@ header.header {
     .nav-list-item.nav-hamburger.display {
       @include mobile {
         position: absolute;
-        right: 1rem;
+        right: 0rem;
         margin-right: 0rem;
-        top: 0;
+        top: 0.25rem;
+        transform: rotate(90deg);
       }
     }
     .nav-list-item.search-box {
