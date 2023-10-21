@@ -78,7 +78,8 @@
     .gist tr:nth-child(even) {
       background-color: $white;
     }
-    p code, li  code {
+    p code,
+    li code {
       border-style: dotted;
       border-style: dashed;
       border-width: 0.0625rem;
@@ -156,7 +157,7 @@
   }
 }
 .blog-posts {
-  :first-child {
+  .blog-post:first-child {
     margin-top: 4 * $grid-unit;
   }
   .blog-post {

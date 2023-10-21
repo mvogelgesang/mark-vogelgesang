@@ -6,13 +6,20 @@ const {
 ---
 
 <PageWrapper title={title} description={description}>
-  <div class="blog-post">
-    <div class="col-12 col-4-md m-top-2 blog-post-content">
-      <img src={imgSrc} alt={imgAlt} style="" />
+  <div class="row m-top-3">
+    <div class="col-12 col-8-md grid-gap-105">
+      <div class="blog-post">
+        <div class="blog-post-content">
+          <slot />
+        </div>
+      </div>
     </div>
-
-    <div class="col-12 col-8-md m-top-2 blog-post-content">
-      <slot />
+    <div class="col-12 col-4-md grid-gap-105">
+      <div class="blog-post">
+        <div class="blog-post-content">
+          <img src={imgSrc} alt={imgAlt} style="" />
+        </div>
+      </div>
     </div>
   </div>
 </PageWrapper>

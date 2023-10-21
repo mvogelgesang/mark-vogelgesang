@@ -1,5 +1,6 @@
 ---
 import PageWrapper from "../layouts/PageWrapper.astro";
+import MaterialIcon from "../components/MaterialIcon.astro";
 
 // Use Astro.glob() to fetch all posts, and then sort them by date.
 const posts = (await Astro.glob("./blog/**/*.{astro,md,mdx}")).sort(
@@ -26,9 +27,9 @@ const posts = (await Astro.glob("./blog/**/*.{astro,md,mdx}")).sort(
             >
               {post.frontmatter.title}
               {post.frontmatter.externalUrl ? (
-                <i
-                  class="fa-solid fa-arrow-up-right-from-square fa-xs p-left-105"
-                  style="margin-top: 0rem;"
+                <MaterialIcon
+                  class="m-left-105 v-align-middle"
+                  iconName="open_in_new"
                 />
               ) : (
                 ""

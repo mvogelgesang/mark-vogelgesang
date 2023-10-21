@@ -77,3 +77,20 @@ $border-sides: (
     }
   }
 }
+
+// alignment
+$vertical-alignment-opts: (
+  "baseline",
+  "sub",
+  "super",
+  "text-top",
+  "text-bottom",
+  "middle",
+  "top",
+  "bottom"
+);
+@each $opt in $vertical-alignment-opts {
+  .v-align-#{$opt} {
+    vertical-align: #{$opt};
+  }
+}
