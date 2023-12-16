@@ -13,17 +13,17 @@
     "prerelease": "astro build && lhci autorun --config=lighthouserc_local.json"
   },
   "dependencies": {
-    "@astrojs/mdx": "^1.1.2",
-    "@astrojs/partytown": "^2.0.1",
+    "@astrojs/mdx": "^2.0.1",
+    "@astrojs/partytown": "^2.0.2",
     "@astrojs/prism": "^3.0.0",
-    "@astrojs/rss": "^3.0.0",
-    "@astrojs/sitemap": "^3.0.2",
+    "@astrojs/rss": "^4.0.1",
+    "@astrojs/sitemap": "^3.0.3",
     "@fontsource-variable/inconsolata": "^5.0.15",
     "@fontsource-variable/karla": "^5.0.18",
     "@fontsource/material-icons-round": "^5.0.7",
     "@fontsource/poppins": "^5.0.8",
     "@fontsource/source-code-pro": "^4.5.14",
-    "astro": "^3.3.3",
+    "astro": "^4.0.6",
     "astro-compress": "^2.1.5",
     "prismjs": "^1.29.0"
   },
