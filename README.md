@@ -13,3 +13,7 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro --help` | Get help using the Astro CLI                     |
 
+## Maintenance
+
+- Update dependencies `npm update`
+- Update to LTS version of node and update .nvmrc `nvm install --lts && node -v > .nvmrc`
