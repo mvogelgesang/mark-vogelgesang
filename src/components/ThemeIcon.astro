@@ -9,8 +9,8 @@ const { class: className, icon = "dark_mode" } = Astro.props;
 <script is:inline>
   const darkIcon = "dark_mode";
   const lightIcon = "wb_sunny";
+
   const handleToggleClick = () => {
-    console.log("toggle click");
     const element = document.documentElement;
     element.classList.toggle("theme--dark");
     element.classList.toggle("theme--default");
