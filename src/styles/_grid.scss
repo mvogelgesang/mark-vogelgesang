@@ -20,6 +20,10 @@ $layout-vals: flex-start, flex-end, center, space-between, space-around;
 .row {
   display: flex;
   flex-flow: row wrap;
+  max-width: 100%;
+  article {
+    max-width: 100%;
+  }
 }
 
 @each $key, $val in $unit-increments {
