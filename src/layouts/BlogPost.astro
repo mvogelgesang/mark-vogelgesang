@@ -38,7 +38,7 @@ const sortedTags = Array.from(tags).sort((a, b) => {
         <h1>{title}</h1>
         <div class="blog-post-date">{pubDate}</div>
         <div class="blog-post-content">
-          <div class="p-right-1">
+          <div class="p-right-1 hero-image">
             {hero.src && <img src={hero.src} alt={hero.alt} />}
           </div>
           <slot />
