@@ -1,0 +1,122 @@
+---
+layout: "../../layouts/BlogPost.astro"
+pubDate: "Apr 19, 2024"
+title: "Tiny Example: Creating a simple Homebrew Formula"
+tags: ["homebrew", "tiny example",]
+description: "Editing ones own work requires strong focus on what it is you are trying to say.
+All too often, I find myself, even when writing this, straying away from the
+main points."
+hero:
+  src: "/posts/20240419/Homebrew logo.svg"
+  alt: "Homebrew logo of a beer stein with an apple on top"
+---
+
+Homebrew, a package manager for MacOS, greatly simplifies the installation and maintenance of apps. While I had been using Homebrew since 2013, it was not until 2019 when I read Victoria Drake's article [How to set up a fresh Ubuntu desktop using only dotfiles and bash scripts](https://victoria.dev/blog/how-to-set-up-a-fresh-ubuntu-desktop-using-only-dotfiles-and-bash-scripts/) that I started scripting my computer setup. Fast forward almost five years and I'm still using Homebrew regularly but I had never created my own formula. Until now.
+
+## Formulas, Taps, and Casks
+
+Let's start with some terminology since Homebrew has a few terms that are important to understand.
+
+### Formula
+
+A Ruby script that describes how to install a piece of software. 
+
+When you run `brew install <formula>`, Homebrew looks for the formula in either the core or tap repositories. If it finds the formula, it will install the software according to the instructions in the formula. Some of the basic components of a formula include the name, the version, a SHA256 hash, installation instructions, and dependencies.
+
+### Tap
+
+A collection of one or more formulas. Taps can refer to either the core Homebrew repository or a user's repository. To have a tap included in the core Homebrew repository, it must meet [certain criteria](https://docs.brew.sh/Acceptable-Formulae) and be approved by the maintainers.
+
+### Cask
+
+A formula that installs MacOS applications that contain a GUI.
+
+## Getting Started
+
+I've been building a set of shell scripts at work to facilitate the creation of Salesforce scratch orgs and associated project directories. This project is called [Quick Org Creator](https://github.com/mvogelgesang/homebrew-quick-org-creator) and is a great tool for folks that create a lot of prototypes or need to test specific features in Salesforce. As I have shared the scripts with others, I found myself wanting to make it easier to install and upgrade the scripts over time. This is where Homebrew comes in. Before trying to convert Quick Org Creator, I wanted to start with a Tiny Example to get a feel for the process. To start, I laid out three goals:
+
+- [ ] Create a simple shell script that can be installed via homebrew and run using the alias `tiny-sh-example`
+- [ ] Utilize one or more dependencies to ensure they get installed correctly
+- [ ] Document any missteps or gotchas along the way (this!)
+
+Since I wanted to create a formula for a user repository, I followed Homebrews [How to Create and Maintain a Tap](https://docs.brew.sh/How-to-Create-and-Maintain-a-Tap#naming-your-formulae-to-avoid-clashes) instructions. While there is a lot of detail about conventions and best practices, the lack of a step by step guide made the process a bit daunting. Homebrew formulas support everything from C++ to Node.js so I get why they didn't get super detailed in the documentation- there would just be too much to cover. To get around that, I leaned on blogs and a bit of GitHub Copilot to help me along the way.
+
+## Creating the Project
+
+_The full code example is available on GitHub at [mvogelgesang/homebrew-tiny-sh-example](https://github.com/mvogelgesang/homebrew-tiny-sh-example)._
+
+To start, I created a new repository on GitHub named `homebrew-tiny-sh-example`. The `homebrew` prefix is a suggested convention and allows folks to easily reference your tap and formula after it is published. Once the repo was created in GitHub, I cloned it to my local machine and thought about an example that would meet the goals stated earlier. I chose to consume an API response with [jq](https://jqlang.github.io/jq/) which would help me meet my goal of managing a dependency. To do that, I created a shell script that would prompt the user for their GitHub username and then return the number of public repositories they have.
+
+After installing jq, `brew install jq`, updating the script to parse the GitHub API Response, I had a working script. Now, I was ready to create the Formula- or so I thought. Before creating the Formula, I needed to create a tag and a release for the initial version via GitHub. This would allow me to reference the tarball and it's associated SHA hash in the Formula. This was a step that caught me by surprise as I had assumed that the Formula would have to be shipped with the tag/release.
+
+I created a tag and a release for the initial version and then added the shell script to the repository.
+
+## Creating the Formula
+
+Once the tag and release were created, I was ready to create the Formula. To do so, I ran the following commands in my terminal:
+
+```sh
+HOMEBREW_NO_INSTALL_FROM_API=1
+
+brew tap --force homebrew/core
+
+brew create https://github.com/mvogelgesang/homebrew-tiny-sh-example/archive/refs/tags/v0.0.1.tar.gz
+```
+
+After running `brew create {tarballLink}` VS Code launched a new file with the basic formula. The intent here is for you to copy the file contents into your local project and store it in `./Formula/tiny-sh-example.rb`. Once copied, got the SHA256 hash of the tarball bye running `curl -L {tarballLink} | shasum -a 256`. I copy and pasted the hash from my terminal into the formula. 
+
+Next step was to add jq as a dependency. Since it is installable with Homebrew, adding `depends_on "jq"` was all that was needed.
+
+Adding the shell script and giving it an executable name was the next step and the code was quite simple:
+
+```rb
+def install
+    # here we are installing the shell script and giving it an executable name of "tiny-sh-example"
+    bin.install "src/run.sh" => "tiny-sh-example"
+end
+```
+
+Finally, I added a test to ensure that the script was working as expected. The test was also quite simple:
+
+```rb
+test do
+    # this is a simple test that checks if the script errors out
+    system "#{bin}/tiny-sh-example", "mvogelgesang"
+end
+```
+
+After adding the test, I committed the formula and pushed the update to GitHub. At this point, I had a tappable formula that could be installed via Homebrew.
+
+## Tapping and Installing
+
+Because this is a user-hosted repository, I had to first tap my repository before running any `brew install` commands. Note that I did not have to include the full repository name `homebrew-tiny-sh-example` when tapping the repository. If I had not followed the convention of prefixing the repo with "homebrew", I would have had to include the full URL.
+
+`brew tap mvogelgesang/tiny-sh-example`
+
+Now that the repository is tapped, I could install the formula.
+
+`brew install tiny-sh-example`
+
+After running the install command, I was able to run the script by typing `tiny-sh-example` in the terminal. The script prompted me for a GitHub username and then returned the number of public repositories owned by that user.
+
+```sh
+tiny-sh-example
+
+Enter your GitHub username: mvogelgesang
+
+103
+```
+
+**Great success!!**
+
+## Conclusion
+
+Creating this formula from beginning to end took about an hour and a half and helped shed light on some of the mystery that was Homebrew formulas. As I have started the process of converting [Quick Org Creator](https://github.com/mvogelgesang/homebrew-quick-org-creator) I have bumped up against a number of issues that I will be documenting in a future post. This includes:
+
+- adding multiple directories and files to the formula
+- how to create and run a local version of the tarball
+- how to organize configuration files
+- shell script changes to accomodate file references
+- upgrading
+
+I hope this post helps you get started with creating your own Homebrew formula.
