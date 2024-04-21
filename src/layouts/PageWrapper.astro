@@ -23,10 +23,13 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
     <ViewTransitions />
   </head>
   <body>
-    <div class="flexwrapper">
+    <div class="flex min-h-screen flex-col">
       <Header />
-      <main class="container" transition:animate="slide">
-        <div class="row">
+      <main
+        class="w-full max-w-128 mx-auto box-border px-2"
+        transition:animate="slide"
+      >
+        <div class="flex flex-row flex-wrap max-w-full">
           <slot />
         </div>
       </main>
