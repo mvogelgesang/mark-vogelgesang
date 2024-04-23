@@ -1,141 +1,67 @@
 header.header {
   margin: 0.5rem 1rem;
 }
-
-.header {
-  flex: 0 1 auto;
-  .nav-active {
-    @include desktop {
-      @include themed() {
-        border-bottom: 0.2rem solid t($primary-color);
-      }
-    }
-  }
-  .nav-active:not(:first-child) {
-    @include mobile {
-      @include themed() {
-        border-left: 0.2rem solid t($primary-color);
-      }
-    }
-  }
-  .nav-container {
+.nav-active {
+  @include desktop {
     @include themed() {
-      border-bottom: 0.25rem solid t($accent-two);
-    }
-    @include desktop {
-      height: 3.5rem;
-      max-width: $max-width;
-      margin: 0 auto;
-      padding-top: 0.5rem;
-    }
-    .nav-list-item {
-      cursor: pointer;
-      text-decoration: none;
-      @include themed() {
-        color: t($primary-color);
-      }
-      font-weight: 600;
-      padding: 1rem;
-      @include desktop {
-        float: left;
-        display: block;
-        a {
-          line-height: 2.413rem;
-        }
-      }
-      @include mobile {
-        padding: 1rem 0rem 1rem 1rem;
-        text-align: left;
-      }
-      &:hover {
-        @include themed() {
-          background-color: t($secondary-color);
-          color: t($background-color);
-        }
-      }
-      &:focus {
-        @include themed() {
-          outline: solid thick t($accent-one);
-        }
-      }
-    }
-
-    .nav-list-item:first-child {
-      font-weight: 800;
-      @include mobile {
-        font-size: 2rem;
-        float: left;
-        padding-left: 1rem;
-      }
-    }
-    .nav-list-item:not(:first-child) {
-      @include mobile {
-        display: none;
-      }
-    }
-    .nav-list-item.display {
-      @include mobile {
-        display: block;
-        float: none;
-      }
-    }
-    .nav-list-item.nav-hamburger {
-      @include desktop {
-        display: none;
-      }
-      @include mobile {
-        float: right;
-        display: block;
-        height: 2rem;
-        width: 2rem;
-        margin-right: 2.5rem;
-        border: none;
-        background-color: transparent;
-      }
-    }
-    .nav-list-item.nav-hamburger.display {
-      @include mobile {
-        position: absolute;
-        right: 0rem;
-        margin-right: 0rem;
-        top: 0.25rem;
-        transform: rotate(90deg);
-      }
-    }
-    .nav-list-item.search-box {
-      @include desktop {
-        display: block;
-        float: right;
-        text-align: left;
-      }
-    }
-    .nav-list {
-      text-align: center;
-      padding-inline-start: 0rem;
-      @include mobile {
-        overflow: hidden;
-      }
-    }
-  }
-  .search-box {
-    @include mobile {
-      display: none;
-    }
-  }
-  .search-box.display {
-    @include mobile {
-      padding-bottom: 0.5rem;
+      border-bottom: 0.1rem solid t($primary-color);
     }
   }
 }
-.search-input {
+.nav-active:not(:first-child) {
+  @include mobile {
+    @include themed() {
+      border-left: 0.05rem solid t($primary-color);
+    }
+  }
+}
+
+// @include themed() {
+//   border-bottom: 0.25rem solid t($accent-two);
+// }
+
+.nav-list-item {
+  cursor: pointer;
+  text-decoration: none;
   @include themed() {
-    border: 0.2rem solid t($primary-color);
-    background-color: t($background-color);
     color: t($primary-color);
   }
-  border-radius: 0.333rem;
-  padding: 0.5rem;
-  font-family: $font-stack;
-  box-sizing: border-box;
+  font-weight: 600;
+  padding: 1rem;
+  @include desktop {
+    float: left;
+    display: block;
+    a {
+      line-height: 2.413rem;
+    }
+  }
+  @include mobile {
+    padding: 1rem 0rem 1rem 1rem;
+    text-align: left;
+  }
+  &:hover {
+    @include themed() {
+      background-color: t($secondary-color);
+      color: t($background-color);
+    }
+  }
+  &:focus {
+    @include themed() {
+      outline: solid thick t($accent-one);
+    }
+  }
+}
+
+.nav-list-item:first-child {
+  font-weight: 800;
+  @include mobile {
+    font-size: 2rem;
+    float: left;
+    padding-left: 1rem;
+  }
+}
+.nav-list-item:not(:first-child) {
+  @include mobile {
+    display: none;
+  }
 }
