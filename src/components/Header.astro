@@ -1,47 +1,64 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
-import MaterialIcon from "./MaterialIcon.astro";
 import { NAVIGATION } from "../config";
 import ThemeIcon from "./ThemeIcon.astro";
 ---
 
 <header>
-  <div class="row">
-    <!-- class="header"> -->
-    <div class="col-12">
-      <!-- class="nav-container"> -->
-      <div class="header">
-        <nav class="nav-container">
-          <div class="nav-list">
-            {
-              NAVIGATION.map((x) => {
-                return (
-                  <HeaderLink href={x.path} class="nav-list-item">
-                    {x.label}
-                  </HeaderLink>
-                );
-              })
-            }
-            <ThemeIcon class="nav-list-item" />
-            <button
-              id="navigationHamburgerButton"
-              class="nav-list-item nav-hamburger"
-              aria-label="Open Menu"
-            >
-              <MaterialIcon class="md-36" iconName="menu" />
-            </button>
-          </div>
-        </nav>
+  <nav
+    class="flex items-center justify-between flex-wrap py-4 px-2 my-0 mx-auto max-w-128"
+  >
+    <div class="flex items-center flex-shrink-0 mr-6">
+      <span class="font-extrabold text-xl tracking-tight"
+        ><a href={NAVIGATION[0].path}>{NAVIGATION[0].label}</a></span
+      >
+    </div>
+    <div class="block lg:hidden">
+      <button
+        class="flex items-center px-3 py-2 border rounded hover:text-white hover:border-white"
+        id="menu"
+      >
+        <svg
+          class="fill-current h-3 w-3"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+          ><title>Menu</title><path
+            d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path></svg
+        >
+      </button>
+    </div>
+    <div
+      class="w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden"
+      id="nav-list"
+    >
+      <div class="lg:flex-grow">
+        {
+          NAVIGATION.map((x, index) => {
+            if (index === 0) return;
+            return (
+              <HeaderLink
+                href={x.path}
+                class="block p-4 font-semibold lg:inline-block lg:mt-0 hover:bg-secondary-color hover:text-background"
+              >
+                {x.label}
+              </HeaderLink>
+            );
+          })
+        }
+        <ThemeIcon
+          class="block p-4 font-semibold lg:inline-block lg:mt-0 hover:bg-secondary-color hover:text-background"
+        />
       </div>
     </div>
-  </div>
+  </nav>
 </header>
 
 <script is:inline>
   // Find our component DOM on the page.
-  const button = document.getElementById("navigationHamburgerButton");
-  const navList = document.getElementsByClassName("nav-list");
-  const navListItem = document.querySelectorAll(".nav-list-item");
+  const button = document.querySelector("#menu");
+  const navList = document.querySelector("#nav-list");
+  const navListItem = document.querySelectorAll("#nav-list div a");
+
   // Add event listeners to fire confetti when a button is clicked.
   if (button) {
     button.addEventListener("click", () => clickHamburger());
@@ -55,22 +72,11 @@ import ThemeIcon from "./ThemeIcon.astro";
         menuClosed ? "Open Menu" : "Close Menu"
       );
     }
-    const buttonIcon = document.querySelectorAll(
-      "#navigationHamburgerButton svg"
-    );
-    if (buttonIcon) {
-      buttonIcon.forEach((btn) => {
-        btn.classList.toggle("fa-rotate-90");
-      });
-    }
+    console.log(navList);
     if (navList) {
-      navList[0].classList.toggle("display");
+      navList.classList.toggle("hidden");
     }
-    if (navListItem) {
-      navListItem.forEach((item) => {
-        item.classList.toggle("display");
-      });
-    }
+
     menuClosed = !menuClosed;
   }
 </script>
