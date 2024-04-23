@@ -9,7 +9,7 @@ import ThemeIcon from "./ThemeIcon.astro";
     class="flex items-center justify-between flex-wrap py-4 px-2 my-0 mx-auto max-w-128"
   >
     <div class="flex items-center flex-shrink-0 mr-6">
-      <span class="font-extrabold text-xl tracking-tight"
+      <span class="font-extrabold text-xl text-primary-color tracking-tight"
         ><a href={NAVIGATION[0].path}>{NAVIGATION[0].label}</a></span
       >
     </div>
@@ -38,7 +38,7 @@ import ThemeIcon from "./ThemeIcon.astro";
             return (
               <HeaderLink
                 href={x.path}
-                class="block p-4 font-semibold lg:inline-block lg:mt-0 hover:bg-secondary-color hover:text-background"
+                class="block p-4 text-primary-color font-semibold lg:inline-block lg:mt-0 hover:bg-secondary-color hover:text-background"
               >
                 {x.label}
               </HeaderLink>
@@ -46,7 +46,7 @@ import ThemeIcon from "./ThemeIcon.astro";
           })
         }
         <ThemeIcon
-          class="block p-4 font-semibold lg:inline-block lg:mt-0 hover:bg-secondary-color hover:text-background"
+          class="block p-4 text-primary-color font-semibold lg:inline-block lg:mt-0 hover:bg-secondary-color hover:text-background"
         />
       </div>
     </div>

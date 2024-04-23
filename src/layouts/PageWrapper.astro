@@ -22,7 +22,7 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
     <BaseHead title={title} description={description} />
     <ViewTransitions />
   </head>
-  <body>
+  <body class="bg-background">
     <div class="flex min-h-screen flex-col">
       <Header />
       <main
