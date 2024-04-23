@@ -12,12 +12,6 @@ html {
   font-family: $font-stack;
   font-size: 1rem;
 }
-body {
-  @include themed() {
-    background-color: t($background-color);
-    color: t($text);
-  }
-}
 
 .fullScreen {
   max-width: unset;
