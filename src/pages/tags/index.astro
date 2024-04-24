@@ -1,6 +1,8 @@
 ---
 import PageWrapper from "../../layouts/PageWrapper.astro";
 import MaterialIcon from "../../components/MaterialIcon.astro";
+import TagListItem from "../../components/TagListItem.astro";
+import TagList from "../../components/TagList.astro";
 const allPosts = await Astro.glob("../blog/**/*.{md,mdx}");
 
 const uniqueTags = [
@@ -19,27 +21,17 @@ const sortedTags = Array.from(uniqueTags).sort((a, b) => {
 ---
 
 <PageWrapper title="Tags">
-  <div class="col-12">
-    <h1>Tags</h1>
-  </div>
-  <div class="col-12 m-bottom-4">
-    <div class="tag-list">
-      <ul>
+  <div class="max-w-2xl">
+    <h1 class="font-header text-text">Tags</h1>
+
+    <div class="mb-8">
+      <TagList>
         {
           sortedTags.map((tag) => (
-            <li style="padding-bottom: 0.5rem;">
-              <a href={"/tags/" + tag}>
-                <MaterialIcon
-                  class="p-right-05 v-align-middle"
-                  iconName="tag"
-                />
-
-                {tag}
-              </a>
-            </li>
+            <TagListItem tag={tag} link={"/tags/" + tag} iconName="tag" />
           ))
         }
-      </ul>
+      </TagList>
     </div>
   </div>
 </PageWrapper>
