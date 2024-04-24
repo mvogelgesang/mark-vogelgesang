@@ -1,35 +1,4 @@
-.tag-container {
-  overflow: hidden;
-}
 .tag {
-  font-family: $font-stack;
-  font-size: 1rem;
-  @include themed() {
-    background-color: t($background-color) !important;
-    color: $secondary-color;
-  }
-  text-transform: lowercase;
-  font-weight: 500;
-  border-radius: 3px;
-  margin-right: 0.5rem;
-  padding: 0.5rem 0.5rem;
-  text-decoration: none;
-  float: left;
-  display: block;
-  &:hover {
-    @include themed() {
-      background-color: t($background-color);
-      color: t($secondary-color) !important;
-    }
-    font-weight: 600;
-    text-decoration: none;
-  }
-  @include mobile {
-    margin-bottom: 1rem;
-  }
-  &:first-child {
-    padding-left: 0;
-  }
 }
 .tag-list {
   @include mobile {
