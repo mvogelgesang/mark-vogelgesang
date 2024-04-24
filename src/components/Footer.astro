@@ -3,29 +3,27 @@ import { NAVIGATION, SOCIAL_MEDIA } from "../config";
 import FooterLink from "./FooterLink.astro";
 ---
 
-<footer class="footer">
-  <div class="footer-container">
-    <div class="footer-nav-list">
+<footer
+  class="border-t-4 text-text flex-initial md:h-40 mt-auto overflow-hidden md:overflow-auto h-fit pb-4 md:pb-0"
+>
+  <div class="max-w-2xl mx-auto pt-0 md:pt-8 pb-4 px-0">
+    <div class="ps-0">
       {
         NAVIGATION.map((x) => {
           return (
-            <FooterLink href={x.path} class="footer-nav-link">
+            <FooterLink href={x.path} class="">
               {x.label}
             </FooterLink>
           );
         })
       }
     </div>
-    <div class="footer-social">
-      <div class="footer-nav-list">
+    <div class="float-left md:float-right">
+      <div>
         {
           SOCIAL_MEDIA.map((item) => {
             return (
-              <FooterLink
-                href={item.url}
-                class="footer-nav-link"
-                aria-label={item.name}
-              >
+              <FooterLink href={item.url} class="" aria-label={item.name}>
                 {item.name}
               </FooterLink>
             );
