@@ -1,0 +1,17 @@
+---
+import MaterialIcon from "./MaterialIcon.astro";
+const { class: className, link, tag, iconName, ...props } = Astro.props;
+---
+
+<li class="pb-4 list-none"></li>
+<a
+  href={link}
+  class="text-primary-color font-sans hover:underline visited:text-secondary-color"
+>
+  {
+    iconName && iconName !== "" && (
+      <MaterialIcon class="pr-1 align-middle" iconName={iconName} />
+    )
+  }
+  {tag}
+</a>
