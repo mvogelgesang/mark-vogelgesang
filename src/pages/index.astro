@@ -10,14 +10,14 @@ const posts = (await Astro.glob("./blog/**/*.{astro,md,mdx}")).sort(
 ---
 
 <PageWrapper title="Home">
-  <div class="col-12 col-8-md blog-posts">
+  <div class="max-w-2xl">
     {
       posts.map((post) => (
         <>
-          <div class="blog-post">
+          <div class="first:mt-8 mt-6">
             <h2>
               <a
-                class="blog-post-link"
+                class="text-primary-color no-underline hover:underline hover:text-primary-200 visited:text-primary-400"
                 href={
                   post.frontmatter.externalUrl
                     ? post.frontmatter.externalUrl
@@ -27,7 +27,7 @@ const posts = (await Astro.glob("./blog/**/*.{astro,md,mdx}")).sort(
                 {post.frontmatter.title}
                 {post.frontmatter.externalUrl ? (
                   <MaterialIcon
-                    class="m-left-105 v-align-middle"
+                    class="ml-3 align-middle"
                     iconName="open_in_new"
                   />
                 ) : (
@@ -35,7 +35,9 @@ const posts = (await Astro.glob("./blog/**/*.{astro,md,mdx}")).sort(
                 )}
               </a>
             </h2>
-            <p class="blog-post-content">{post.frontmatter.description}</p>
+            <p class="font-sans leading-relaxed text-text">
+              {post.frontmatter.description}
+            </p>
           </div>
         </>
       ))

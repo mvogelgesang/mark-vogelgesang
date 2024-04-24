@@ -20,6 +20,7 @@ export default {
       },
     },
     fontFamily: {
+      header: ["Karla Variable"],
       sans: ["Inconsolata Variable", "Poppins", "Montserrat", "sans-serif"],
       serif: ["Merriweather", "serif"],
     },

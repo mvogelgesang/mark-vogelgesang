@@ -1,3 +1,7 @@
+@import "@fontsource-variable/inconsolata";
+@import "@fontsource-variable/karla";
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/source-code-pro/400.css";
 /*https://medium.com/@beratyilmaz3102/setting-up-a-maintainable-color-theme-in-tailwind-css-4c7f0bd70d6c*/
 @tailwind base;
 @tailwind components;
@@ -53,6 +57,17 @@
     --color-secondary: var(--green-600);
     --color-accent-1: var(--aqua-700);
     --color-accent-2: var(--aqua-200);
+  }
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Karla Variable", system-ui, sans-serif;
   }
 }
 
