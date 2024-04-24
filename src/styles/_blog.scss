@@ -26,10 +26,6 @@
       }
     }
   }
-  .blog-post-date {
-    font-size: 0.8rem;
-    margin-bottom: $grid-unit;
-  }
 
   .blog-post-content {
     @include themed() {
@@ -135,34 +131,6 @@
         border-left: 1rem solid t($primary-color);
       }
       border-radius: 0.5rem;
-    }
-  }
-}
-.blog-posts {
-  .blog-post:first-child {
-    margin-top: 4 * $grid-unit;
-  }
-  .blog-post {
-    margin-top: 1.5rem;
-    h1 {
-      margin: 0rem 0rem 1rem;
-    }
-  }
-  .blog-post-link {
-    text-decoration: none;
-    @include themed() {
-      color: t($primary-color);
-    }
-    &:hover {
-      text-decoration: underline;
-      @include themed() {
-        color: t($primary-200);
-      }
-    }
-    &:visited {
-      @include themed() {
-        color: t($primary-400);
-      }
     }
   }
 }

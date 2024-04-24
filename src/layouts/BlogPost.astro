@@ -1,6 +1,8 @@
 ---
+import BlogPostDate from "../components/BlogPostDate.astro";
 import PageWrapper from "./PageWrapper.astro";
 import Tag from "../components/Tag.astro";
+
 import MaterialIcon from "../../components/MaterialIcon.astro";
 
 export interface Props {
@@ -35,11 +37,19 @@ const sortedTags = Array.from(tags).sort((a, b) => {
   <article>
     <div class="col-12 col-8-md">
       <div class="blog-post">
-        <h1>{title}</h1>
-        <div class="blog-post-date">{pubDate}</div>
-        <div class="blog-post-content">
+        <h1 class="font-header text-text">{title}</h1>
+        <BlogPostDate pubDate={pubDate} />
+        <div class="font-sans leading-relaxed text-text">
           <div class="p-right-1 hero-image">
-            {hero.src && <img src={hero.src} alt={hero.alt} />}
+            {
+              hero.src && (
+                <img
+                  src={hero.src}
+                  alt={hero.alt}
+                  class="mb-4 max-h-80 w-full"
+                />
+              )
+            }
           </div>
           <slot />
         </div>
@@ -47,8 +57,8 @@ const sortedTags = Array.from(tags).sort((a, b) => {
         {
           tags && (
             <>
-              <h3>Tagged</h3>
-              <div class="tag-container m-bottom-4">
+              <h3 class="font-header text-text">Tagged</h3>
+              <div class="overflow-hidden mb-4">
                 {sortedTags.map((item) => {
                   return <Tag tag={item} />;
                 })}
