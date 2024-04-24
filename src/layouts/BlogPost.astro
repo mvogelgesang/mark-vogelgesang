@@ -3,8 +3,6 @@ import BlogPostDate from "../components/BlogPostDate.astro";
 import PageWrapper from "./PageWrapper.astro";
 import Tag from "../components/Tag.astro";
 
-import MaterialIcon from "../../components/MaterialIcon.astro";
-
 export interface Props {
   content: {
     title: string;
@@ -34,10 +32,10 @@ const sortedTags = Array.from(tags).sort((a, b) => {
 ---
 
 <PageWrapper title={title} description={description}>
-  <article>
-    <div class="col-12 col-8-md">
+  <article class="max-w-full md:max-w-2xl">
+    <div class="">
       <div class="blog-post">
-        <h1 class="font-header text-text">{title}</h1>
+        <h1 class="font-header text-text mt-4">{title}</h1>
         <BlogPostDate pubDate={pubDate} />
         <div class="font-sans leading-relaxed text-text">
           <div class="p-right-1 hero-image">
