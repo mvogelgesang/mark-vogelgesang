@@ -1,82 +1,7 @@
 @use "_colors.scss" as colors;
 
 .blog-post {
-  @include mobile {
-    margin-top: 0rem;
-    .blog-post:first-child h1 {
-      margin-top: 0rem;
-    }
-  }
-  a {
-    text-decoration: underline;
-    text-decoration-thickness: 0.0625rem;
-    text-underline-offset: 0.25rem;
-    @include themed() {
-      color: t($text);
-    }
-    word-wrap: break-word;
-    &:hover {
-      @include themed() {
-        color: t($primary-200);
-      }
-    }
-    &:visited {
-      @include themed() {
-        color: t($primary-400);
-      }
-    }
-  }
-
   .blog-post-content {
-    @include themed() {
-      color: t($text);
-    }
-    font-family: $font-stack;
-    font-size: $prose-font-size;
-    line-height: $prose-line-height;
-
-    img {
-      @include themed() {
-        border-color: t($accent-one);
-      }
-      border-radius: $grid-unit;
-      border-style: solid;
-      border-width: 0.5 * $grid-unit;
-      margin-bottom: 2 * $grid-unit;
-      max-height: 360px;
-      width: 100%;
-      @include mobile {
-        max-height: none;
-        width: 100%;
-      }
-    }
-    .hero-image img {
-      border: none;
-    }
-    ol {
-      margin-bottom: 2 * $grid-unit;
-      @include mobile {
-        padding-inline-start: 1rem;
-      }
-    }
-    table {
-      margin-bottom: 2 * $grid-unit;
-    }
-    th {
-      font-weight: bold;
-    }
-    ul {
-      margin-bottom: 2 * $grid-unit;
-    }
-    em {
-      font-style: italic;
-      font-size: $prose-font-size;
-      line-height: $prose-line-height;
-    }
-
-    .gist tr:nth-child(even) {
-      background-color: $white;
-    }
     p code,
     li code {
       border-style: dotted;
@@ -123,14 +48,6 @@
       border-radius: 0.25rem;
 
       cursor: pointer;
-    }
-    blockquote {
-      padding: 0rem 2rem;
-      @include themed() {
-        border: 1px solid t($primary-color);
-        border-left: 1rem solid t($primary-color);
-      }
-      border-radius: 0.5rem;
     }
   }
 }
