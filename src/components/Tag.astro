@@ -5,7 +5,7 @@ const { class: className, tag, ...props } = Astro.props;
 
 <div class="">
   <a
-    class="text-secondary-color font-sans font-medium lowercase bg-background mr-2 p-2 no-underline rounded-sm hover:bg-secondary-color hover:text-background hover:font-semibold transition-colors duration-200 ease-in-out block first:pl-0 float-left mb-2 md:mb-0"
+    class="not-prose text-secondary-color font-sans font-medium lowercase bg-background mr-2 p-2 no-underline rounded-sm hover:bg-secondary-color hover:text-background hover:font-semibold transition-colors duration-200 ease-in-out block first:pl-0 float-left mb-2 md:mb-0"
     href={`/tags/${tag}/`}
   >
     <MaterialIcon class="pr-1 align-middle" iconName="tag" />{tag}

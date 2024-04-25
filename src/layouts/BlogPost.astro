@@ -1,6 +1,7 @@
 ---
 import BlogPostDate from "../components/BlogPostDate.astro";
 import PageWrapper from "./PageWrapper.astro";
+import Prose from "../components/Prose.astro";
 import Tag from "../components/Tag.astro";
 
 export interface Props {
@@ -32,39 +33,37 @@ const sortedTags = Array.from(tags).sort((a, b) => {
 ---
 
 <PageWrapper title={title} description={description}>
-  <article class="max-w-full md:max-w-2xl">
+  <Prose>
     <div class="">
-      <div class="blog-post">
-        <h1 class="font-header text-text mt-4">{title}</h1>
-        <BlogPostDate pubDate={pubDate} />
-        <div class="font-sans leading-relaxed text-text">
-          <div class="p-right-1 hero-image">
-            {
-              hero.src && (
-                <img
-                  src={hero.src}
-                  alt={hero.alt}
-                  class="mb-4 max-h-80 w-full"
-                />
-              )
-            }
-          </div>
-          <slot />
+      <h1>{title}</h1>
+      <BlogPostDate pubDate={pubDate} />
+      <div class="font-sans leading-relaxed">
+        <div class="pr-2">
+          {
+            hero.src && (
+              <img
+                src={hero.src}
+                alt={hero.alt}
+                class="mb-4 not-prose border-none max-h-80 w-full"
+              />
+            )
+          }
         </div>
-        <!-- tags -->
-        {
-          tags && (
-            <>
-              <h3 class="font-header text-text">Tagged</h3>
-              <div class="overflow-hidden mb-4">
-                {sortedTags.map((item) => {
-                  return <Tag tag={item} />;
-                })}
-              </div>
-            </>
-          )
-        }
+        <slot />
       </div>
+      <!-- tags -->
+      {
+        tags && (
+          <>
+            <h3>Tagged</h3>
+            <div class="overflow-hidden mb-4">
+              {sortedTags.map((item) => {
+                return <Tag tag={item} />;
+              })}
+            </div>
+          </>
+        )
+      }
     </div>
-  </article>
+  </Prose>
 </PageWrapper>
