@@ -18,7 +18,7 @@
   prose-tbody:w-full prose-tbody:block md:prose-tbody:table 
   prose-thead:hidden md:prose-thead:table-header-group 
   prose-th:bg-secondary-color prose-th:text-background prose-th:p-2 prose-th:align-left prose-th:align-bottom prose-th:font-bold 
-  prose-tr:border-b prose-tr:border-dotted prose-tr:border-text hover:prose-tr:bg-accent-one hover:prose-tr:text-background 
+  prose-tr:border-b prose-tr:border-dotted prose-tr:border-text hover:prose-tr:bg-accent-one hover:prose-tr:*:text-background
   prose-td:py-1 prose-td:px-2 prose-td:align-left prose-td:align-top
   prose-ul:ps-4 prose-ul:mb-4 prose-ul:pl-8"
 >
@@ -27,5 +27,12 @@
     document.querySelectorAll('pre > code').forEach((codeBlock) => {
       codeBlock.classList.add('not-prose');
     });
+    // treat all table rows as a group, apply correct color to child elements of tr
+    document.querySelectorAll('.prose tr').forEach((tr) => {
+      tr.classList.add('group');
+    });
+    document.querySelectorAll('.prose tr *').forEach((tr) => {
+      tr.classList.add('group-hover:text-background');
+    })
   </script>
 </article>
