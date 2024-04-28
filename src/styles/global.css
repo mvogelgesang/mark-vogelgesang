@@ -54,7 +54,7 @@
     --color-primary: var(--green-900);
     --color-primary-200: var(--green-700);
     --color-primary-400: var(--green-500);
-    --color-secondary: var(--green-600);
+    --color-secondary: var(--green-700);
     --color-accent-1: var(--aqua-700);
     --color-accent-2: var(--aqua-200);
   }
@@ -104,7 +104,7 @@
   --color-primary: var(--green-900);
   --color-primary-200: var(--green-700);
   --color-primary-400: var(--green-500);
-  --color-secondary: var(--green-600);
+  --color-secondary: var(--green-700);
   --color-accent-1: var(--aqua-700);
   --color-accent-2: var(--aqua-200);
 }
