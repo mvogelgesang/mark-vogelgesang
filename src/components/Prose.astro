@@ -9,10 +9,10 @@
   prose-inline-code:text-text prose-inline-code:border-dotted prose-inline-code:border after:prose-inline-code:content-none before:prose-inline-code:content-none prose-inline-code:py-0.5 prose-inline-code:px-1 prose-inline-code:rounded 
   prose-headings:text-text prose-headings:font-header 
   prose-h1:mt-4 
-  prose-img:border-solid prose-img:border-accent-one prose-img:rounded-lg prose-img:border-8 prose-img:mb-8 md:prose-img:max-h-80 prose-img:max-h-none prose-img:w-full 
+  prose-img:border-solid prose-img:border-accent-one prose-img:rounded-lg prose-img:border-6 prose-img:mb-8 md:prose-img:max-h-80 prose-img:max-h-none prose-img:w-full 
   prose-em:italic 
   prose-figure:mb-4 
-  prose-ol:mb-2 prose-ol:ps-4 
+  prose-ol:mb-2 prose-ol:ps-4 prose-ol:pl-8
   prose-pre:has-[code]:text-white
   prose-table:border-collapse prose-table:mb-2.5 prose-table:p-0 prose-table:w-full prose-table:mb-4 prose-table:block md:prose-table:table 
   prose-tbody:w-full prose-tbody:block md:prose-tbody:table 
@@ -20,12 +20,12 @@
   prose-th:bg-secondary-color prose-th:text-background prose-th:p-2 prose-th:align-left prose-th:align-bottom prose-th:font-bold 
   prose-tr:border-b prose-tr:border-dotted prose-tr:border-text hover:prose-tr:bg-accent-one hover:prose-tr:text-background 
   prose-td:py-1 prose-td:px-2 prose-td:align-left prose-td:align-top
-  prose-ul:ps-4 prose-ul:mb-4"
+  prose-ul:ps-4 prose-ul:mb-4 prose-ul:pl-8"
 >
   <slot />
   <script is:inline>
     document.querySelectorAll('pre > code').forEach((codeBlock) => {
-  codeBlock.classList.add('not-prose');
-});
+      codeBlock.classList.add('not-prose');
+    });
   </script>
 </article>
