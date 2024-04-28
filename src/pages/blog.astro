@@ -12,14 +12,14 @@ const posts = (await Astro.glob("./blog/**/*.{astro,md,mdx}")).sort(
 ---
 
 <PageWrapper title="Posts">
-  <div class="col-12 col-8-md">
-    <h1 class="font-header text-text mb-4 mt-4">Posts</h1>
+  <div class="max-w-2xl">
+    <h1 class="font-header text-text font-bold mb-4 mt-4">Posts</h1>
     {
       posts.map((post) => (
         <div class="first:mt-4 mt-6">
-          <h2>
+          <h2 class="text-primary-color font-header">
             <a
-              class="no-underline text-primary-color font-header text-text hover:underline hover:text-primary-200 visited:text-primary-400 "
+              class="no-underline hover:underline hover:text-primary-200 visited:text-primary-400 "
               href={
                 post.frontmatter.externalUrl
                   ? post.frontmatter.externalUrl
@@ -38,7 +38,7 @@ const posts = (await Astro.glob("./blog/**/*.{astro,md,mdx}")).sort(
             </a>
           </h2>
           <BlogPostDate pubDate={post.frontmatter.pubDate} />
-          <div class="blog-post">
+          <div class="">
             <p class="font-sans leading-relaxed text-text">
               {post.frontmatter.description}
             </p>
