@@ -20,6 +20,13 @@ export default {
       maxWidth: {
         128: "60rem",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            "--tw-prose-bullets": "hsl(var(--color-text))",
+          },
+        },
+      },
     },
     fontFamily: {
       header: ["Karla Variable"],
