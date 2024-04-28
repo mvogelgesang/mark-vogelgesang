@@ -1,24 +1,23 @@
 ---
 import PageWrapper from "./PageWrapper.astro";
+import Prose from "../components/Prose.astro";
 const {
   content: { title, description, imgSrc, imgAlt },
 } = Astro.props;
 ---
 
 <PageWrapper title={title} description={description}>
-  <div class="row m-top-3">
-    <div class="col-12 col-8-md grid-gap-105">
-      <div class="blog-post">
-        <div class="text-text blog-post-content">
+  <div class="mt-6">
+    <div class="grid grid-cols-12 gap-4">
+      <div class="col-span-12 md:col-span-8 font-sans leading-relaxed">
+        <Prose>
           <slot />
-        </div>
+        </Prose>
       </div>
-    </div>
-    <div class="col-12 col-4-md grid-gap-105">
-      <div class="blog-post">
-        <div class="blog-post-content">
+      <div class="col-span-12 md:col-span-4">
+        <Prose>
           <img src={imgSrc} alt={imgAlt} style="" />
-        </div>
+        </Prose>
       </div>
     </div>
   </div>
