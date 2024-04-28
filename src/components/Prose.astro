@@ -3,16 +3,17 @@
 
 <!-- prettier-ignore -->
 <article
-  class="max-w-full md:max-w-2xl text-text prose 
-  prose-a:font-normal prose-a:underline prose-a:decoration-1 prose-a:underline-offset-2 prose-a:break-word hover:prose-a:text-primary-200 visited:prose-a:text-primary-400 
+  class="max-w-full lg:max-w-2xl text-text prose 
+  prose-a:font-normal prose-a:text-text prose-a:underline prose-a:decoration-1 prose-a:underline-offset-2 prose-a:break-word hover:prose-a:text-primary-200 visited:prose-a:text-primary-400 
   prose-blockquote:px-8 prose-blockquote:border prose-blockquote:border-l-4 prose-blockquote:rounded-lg 
-  prose-code:border-dotted prose-code:border after:prose-code:content-none before:prose-code:content-none prose-code:py-0.5 prose-code:px-1 prose-code:rounded 
+  prose-inline-code:text-text prose-inline-code:border-dotted prose-inline-code:border after:prose-inline-code:content-none before:prose-inline-code:content-none prose-inline-code:py-0.5 prose-inline-code:px-1 prose-inline-code:rounded 
   prose-headings:text-text prose-headings:font-header 
   prose-h1:mt-4 
   prose-img:border-solid prose-img:border-accent-one prose-img:rounded-lg prose-img:border-8 prose-img:mb-8 md:prose-img:max-h-80 prose-img:max-h-none prose-img:w-full 
   prose-em:italic 
   prose-figure:mb-4 
   prose-ol:mb-2 prose-ol:ps-4 
+  prose-pre:has-[code]:text-white
   prose-table:border-collapse prose-table:mb-2.5 prose-table:p-0 prose-table:w-full prose-table:mb-4 prose-table:block md:prose-table:table 
   prose-tbody:w-full prose-tbody:block md:prose-tbody:table 
   prose-thead:hidden md:prose-thead:table-header-group 
@@ -22,4 +23,9 @@
   prose-ul:ps-4 prose-ul:mb-4"
 >
   <slot />
+  <script is:inline>
+    document.querySelectorAll('pre > code').forEach((codeBlock) => {
+  codeBlock.classList.add('not-prose');
+});
+  </script>
 </article>

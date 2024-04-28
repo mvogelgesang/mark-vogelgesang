@@ -5,21 +5,32 @@ import partytown from "@astrojs/partytown";
 import compress from "astro-compress";
 import astroExpressiveCode from "astro-expressive-code";
 import tailwind from "@astrojs/tailwind";
+import rehypeTableDataLabel from "@mvogelgesang/rehype-table-data-label";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://mvogelgesang.com",
-  integrations: [astroExpressiveCode({
-    // You can set configuration options here
-    themes: ["github-dark"],
-    styleOverrides: {
-      // You can also override styles
-      borderRadius: "0.5rem"
-    },
-    defaultProps: {
-      wrap: false
-    }
-  }), mdx({
-    extendDefaultPlugins: true
-  }), sitemap(), partytown(), compress(), tailwind()]
+  markdown: {
+    rehypePlugins: [[rehypeTableDataLabel, {}]],
+  },
+  integrations: [
+    sitemap(),
+    partytown(),
+    compress(),
+    tailwind(),
+    astroExpressiveCode({
+      // You can set configuration options here
+      themes: ["github-dark"],
+      styleOverrides: {
+        // You can also override styles
+        borderRadius: "0.5rem",
+      },
+      defaultProps: {
+        wrap: false,
+      },
+    }),
+    mdx({
+      extendDefaultPlugins: true,
+    }),
+  ],
 });

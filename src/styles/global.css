@@ -108,3 +108,7 @@
   --color-accent-1: var(--aqua-700);
   --color-accent-2: var(--aqua-200);
 }
+
+.task-list-item {
+  list-style: none;
+}
