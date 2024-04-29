@@ -26,7 +26,6 @@ const { class: className, icon = "wb_sunny" } = Astro.props;
 
   const handleToggleClick = () => {
     let currentTheme = document.getElementById("theme");
-    console.log(currentTheme);
     if (currentTheme.innerText === darkIcon) {
       setLightMode(true);
     } else {
