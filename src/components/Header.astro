@@ -55,29 +55,31 @@ import ThemeIcon from "./ThemeIcon.astro";
 </header>
 
 <script is:inline>
-  // Find our component DOM on the page.
-  const button = document.querySelector("#menu");
-  const navList = document.querySelector("#nav-list");
-  const navListItem = document.querySelectorAll("#nav-list div a");
+  const enableButton = () => {
+    const button = document.querySelector("#menu");
+    const navList = document.querySelector("#nav-list");
+    const navListItem = document.querySelectorAll("#nav-list div a");
 
-  // Add event listeners to fire confetti when a button is clicked.
-  if (button) {
-    button.addEventListener("click", () => clickHamburger());
-  }
-
-  let menuClosed = true;
-  function clickHamburger() {
     if (button) {
-      button.setAttribute(
-        "aria-label",
-        menuClosed ? "Open Menu" : "Close Menu"
-      );
-    }
-    console.log(navList);
-    if (navList) {
-      navList.classList.toggle("hidden");
+      button.addEventListener("click", () => clickHamburger());
     }
 
-    menuClosed = !menuClosed;
-  }
+    let menuClosed = true;
+    function clickHamburger() {
+      if (button) {
+        button.setAttribute(
+          "aria-label",
+          menuClosed ? "Open Menu" : "Close Menu"
+        );
+      }
+      if (navList) {
+        navList.classList.toggle("hidden");
+      }
+
+      menuClosed = !menuClosed;
+    }
+  };
+
+  document.addEventListener("astro:page-load", enableButton, { once: true });
+  document.addEventListener("astro:after-swap", enableButton);
 </script>
