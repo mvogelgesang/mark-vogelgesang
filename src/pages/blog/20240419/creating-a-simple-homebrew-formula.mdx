@@ -33,9 +33,9 @@ A formula that installs MacOS applications that contain a GUI.
 
 I've been building a set of shell scripts at work to facilitate the creation of Salesforce scratch orgs and associated project directories. This project is called [Quick Org Creator](https://github.com/mvogelgesang/homebrew-quick-org-creator) and is a great tool for folks that create a lot of prototypes or need to test specific features in Salesforce. As I have shared the scripts with others, I found myself wanting to make it easier to install and upgrade the scripts over time. This is where Homebrew comes in. Before trying to convert Quick Org Creator, I wanted to start with a Tiny Example to get a feel for the process. To start, I laid out three goals:
 
-- [ ] Create a simple shell script that can be installed via homebrew and run using the alias `tiny-sh-example`
-- [ ] Utilize one or more dependencies to ensure they get installed correctly
-- [ ] Document any missteps or gotchas along the way (this!)
+- Create a simple shell script that can be installed via homebrew and run using the alias `tiny-sh-example`
+- Utilize one or more dependencies to ensure they get installed correctly
+- Document any missteps or gotchas along the way (this!)
 
 Since I wanted to create a formula for a user repository, I followed Homebrews [How to Create and Maintain a Tap](https://docs.brew.sh/How-to-Create-and-Maintain-a-Tap#naming-your-formulae-to-avoid-clashes) instructions. While there is a lot of detail about conventions and best practices, the lack of a step by step guide made the process a bit daunting. Homebrew formulas support everything from C++ to Node.js so I get why they didn't get super detailed in the documentation- there would just be too much to cover. To get around that, I leaned on blogs and a bit of GitHub Copilot to help me along the way.
 
