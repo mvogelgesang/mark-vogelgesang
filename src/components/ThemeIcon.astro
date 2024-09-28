@@ -3,9 +3,9 @@ import MaterialIcon from "./MaterialIcon.astro";
 const { class: className, icon = "wb_sunny" } = Astro.props;
 ---
 
-<a id="themeToggle" class:list={[className]} tabindex="0">
+<div id="themeToggle" class:list={[className]} tabindex="0">
   <MaterialIcon id="theme" iconName={icon} />
-</a>
+</div>
 <script is:inline>
   const darkIcon = "dark_mode";
   const lightIcon = "wb_sunny";
