@@ -25,7 +25,7 @@
     "@fontsource/poppins": "^5.0.8",
     "@fontsource/source-code-pro": "^4.5.14",
     "@mvogelgesang/rehype-table-data-label": "^0.0.3",
-    "astro": "^4.15.9",
+    "astro": "^4.16.3",
     "astro-compress": "^2.1.5",
     "astro-expressive-code": "^0.35.2",
     "prismjs": "^1.29.0",
