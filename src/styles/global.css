@@ -1,11 +1,29 @@
-@import "@fontsource-variable/inconsolata";
-@import "@fontsource-variable/karla";
-@import "@fontsource/poppins/400.css";
-@import "@fontsource/source-code-pro/400.css";
+@import "@fontsource-variable/inconsolata" layer(base);
+@import "@fontsource-variable/karla" layer(base);
+@import "@fontsource/poppins/400.css" layer(base);
+@import "@fontsource/source-code-pro/400.css" layer(base);
 /*https://medium.com/@beratyilmaz3102/setting-up-a-maintainable-color-theme-in-tailwind-css-4c7f0bd70d6c*/
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 
 @layer base {
   :root {

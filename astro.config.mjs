@@ -4,8 +4,10 @@ import sitemap from "@astrojs/sitemap";
 import partytown from "@astrojs/partytown";
 import compress from "astro-compress";
 import astroExpressiveCode from "astro-expressive-code";
-import tailwind from "@astrojs/tailwind";
 import rehypeTableDataLabel from "@mvogelgesang/rehype-table-data-label";
+import tailwindcss from "@tailwindcss/vite";
+
+import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,24 +15,20 @@ export default defineConfig({
   markdown: {
     rehypePlugins: [[rehypeTableDataLabel, {}]],
   },
-  integrations: [
-    sitemap(),
-    partytown(),
-    compress(),
-    tailwind(),
-    astroExpressiveCode({
-      // You can set configuration options here
-      themes: ["github-dark"],
-      styleOverrides: {
-        // You can also override styles
-        borderRadius: "0.5rem",
-      },
-      defaultProps: {
-        wrap: false,
-      },
-    }),
-    mdx({
-      extendDefaultPlugins: true,
-    }),
-  ],
+  integrations: [sitemap(), partytown(), compress(), astroExpressiveCode({
+    // You can set configuration options here
+    themes: ["github-dark"],
+    styleOverrides: {
+      // You can also override styles
+      borderRadius: "0.5rem",
+    },
+    defaultProps: {
+      wrap: false,
+    },
+  }), mdx({
+    extendDefaultPlugins: true,
+  }), tailwind()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
