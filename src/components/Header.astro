@@ -8,7 +8,7 @@ import ThemeIcon from "./ThemeIcon.astro";
   <nav
     class="flex items-center justify-between flex-wrap py-4 px-2 sm:px-4 my-0 mx-auto max-w-128 border-solid border-b-4 border-accent-one"
   >
-    <div class="flex items-center flex-shrink-0 mr-6">
+    <div class="flex items-center shrink-0 mr-6">
       <span
         class="font-extrabold font-sans text-xl text-primary-color tracking-tight"
         ><a href={NAVIGATION[0].path}>{NAVIGATION[0].label}</a></span
@@ -16,7 +16,7 @@ import ThemeIcon from "./ThemeIcon.astro";
     </div>
     <div class="block lg:hidden">
       <button
-        class="flex items-center px-3 py-2 border rounded hover:text-white hover:border-white"
+        class="flex items-center px-3 py-2 border rounded-sm hover:text-white hover:border-white"
         id="menu"
       >
         <svg
@@ -29,10 +29,10 @@ import ThemeIcon from "./ThemeIcon.astro";
       </button>
     </div>
     <div
-      class="w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden"
+      class="w-full block grow lg:flex lg:items-center lg:w-auto hidden"
       id="nav-list"
     >
-      <div class="lg:flex-grow">
+      <div class="lg:grow">
         {
           NAVIGATION.map((x, index) => {
             if (index === 0) return;

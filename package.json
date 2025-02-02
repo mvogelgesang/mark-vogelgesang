@@ -18,18 +18,21 @@
     "@astrojs/prism": "^3.1.0",
     "@astrojs/rss": "^4.0.7",
     "@astrojs/sitemap": "^3.1.6",
-    "@astrojs/tailwind": "^5.1.1",
+    "@astrojs/tailwind": "^6.0.0",
     "@fontsource-variable/inconsolata": "^5.0.15",
     "@fontsource-variable/karla": "^5.0.18",
     "@fontsource/material-icons-round": "^5.0.7",
     "@fontsource/poppins": "^5.0.8",
     "@fontsource/source-code-pro": "^4.5.14",
     "@mvogelgesang/rehype-table-data-label": "^0.0.3",
+    "@tailwindcss/postcss": "^4.0.3",
+    "@tailwindcss/vite": "^4.0.3",
     "astro": "^4.15.9",
     "astro-compress": "^2.1.5",
     "astro-expressive-code": "^0.35.2",
+    "postcss": "^8.5.1",
     "prismjs": "^1.29.0",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.12",
