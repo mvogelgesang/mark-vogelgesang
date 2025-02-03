@@ -20,3 +20,5 @@ pnpm-debug.log*
 
 gatsbysrc/
 .lighthouseci/
+
+.astro/
