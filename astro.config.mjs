@@ -6,8 +6,6 @@ import compress from "astro-compress";
 import astroExpressiveCode from "astro-expressive-code";
 import rehypeTableDataLabel from "@mvogelgesang/rehype-table-data-label";
 
-import tailwind from "@astrojs/tailwind";
-
 // https://astro.build/config
 export default defineConfig({
   site: "https://mvogelgesang.com",
@@ -26,5 +24,5 @@ export default defineConfig({
     },
   }), mdx({
     extendDefaultPlugins: true,
-  }), tailwind()],
+  })],
 });
