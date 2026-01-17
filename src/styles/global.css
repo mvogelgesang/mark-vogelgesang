@@ -1,11 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @import "@fontsource-variable/inconsolata" layer(base);
 @import "@fontsource-variable/karla" layer(base);
 @import "@fontsource/poppins/400.css" layer(base);
 @import "@fontsource/source-code-pro/400.css" layer(base);
 /*https://medium.com/@beratyilmaz3102/setting-up-a-maintainable-color-theme-in-tailwind-css-4c7f0bd70d6c*/
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,

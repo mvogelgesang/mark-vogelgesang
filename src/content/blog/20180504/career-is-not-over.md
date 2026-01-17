@@ -1,5 +1,4 @@
 ---
-layout: "../../../layouts/BlogPost.astro"
 pubDate: "May 4 2018"
 title: "Career is not Over"
 tags: ["it leadership", "government", "cio"]

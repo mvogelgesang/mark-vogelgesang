@@ -5,7 +5,6 @@ import partytown from "@astrojs/partytown";
 import compress from "astro-compress";
 import astroExpressiveCode from "astro-expressive-code";
 import rehypeTableDataLabel from "@mvogelgesang/rehype-table-data-label";
-import tailwindcss from "@tailwindcss/vite";
 
 import tailwind from "@astrojs/tailwind";
 
@@ -28,7 +27,4 @@ export default defineConfig({
   }), mdx({
     extendDefaultPlugins: true,
   }), tailwind()],
-  vite: {
-    plugins: [tailwindcss()],
-  },
 });

@@ -1,5 +1,4 @@
 ---
-layout: "../../../layouts/BlogPost.astro"
 pubDate: "Sep 17 2017"
 title: "what development teams can learn from my favorite pizza place"
 hero: 

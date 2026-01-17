@@ -1,5 +1,4 @@
 ---
-layout: "../../../layouts/BlogPost.astro"
 pubDate: Apr 19, 2019
 title: "Sheets to Email with Google Apps Script"
 tags: ["apps script", "google sheets"]

@@ -1,11 +1,11 @@
 ---
+import { getCollection } from "astro:content";
 import PageWrapper from "../layouts/PageWrapper.astro";
 import MaterialIcon from "../components/MaterialIcon.astro";
-// Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await Astro.glob("./blog/**/*.{astro,md,mdx}")).sort(
+// Use getCollection to fetch all posts, and then sort them by date.
+const posts = (await getCollection("blog")).sort(
   (a, b) =>
-    new Date(b.frontmatter.pubDate).valueOf() -
-    new Date(a.frontmatter.pubDate).valueOf()
+    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 );
 ---
 
@@ -19,13 +19,13 @@ const posts = (await Astro.glob("./blog/**/*.{astro,md,mdx}")).sort(
               <a
                 class="text-primary-color no-underline hover:underline hover:text-primary-200 visited:text-primary-400"
                 href={
-                  post.frontmatter.externalUrl
-                    ? post.frontmatter.externalUrl
-                    : post.url
+                  post.data.externalUrl
+                    ? post.data.externalUrl
+                    : `/blog/${post.slug}`
                 }
               >
-                {post.frontmatter.title}
-                {post.frontmatter.externalUrl ? (
+                {post.data.title}
+                {post.data.externalUrl ? (
                   <MaterialIcon
                     class="ml-3 align-middle"
                     iconName="open_in_new"
@@ -36,7 +36,7 @@ const posts = (await Astro.glob("./blog/**/*.{astro,md,mdx}")).sort(
               </a>
             </h2>
             <p class="font-sans leading-relaxed text-text">
-              {post.frontmatter.description}
+              {post.data.description}
             </p>
           </div>
         </>
