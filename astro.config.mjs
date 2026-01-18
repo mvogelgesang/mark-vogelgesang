@@ -27,8 +27,5 @@ export default defineConfig({
     },
   }), mdx({
     extendDefaultPlugins: true,
-  }), tailwind()],
-  vite: {
-    plugins: [tailwindcss()],
-  },
+  })],
 });
