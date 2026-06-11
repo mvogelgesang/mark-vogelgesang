@@ -2,45 +2,417 @@
 import { getCollection } from "astro:content";
 import PageWrapper from "../layouts/PageWrapper.astro";
 import MaterialIcon from "../components/MaterialIcon.astro";
+
 // Use getCollection to fetch all posts, and then sort them by date.
 const posts = (await getCollection("blog")).sort(
   (a, b) =>
     new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 );
+
+const [latest, ...older] = posts;
+const recent = older.slice(0, 4);
+
+const tagCounts = new Map();
+for (const post of posts) {
+  for (const tag of post.data.tags) {
+    tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+  }
+}
+const topTags = [...tagCounts.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 10)
+  .map(([tag]) => tag);
+
+const formatDate = (date) =>
+  new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
+const postUrl = (post) =>
+  post.data.externalUrl ? post.data.externalUrl : `/blog/${post.slug}`;
 ---
 
 <PageWrapper title="Home">
-  <div class="max-w-2xl">
+  <div class="w-full">
+    <!-- Hero -->
+    <section class="hero rise">
+      <p class="eyebrow font-sans">Mark Vogelgesang</p>
+      <h1 class="hero-title text-primary-color">
+        Pursuing <span class="gradient-text">better solutions</span>.
+      </h1>
+      <p class="hero-intro font-sans text-text">
+        Director of Product Management at Salesforce. Here you'll find the
+        occasional musing about my work, scripts to make life easier, and
+        ongoing development projects.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-solid font-sans" href="/blog">
+          Read the blog
+          <MaterialIcon class="btn-icon" iconName="arrow_forward" />
+        </a>
+        <a class="btn btn-outline font-sans" href="/about">About me</a>
+      </div>
+    </section>
+
+    <!-- Latest post -->
     {
-      posts.map((post) => (
-        <>
-          <div class="first:mt-8 mt-6">
-            <h2>
-              <a
-                class="text-primary-color no-underline hover:underline hover:text-primary-200 visited:text-primary-400"
-                href={
-                  post.data.externalUrl
-                    ? post.data.externalUrl
-                    : `/blog/${post.slug}`
-                }
-              >
-                {post.data.title}
-                {post.data.externalUrl ? (
-                  <MaterialIcon
-                    class="ml-3 align-middle"
-                    iconName="open_in_new"
-                  />
-                ) : (
-                  ""
+      latest && (
+        <section class="rise rise-1">
+          <h2 class="section-title font-header text-text">Latest post</h2>
+          <article class="card card-featured">
+            <p class="card-date font-sans">{formatDate(latest.data.pubDate)}</p>
+            <h3 class="card-title font-header">
+              <a class="card-link" href={postUrl(latest)}>
+                {latest.data.title}
+                {latest.data.externalUrl && (
+                  <MaterialIcon class="ml-2 align-middle" iconName="open_in_new" />
                 )}
               </a>
-            </h2>
-            <p class="font-sans leading-relaxed text-text">
-              {post.data.description}
+            </h3>
+            <p class="card-description font-sans text-text">
+              {latest.data.description}
             </p>
-          </div>
-        </>
-      ))
+            <div class="chip-row">
+              {latest.data.tags.map((tag) => (
+                <span class="chip chip-static font-sans">{tag}</span>
+              ))}
+            </div>
+          </article>
+        </section>
+      )
     }
+
+    <!-- Recent posts -->
+    <section class="rise rise-2">
+      <h2 class="section-title font-header text-text">More writing</h2>
+      <div class="card-grid">
+        {
+          recent.map((post) => (
+            <article class="card">
+              <p class="card-date font-sans">{formatDate(post.data.pubDate)}</p>
+              <h3 class="card-title font-header">
+                <a class="card-link" href={postUrl(post)}>
+                  {post.data.title}
+                  {post.data.externalUrl && (
+                    <MaterialIcon
+                      class="ml-2 align-middle"
+                      iconName="open_in_new"
+                    />
+                  )}
+                </a>
+              </h3>
+              <p class="card-description card-clamp font-sans text-text">
+                {post.data.description}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="view-all">
+        <a class="view-all-link font-sans" href="/blog">
+          View all posts
+          <MaterialIcon class="btn-icon" iconName="arrow_forward" />
+        </a>
+      </div>
+    </section>
+
+    <!-- Topics -->
+    <section class="topics rise rise-3">
+      <h2 class="section-title font-header text-text">Browse by topic</h2>
+      <div class="chip-row">
+        {
+          topTags.map((tag) => (
+            <a class="chip font-sans" href={`/tags/${tag}/`}>
+              <MaterialIcon class="chip-icon" iconName="tag" />
+              {tag}
+            </a>
+          ))
+        }
+        <a class="chip chip-muted font-sans" href="/tags">all topics</a>
+      </div>
+    </section>
   </div>
 </PageWrapper>
+
+<style>
+  /* ---- Hero ---- */
+  .hero {
+    position: relative;
+    isolation: isolate;
+    padding: 3.5rem 0 3rem;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: -1rem 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        36rem 18rem at 85% 0%,
+        hsl(var(--color-accent-1) / 0.16),
+        transparent 70%
+      ),
+      radial-gradient(
+        28rem 16rem at 0% 100%,
+        hsl(var(--color-secondary) / 0.12),
+        transparent 70%
+      );
+  }
+  .eyebrow {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: hsl(var(--color-secondary));
+    padding: 0;
+  }
+  .hero-title {
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    line-height: 1.1;
+    margin: 0.75rem 0 1rem;
+  }
+  .gradient-text {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--color-secondary)),
+      hsl(var(--color-accent-1))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero-intro {
+    max-width: 38rem;
+    font-size: 1.25rem;
+    line-height: 1.7;
+  }
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    padding: 0.65rem 1.4rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-solid {
+    background-color: hsl(var(--color-primary));
+    color: hsl(var(--color-bg));
+  }
+  .btn-solid:hover {
+    background-color: hsl(var(--color-primary-200));
+  }
+  .btn-outline {
+    border: 2px solid hsl(var(--color-primary) / 0.4);
+    color: hsl(var(--color-primary));
+  }
+  .btn-outline:hover {
+    border-color: hsl(var(--color-accent-1));
+  }
+  .btn-icon {
+    font-size: 1.1em;
+  }
+
+  /* ---- Sections ---- */
+  section {
+    margin-bottom: 3.5rem;
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .section-title::before {
+    content: "";
+    width: 2rem;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--color-accent-1)),
+      hsl(var(--color-secondary))
+    );
+  }
+
+  /* ---- Cards ---- */
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid hsl(var(--color-text) / 0.15);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    background-color: hsl(var(--color-text) / 0.03);
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: hsl(var(--color-accent-1) / 0.8);
+    box-shadow: 0 12px 30px -12px hsl(var(--color-text) / 0.3);
+  }
+  .card-featured {
+    border-left: 4px solid hsl(var(--color-accent-1));
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 640px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .card-date {
+    font-size: 0.875rem;
+    color: hsl(var(--color-secondary));
+    margin: 0;
+    padding: 0 0 0.5rem;
+  }
+  .card-title {
+    font-size: 1.35rem;
+    line-height: 1.3;
+    margin: 0 0 0.5rem;
+  }
+  .card-featured .card-title {
+    font-size: 1.75rem;
+  }
+  .card-link {
+    color: hsl(var(--color-primary));
+    text-decoration: none;
+  }
+  /* Stretch the title link across the whole card */
+  .card-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .card:hover .card-link {
+    text-decoration: underline;
+  }
+  .card-description {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+  .card-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .view-all {
+    margin-top: 1.5rem;
+  }
+  .view-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: hsl(var(--color-primary));
+    text-decoration: none;
+  }
+  .view-all-link:hover {
+    color: hsl(var(--color-primary-200));
+    text-decoration: underline;
+  }
+
+  /* ---- Chips ---- */
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border: 1px solid hsl(var(--color-secondary) / 0.45);
+    border-radius: 9999px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.9rem;
+    text-transform: lowercase;
+    text-decoration: none;
+    color: hsl(var(--color-secondary));
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+  a.chip:hover {
+    background-color: hsl(var(--color-secondary));
+    color: hsl(var(--color-bg));
+  }
+  .chip-icon {
+    font-size: 1em;
+  }
+  .chip-static {
+    border-style: dashed;
+  }
+  .chip-muted {
+    border-color: hsl(var(--color-text) / 0.3);
+    color: hsl(var(--color-text) / 0.8);
+  }
+  .topics {
+    margin-bottom: 2rem;
+  }
+
+  /* ---- Motion ---- */
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .rise {
+    animation: rise 0.6s ease-out both;
+  }
+  .rise-1 {
+    animation-delay: 0.1s;
+  }
+  .rise-2 {
+    animation-delay: 0.2s;
+  }
+  .rise-3 {
+    animation-delay: 0.3s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rise {
+      animation: none;
+    }
+    .btn:hover,
+    .card:hover {
+      transform: none;
+    }
+  }
+</style>
