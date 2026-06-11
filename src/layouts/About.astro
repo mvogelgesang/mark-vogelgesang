@@ -1,24 +1,121 @@
 ---
 import PageWrapper from "./PageWrapper.astro";
 import Prose from "../components/Prose.astro";
-const {
-  content: { title, description, imgSrc, imgAlt },
-} = Astro.props;
+import Chip from "../components/Chip.astro";
+import { SITE_TITLE, SITE_DESCRIPTION, SOCIAL_MEDIA } from "../config";
+
+const { title, description, imgSrc, imgAlt, updatedDate } =
+  Astro.props.content ?? Astro.props.frontmatter;
 ---
 
 <PageWrapper title={title} description={description}>
-  <div class="mt-6">
-    <div class="grid grid-cols-12 gap-4">
-      <div class="col-span-12 md:col-span-8 font-sans leading-relaxed">
-        <Prose>
-          <slot />
-        </Prose>
+  <div class="w-full">
+    <header class="profile">
+      <div class="portrait-ring">
+        <img class="portrait" src={imgSrc} alt={imgAlt} />
       </div>
-      <div class="col-span-12 md:col-span-4">
-        <Prose>
-          <img src={imgSrc} alt={imgAlt} style="" />
-        </Prose>
+      <div class="profile-details">
+        <h1 class="profile-name text-primary-color">{SITE_TITLE}</h1>
+        <p class="profile-tagline font-sans">{SITE_DESCRIPTION}</p>
+        <div class="chip-row">
+          {
+            SOCIAL_MEDIA.map((item) => (
+              <Chip href={item.url} icon="open_in_new">
+                {item.name}
+              </Chip>
+            ))
+          }
+        </div>
+        {
+          updatedDate && (
+            <p class="profile-updated font-sans">Last updated {updatedDate}</p>
+          )
+        }
       </div>
+    </header>
+
+    <div class="about-body">
+      <Prose>
+        <slot />
+      </Prose>
     </div>
   </div>
 </PageWrapper>
+
+<style>
+  .profile {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 3rem 0 2.5rem;
+  }
+  @media (min-width: 640px) {
+    .profile {
+      flex-direction: row;
+      align-items: center;
+      gap: 2.5rem;
+    }
+  }
+  .profile::before {
+    content: "";
+    position: absolute;
+    inset: -1rem 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      32rem 16rem at 90% 10%,
+      hsl(var(--color-accent-1) / 0.14),
+      transparent 70%
+    );
+  }
+
+  .portrait-ring {
+    flex-shrink: 0;
+    padding: 5px;
+    border-radius: 9999px;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--color-secondary)),
+      hsl(var(--color-accent-1))
+    );
+  }
+  .portrait {
+    display: block;
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: 9999px;
+    border: 4px solid hsl(var(--color-bg));
+  }
+
+  .profile-name {
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.15;
+    margin: 0 0 0.25rem;
+  }
+  .profile-tagline {
+    font-size: 1.15rem;
+    color: hsl(var(--color-secondary));
+    margin: 0;
+    padding: 0;
+  }
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .profile-updated {
+    font-size: 0.85rem;
+    color: hsl(var(--color-text) / 0.6);
+    margin: 0.75rem 0 0;
+    padding: 0;
+  }
+
+  .about-body {
+    margin-bottom: 3rem;
+  }
+</style>
