@@ -1,69 +1,250 @@
 ---
-import BlogPostDate from "../components/BlogPostDate.astro";
 import PageWrapper from "./PageWrapper.astro";
 import Prose from "../components/Prose.astro";
-import Tag from "../components/Tag.astro";
+import Chip from "../components/Chip.astro";
+import MaterialIcon from "../components/MaterialIcon.astro";
+import { formatDate } from "../utils/posts";
 
 export interface Props {
   content: {
     title: string;
     description: string;
     pubDate?: string;
-    hero: {
+    externalUrl?: string;
+    hero?: {
       alt?: string;
       src?: string;
     };
     tags: string[];
   };
+  minutesRead?: number;
+  newerPost?: { slug: string; title: string };
+  olderPost?: { slug: string; title: string };
 }
 
-const {
-  content: { title, description, pubDate, hero, tags },
-} = Astro.props;
+const { minutesRead, newerPost, olderPost } = Astro.props;
+const { title, description, pubDate, externalUrl, hero, tags } =
+  Astro.props.content ?? Astro.props.frontmatter;
 
-const sortedTags = Array.from(tags).sort((a, b) => {
-  if (a.toLowerCase() < b.toLowerCase()) {
-    return -1;
-  } else if (a.toLowerCase() > b.toLowerCase()) {
-    return 1;
-  }
-  // a must be equal to b
-  return 0;
-});
+const sortedTags = Array.from(tags ?? []).sort((a, b) =>
+  a.toLowerCase().localeCompare(b.toLowerCase())
+);
 ---
 
 <PageWrapper title={title} description={description}>
-  <Prose>
-    <div class="">
-      <h1>{title}</h1>
-      <BlogPostDate pubDate={pubDate} />
-      <div class="font-sans leading-relaxed">
-        <div class="pr-2">
-          {
-            hero.src && (
-              <img
-                src={hero.src}
-                alt={hero.alt}
-                class="mb-4 not-prose border-none max-h-80 w-full"
-              />
-            )
-          }
-        </div>
-        <slot />
-      </div>
-      <!-- tags -->
+  <div class="w-full max-w-full lg:max-w-2xl">
+    <header class="post-header">
+      <a class="breadcrumb font-sans" href="/blog">
+        <MaterialIcon class="breadcrumb-icon" iconName="arrow_back" />
+        All posts
+      </a>
+      <h1 class="post-title text-primary-color">{title}</h1>
+      <p class="post-meta font-sans">
+        {pubDate && <span>{formatDate(pubDate)}</span>}
+        {minutesRead && <span class="post-meta-sep">·</span>}
+        {minutesRead && <span>{minutesRead} min read</span>}
+      </p>
       {
-        tags && (
-          <>
-            <h3>Tagged</h3>
-            <div class="overflow-hidden mb-4">
-              {sortedTags.map((item) => {
-                return <Tag tag={item} />;
-              })}
-            </div>
-          </>
+        sortedTags.length > 0 && (
+          <div class="chip-row">
+            {sortedTags.map((tag) => (
+              <Chip href={`/tags/${tag}/`} icon="tag">
+                {tag}
+              </Chip>
+            ))}
+          </div>
         )
       }
-    </div>
-  </Prose>
+    </header>
+
+    {
+      hero?.src && (
+        <img class="post-hero" src={hero.src} alt={hero.alt ?? ""} />
+      )
+    }
+
+    {
+      externalUrl && (
+        <a class="external-cta font-sans" href={externalUrl}>
+          Read the full post
+          <MaterialIcon class="external-cta-icon" iconName="open_in_new" />
+        </a>
+      )
+    }
+
+    <Prose>
+      <slot />
+    </Prose>
+
+    {
+      (newerPost || olderPost) && (
+        <nav class="post-nav" aria-label="Post navigation">
+          {newerPost ? (
+            <a class="post-nav-card" href={`/blog/${newerPost.slug}`}>
+              <span class="post-nav-label font-sans">
+                <MaterialIcon class="post-nav-icon" iconName="arrow_back" />
+                Newer
+              </span>
+              <span class="post-nav-title font-header">{newerPost.title}</span>
+            </a>
+          ) : (
+            <span class="post-nav-spacer" />
+          )}
+          {olderPost && (
+            <a class="post-nav-card post-nav-older" href={`/blog/${olderPost.slug}`}>
+              <span class="post-nav-label font-sans">
+                Older
+                <MaterialIcon class="post-nav-icon" iconName="arrow_forward" />
+              </span>
+              <span class="post-nav-title font-header">{olderPost.title}</span>
+            </a>
+          )}
+        </nav>
+      )
+    }
+  </div>
 </PageWrapper>
+
+<style>
+  .post-header {
+    margin: 2rem 0 1.5rem;
+  }
+  .breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: hsl(var(--color-secondary));
+    text-decoration: none;
+  }
+  .breadcrumb:hover {
+    color: hsl(var(--color-primary));
+    text-decoration: underline;
+  }
+  .breadcrumb-icon {
+    font-size: 1.1em;
+  }
+  .post-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.15;
+    margin: 0.75rem 0 0.75rem;
+  }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: hsl(var(--color-text) / 0.75);
+    margin: 0;
+    padding: 0;
+  }
+  .post-meta-sep {
+    color: hsl(var(--color-accent-1));
+  }
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .post-hero {
+    width: 100%;
+    max-height: 24rem;
+    object-fit: cover;
+    border: 4px solid hsl(var(--color-accent-1));
+    border-radius: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .external-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    padding: 0.65rem 1.4rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    background-color: hsl(var(--color-primary));
+    color: hsl(var(--color-bg));
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
+  }
+  .external-cta:hover {
+    background-color: hsl(var(--color-primary-200));
+    transform: translateY(-2px);
+  }
+  .external-cta-icon {
+    font-size: 1.1em;
+  }
+
+  .post-nav {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 640px) {
+    .post-nav {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .post-nav-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    border: 1px solid hsl(var(--color-text) / 0.15);
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+    background-color: hsl(var(--color-text) / 0.03);
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .post-nav-card:hover {
+    transform: translateY(-3px);
+    border-color: hsl(var(--color-accent-1) / 0.8);
+  }
+  .post-nav-older {
+    text-align: right;
+  }
+  .post-nav-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: hsl(var(--color-secondary));
+  }
+  .post-nav-older .post-nav-label {
+    justify-content: flex-end;
+  }
+  .post-nav-icon {
+    font-size: 1.2em;
+  }
+  .post-nav-title {
+    font-weight: 600;
+    color: hsl(var(--color-primary));
+  }
+  .post-nav-spacer {
+    display: none;
+  }
+  @media (min-width: 640px) {
+    .post-nav-spacer {
+      display: block;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .external-cta:hover,
+    .post-nav-card:hover {
+      transform: none;
+    }
+  }
+</style>
