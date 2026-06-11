@@ -1,0 +1,29 @@
+---
+const { as: Element = "h2", class: className } = Astro.props;
+---
+
+<Element class:list={["section-title font-header text-text", className]}>
+  <slot />
+</Element>
+
+<style>
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .section-title::before {
+    content: "";
+    flex-shrink: 0;
+    width: 2rem;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--color-accent-1)),
+      hsl(var(--color-secondary))
+    );
+  }
+</style>
