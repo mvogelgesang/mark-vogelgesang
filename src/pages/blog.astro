@@ -1,51 +1,65 @@
 ---
 import { getCollection } from "astro:content";
 import PageWrapper from "../layouts/PageWrapper.astro";
-import MaterialIcon from "../components/MaterialIcon.astro";
-import BlogPostDate from "../components/BlogPostDate.astro";
+import PostCard from "../components/PostCard.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import { formatDate } from "../utils/posts";
 
 // Use getCollection to fetch all posts, and then sort them by date.
 const posts = (await getCollection("blog")).sort(
   (a, b) =>
-    new Date(b.data.pubDate).valueOf() -
-    new Date(a.data.pubDate).valueOf()
+    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 );
 ---
 
 <PageWrapper title="Posts">
-  <div class="max-w-2xl">
-    <h1 class="font-header text-text font-bold mb-4 mt-4">Posts</h1>
-    {
-      posts.map((post) => (
-        <div class="first:mt-4 mt-6">
-          <h2 class="text-primary-color font-header">
-            <a
-              class="no-underline hover:underline hover:text-primary-200 visited:text-primary-400 "
-              href={
-                post.data.externalUrl
-                  ? post.data.externalUrl
-                  : `/blog/${post.slug}`
-              }
-            >
-              {post.data.title}
-              {post.data.externalUrl ? (
-                <MaterialIcon
-                  class="ml-3 align-middle"
-                  iconName="open_in_new"
-                />
-              ) : (
-                ""
-              )}
-            </a>
-          </h2>
-          <BlogPostDate pubDate={post.data.pubDate} />
-          <div class="">
-            <p class="font-sans leading-relaxed text-text">
-              {post.data.description}
-            </p>
-          </div>
-        </div>
-      ))
-    }
+  <div class="w-full">
+    <header class="page-header">
+      <SectionTitle as="h1">All posts</SectionTitle>
+      <p class="page-subtitle font-sans text-text">
+        {posts.length} posts, newest first.
+      </p>
+    </header>
+
+    <div class="card-grid">
+      {
+        posts.map((post) => (
+          <PostCard
+            url={
+              post.data.externalUrl
+                ? post.data.externalUrl
+                : `/blog/${post.slug}`
+            }
+            title={post.data.title}
+            description={post.data.description}
+            date={formatDate(post.data.pubDate)}
+            external={!!post.data.externalUrl}
+            clamp
+          />
+        ))
+      }
+    </div>
   </div>
 </PageWrapper>
+
+<style>
+  .page-header {
+    margin: 2.5rem 0 1.5rem;
+  }
+  .page-subtitle {
+    font-size: 1.05rem;
+    margin: 0;
+    padding: 0;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  @media (min-width: 640px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,20 +1,24 @@
 ---
 import { getCollection } from "astro:content";
-import TagList from "../../components/TagList.astro";
-import TagListItem from "../../components/TagListItem.astro";
 import PageWrapper from "../../layouts/PageWrapper.astro";
+import MaterialIcon from "../../components/MaterialIcon.astro";
+import PostCard from "../../components/PostCard.astro";
+import SectionTitle from "../../components/SectionTitle.astro";
+import { formatDate } from "../../utils/posts";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("blog");
 
-  const uniqueTags = [
-    ...new Set(allPosts.map((post) => post.data.tags).flat()),
-  ];
+  const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
 
   return uniqueTags.map((tag) => {
-    const filteredPosts = allPosts.filter((post) =>
-      post.data.tags.includes(tag)
-    );
+    const filteredPosts = allPosts
+      .filter((post) => post.data.tags.includes(tag))
+      .sort(
+        (a, b) =>
+          new Date(b.data.pubDate).valueOf() -
+          new Date(a.data.pubDate).valueOf()
+      );
     return {
       params: { tag },
       props: { posts: filteredPosts },
@@ -27,22 +31,73 @@ const { posts } = Astro.props;
 ---
 
 <PageWrapper title={tag}>
-  <div class="max-w-2xl mb-8">
-    <h1 class="font-header text-text mt-4">Tags // {tag}</h1>
+  <div class="w-full">
+    <header class="page-header">
+      <a class="breadcrumb font-sans" href="/tags">
+        <MaterialIcon class="breadcrumb-icon" iconName="arrow_back" />
+        All topics
+      </a>
+      <SectionTitle as="h1" class="topic-title">{tag}</SectionTitle>
+      <p class="page-subtitle font-sans text-text">
+        {posts.length} {posts.length === 1 ? "post" : "posts"} tagged with
+        “{tag}”.
+      </p>
+    </header>
 
-    <div class="overflow-hidden">
-      <TagList>
-        {
-          posts.map(
-            (post) => (
-              <TagListItem
-                link={`/blog/${post.slug}`}
-                tag={"// " + post.data.title}
-              />
-            )
-          )
-        }
-      </TagList>
+    <div class="card-grid">
+      {
+        posts.map((post) => (
+          <PostCard
+            url={`/blog/${post.slug}`}
+            title={post.data.title}
+            description={post.data.description}
+            date={formatDate(post.data.pubDate)}
+            clamp
+          />
+        ))
+      }
     </div>
   </div>
 </PageWrapper>
+
+<style>
+  .page-header {
+    margin: 2.5rem 0 1.5rem;
+  }
+  .breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: hsl(var(--color-secondary));
+    text-decoration: none;
+    margin-bottom: 1rem;
+  }
+  .breadcrumb:hover {
+    color: hsl(var(--color-primary));
+    text-decoration: underline;
+  }
+  .breadcrumb-icon {
+    font-size: 1.1em;
+  }
+  .topic-title {
+    text-transform: lowercase;
+  }
+  .page-subtitle {
+    font-size: 1.05rem;
+    margin: 0;
+    padding: 0;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  @media (min-width: 640px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
