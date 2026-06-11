@@ -1,38 +1,57 @@
 ---
 import { getCollection } from "astro:content";
 import PageWrapper from "../../layouts/PageWrapper.astro";
-import MaterialIcon from "../../components/MaterialIcon.astro";
-import TagListItem from "../../components/TagListItem.astro";
-import TagList from "../../components/TagList.astro";
+import Chip from "../../components/Chip.astro";
+import SectionTitle from "../../components/SectionTitle.astro";
+
 const allPosts = await getCollection("blog");
 
-const uniqueTags = [
-  ...new Set(allPosts.map((post) => post.data.tags).flat()),
-];
-
-const sortedTags = Array.from(uniqueTags).sort((a, b) => {
-  if (a.toLowerCase() < b.toLowerCase()) {
-    return -1;
-  } else if (a.toLowerCase() > b.toLowerCase()) {
-    return 1;
+const tagCounts = new Map();
+for (const post of allPosts) {
+  for (const tag of post.data.tags) {
+    tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
   }
-  // a must be equal to b
-  return 0;
-});
+}
+
+const sortedTags = [...tagCounts.entries()].sort(
+  (a, b) => b[1] - a[1] || a[0].toLowerCase().localeCompare(b[0].toLowerCase())
+);
 ---
 
-<PageWrapper title="Tags">
-  <div class="max-w-2xl">
-    <h1 class="font-header text-text mt-4">Tags</h1>
+<PageWrapper title="Topics">
+  <div class="w-full">
+    <header class="page-header">
+      <SectionTitle as="h1">Browse by topic</SectionTitle>
+      <p class="page-subtitle font-sans text-text">
+        {sortedTags.length} topics across {allPosts.length} posts.
+      </p>
+    </header>
 
-    <div class="mb-8">
-      <TagList>
-        {
-          sortedTags.map((tag) => (
-            <TagListItem tag={tag} link={"/tags/" + tag} iconName="tag" />
-          ))
-        }
-      </TagList>
+    <div class="chip-row">
+      {
+        sortedTags.map(([tag, count]) => (
+          <Chip href={`/tags/${tag}/`} icon="tag">
+            {tag} · {count}
+          </Chip>
+        ))
+      }
     </div>
   </div>
 </PageWrapper>
+
+<style>
+  .page-header {
+    margin: 2.5rem 0 0.5rem;
+  }
+  .page-subtitle {
+    font-size: 1.05rem;
+    margin: 0;
+    padding: 0;
+  }
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.25rem 0 3rem;
+  }
+</style>
