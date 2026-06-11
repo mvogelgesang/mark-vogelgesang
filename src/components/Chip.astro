@@ -1,0 +1,50 @@
+---
+import MaterialIcon from "./MaterialIcon.astro";
+
+const { href, icon, muted = false, class: className } = Astro.props;
+const Element = href ? "a" : "span";
+---
+
+<Element
+  href={href}
+  class:list={[
+    "chip font-sans",
+    { "chip-static": !href, "chip-muted": muted },
+    className,
+  ]}
+>
+  {icon && <MaterialIcon class="chip-icon" iconName={icon} />}
+  <slot />
+</Element>
+
+<style>
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border: 1px solid hsl(var(--color-secondary) / 0.45);
+    border-radius: 9999px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.9rem;
+    text-transform: lowercase;
+    text-decoration: none;
+    color: hsl(var(--color-secondary));
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+  a.chip:hover {
+    background-color: hsl(var(--color-secondary));
+    color: hsl(var(--color-bg));
+  }
+  .chip-icon {
+    font-size: 1em;
+  }
+  .chip-static {
+    border-style: dashed;
+  }
+  .chip-muted {
+    border-color: hsl(var(--color-text) / 0.3);
+    color: hsl(var(--color-text) / 0.8);
+  }
+</style>

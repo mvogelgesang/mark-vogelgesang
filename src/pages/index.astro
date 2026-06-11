@@ -2,6 +2,10 @@
 import { getCollection } from "astro:content";
 import PageWrapper from "../layouts/PageWrapper.astro";
 import MaterialIcon from "../components/MaterialIcon.astro";
+import PostCard from "../components/PostCard.astro";
+import Chip from "../components/Chip.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import { formatDate } from "../utils/posts";
 
 // Use getCollection to fetch all posts, and then sort them by date.
 const posts = (await getCollection("blog")).sort(
@@ -22,13 +26,6 @@ const topTags = [...tagCounts.entries()]
   .sort((a, b) => b[1] - a[1])
   .slice(0, 10)
   .map(([tag]) => tag);
-
-const formatDate = (date) =>
-  new Date(date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
 
 const postUrl = (post) =>
   post.data.externalUrl ? post.data.externalUrl : `/blog/${post.slug}`;
@@ -60,53 +57,34 @@ const postUrl = (post) =>
     {
       latest && (
         <section class="rise rise-1">
-          <h2 class="section-title font-header text-text">Latest post</h2>
-          <article class="card card-featured">
-            <p class="card-date font-sans">{formatDate(latest.data.pubDate)}</p>
-            <h3 class="card-title font-header">
-              <a class="card-link" href={postUrl(latest)}>
-                {latest.data.title}
-                {latest.data.externalUrl && (
-                  <MaterialIcon class="ml-2 align-middle" iconName="open_in_new" />
-                )}
-              </a>
-            </h3>
-            <p class="card-description font-sans text-text">
-              {latest.data.description}
-            </p>
-            <div class="chip-row">
-              {latest.data.tags.map((tag) => (
-                <span class="chip chip-static font-sans">{tag}</span>
-              ))}
-            </div>
-          </article>
+          <SectionTitle>Latest post</SectionTitle>
+          <PostCard
+            url={postUrl(latest)}
+            title={latest.data.title}
+            description={latest.data.description}
+            date={formatDate(latest.data.pubDate)}
+            tags={latest.data.tags}
+            external={!!latest.data.externalUrl}
+            featured
+          />
         </section>
       )
     }
 
     <!-- Recent posts -->
     <section class="rise rise-2">
-      <h2 class="section-title font-header text-text">More writing</h2>
+      <SectionTitle>More writing</SectionTitle>
       <div class="card-grid">
         {
           recent.map((post) => (
-            <article class="card">
-              <p class="card-date font-sans">{formatDate(post.data.pubDate)}</p>
-              <h3 class="card-title font-header">
-                <a class="card-link" href={postUrl(post)}>
-                  {post.data.title}
-                  {post.data.externalUrl && (
-                    <MaterialIcon
-                      class="ml-2 align-middle"
-                      iconName="open_in_new"
-                    />
-                  )}
-                </a>
-              </h3>
-              <p class="card-description card-clamp font-sans text-text">
-                {post.data.description}
-              </p>
-            </article>
+            <PostCard
+              url={postUrl(post)}
+              title={post.data.title}
+              description={post.data.description}
+              date={formatDate(post.data.pubDate)}
+              external={!!post.data.externalUrl}
+              clamp
+            />
           ))
         }
       </div>
@@ -120,17 +98,16 @@ const postUrl = (post) =>
 
     <!-- Topics -->
     <section class="topics rise rise-3">
-      <h2 class="section-title font-header text-text">Browse by topic</h2>
+      <SectionTitle>Browse by topic</SectionTitle>
       <div class="chip-row">
         {
           topTags.map((tag) => (
-            <a class="chip font-sans" href={`/tags/${tag}/`}>
-              <MaterialIcon class="chip-icon" iconName="tag" />
+            <Chip href={`/tags/${tag}/`} icon="tag">
               {tag}
-            </a>
+            </Chip>
           ))
         }
-        <a class="chip chip-muted font-sans" href="/tags">all topics</a>
+        <Chip href="/tags" muted>all topics</Chip>
       </div>
     </section>
   </div>
@@ -236,47 +213,6 @@ const postUrl = (post) =>
   section {
     margin-bottom: 3.5rem;
   }
-  .section-title {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 1.5rem;
-    margin-bottom: 1.25rem;
-  }
-  .section-title::before {
-    content: "";
-    width: 2rem;
-    height: 4px;
-    border-radius: 2px;
-    background: linear-gradient(
-      90deg,
-      hsl(var(--color-accent-1)),
-      hsl(var(--color-secondary))
-    );
-  }
-
-  /* ---- Cards ---- */
-  .card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid hsl(var(--color-text) / 0.15);
-    border-radius: 0.75rem;
-    padding: 1.5rem;
-    background-color: hsl(var(--color-text) / 0.03);
-    transition:
-      transform 0.2s ease,
-      border-color 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-  .card:hover {
-    transform: translateY(-4px);
-    border-color: hsl(var(--color-accent-1) / 0.8);
-    box-shadow: 0 12px 30px -12px hsl(var(--color-text) / 0.3);
-  }
-  .card-featured {
-    border-left: 4px solid hsl(var(--color-accent-1));
-  }
   .card-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -286,45 +222,6 @@ const postUrl = (post) =>
     .card-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-  }
-  .card-date {
-    font-size: 0.875rem;
-    color: hsl(var(--color-secondary));
-    margin: 0;
-    padding: 0 0 0.5rem;
-  }
-  .card-title {
-    font-size: 1.35rem;
-    line-height: 1.3;
-    margin: 0 0 0.5rem;
-  }
-  .card-featured .card-title {
-    font-size: 1.75rem;
-  }
-  .card-link {
-    color: hsl(var(--color-primary));
-    text-decoration: none;
-  }
-  /* Stretch the title link across the whole card */
-  .card-link::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-  }
-  .card:hover .card-link {
-    text-decoration: underline;
-  }
-  .card-description {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-  }
-  .card-clamp {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
   }
 
   .view-all {
@@ -343,41 +240,11 @@ const postUrl = (post) =>
     text-decoration: underline;
   }
 
-  /* ---- Chips ---- */
   .chip-row {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 0.75rem;
-  }
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    border: 1px solid hsl(var(--color-secondary) / 0.45);
-    border-radius: 9999px;
-    padding: 0.3rem 0.9rem;
-    font-size: 0.9rem;
-    text-transform: lowercase;
-    text-decoration: none;
-    color: hsl(var(--color-secondary));
-    transition:
-      background-color 0.2s ease,
-      color 0.2s ease;
-  }
-  a.chip:hover {
-    background-color: hsl(var(--color-secondary));
-    color: hsl(var(--color-bg));
-  }
-  .chip-icon {
-    font-size: 1em;
-  }
-  .chip-static {
-    border-style: dashed;
-  }
-  .chip-muted {
-    border-color: hsl(var(--color-text) / 0.3);
-    color: hsl(var(--color-text) / 0.8);
   }
   .topics {
     margin-bottom: 2rem;
@@ -410,8 +277,7 @@ const postUrl = (post) =>
     .rise {
       animation: none;
     }
-    .btn:hover,
-    .card:hover {
+    .btn:hover {
       transform: none;
     }
   }
