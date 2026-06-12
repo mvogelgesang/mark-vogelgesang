@@ -23,6 +23,7 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
     <ViewTransitions />
   </head>
   <body class="bg-background">
+    <div class="site-backdrop" aria-hidden="true"></div>
     <div class="flex min-h-screen flex-col">
       <Header />
       <main
@@ -35,5 +36,25 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
       </main>
       <Footer />
     </div>
+    <style is:global>
+      .site-backdrop {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            56rem 26rem at 88% -4rem,
+            hsl(var(--color-accent-1) / 0.16),
+            transparent 70%
+          ),
+          radial-gradient(
+            44rem 22rem at -6% 22rem,
+            hsl(var(--color-secondary) / 0.12),
+            transparent 70%
+          );
+        background-repeat: no-repeat;
+      }
+    </style>
   </body>
 </html>
