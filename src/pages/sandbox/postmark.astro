@@ -1,0 +1,81 @@
+---
+// Temporary sandbox page for visual review of the Postmark component.
+// Not linked from navigation; delete before merging.
+import PageWrapper from "../../layouts/PageWrapper.astro";
+import SectionTitle from "../../components/SectionTitle.astro";
+import Postmark from "../../components/Postmark.astro";
+---
+
+<PageWrapper title="Postmark sandbox">
+  <script is:inline>
+    // Sandbox-only helper: append ?theme=dark or ?theme=light to preview.
+    // Written to localStorage so ThemeIcon's astro:page-load handler keeps it.
+    const theme = new URLSearchParams(location.search).get("theme");
+    if (theme === "dark" || theme === "light") {
+      localStorage.setItem("theme", theme);
+    }
+  </script>
+  <div class="w-full">
+    <header class="page-header">
+      <SectionTitle as="h1">Postmark sandbox</SectionTitle>
+    </header>
+
+    <section>
+      <SectionTitle>Figma reference content</SectionTitle>
+      <div class="demo-full">
+        <Postmark
+          topText="General Services Administration"
+          bottomText="Office of Customer Experience"
+          middleText="Fall 2008"
+        />
+      </div>
+    </section>
+
+    <section>
+      <SectionTitle>On a postcard surface, half size</SectionTitle>
+      <div class="card-surface">
+        <div class="demo-half">
+          <Postmark
+            topText="Salesforce"
+            bottomText="Product Management"
+            middleText="2021 - 2023"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <SectionTitle>At the character budget (34/35)</SectionTitle>
+      <div class="demo-half">
+        <Postmark
+          topText="US General Services Administration"
+          bottomText="18F"
+          middleText="Winter 2016"
+        />
+      </div>
+    </section>
+  </div>
+</PageWrapper>
+
+<style>
+  .page-header {
+    margin: 2.5rem 0 1.5rem;
+  }
+  section {
+    margin-bottom: 3rem;
+  }
+  .demo-full {
+    width: 100%;
+    max-width: 475px;
+  }
+  .demo-half {
+    width: 240px;
+  }
+  .card-surface {
+    display: inline-block;
+    border: 1px solid hsl(var(--color-text) / 0.15);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    background-color: hsl(var(--color-text) / 0.03);
+  }
+</style>
