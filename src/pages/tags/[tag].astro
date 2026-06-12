@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import PageWrapper from "../../layouts/PageWrapper.astro";
 import MaterialIcon from "../../components/MaterialIcon.astro";
-import PostCard from "../../components/PostCard.astro";
+import PostRow from "../../components/PostRow.astro";
 import SectionTitle from "../../components/SectionTitle.astro";
 import { formatDate } from "../../utils/posts";
 
@@ -44,15 +44,14 @@ const { posts } = Astro.props;
       </p>
     </header>
 
-    <div class="card-grid">
+    <div class="post-list">
       {
         posts.map((post) => (
-          <PostCard
+          <PostRow
             url={`/blog/${post.slug}`}
             title={post.data.title}
             description={post.data.description}
             date={formatDate(post.data.pubDate)}
-            clamp
           />
         ))
       }
@@ -89,15 +88,7 @@ const { posts } = Astro.props;
     margin: 0;
     padding: 0;
   }
-  .card-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  .post-list {
     margin-bottom: 3rem;
-  }
-  @media (min-width: 640px) {
-    .card-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }
 </style>
