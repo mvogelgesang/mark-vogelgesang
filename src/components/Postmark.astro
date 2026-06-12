@@ -1,0 +1,137 @@
+---
+// Circular postmark with wavy cancellation lines, rendered as static SVG.
+// Geometry ported from the CodePen prototype (QwWbJMV); d3 removed since
+// every value is deterministic from props and can be computed at build time.
+const {
+  topText = "",
+  bottomText = "",
+  middleText = "",
+  waves = 5,
+  class: className,
+} = Astro.props;
+
+// 35 chars is where natural text width (0.5em/char) meets the arc length;
+// anything longer compresses until it is illegible at card size.
+const MAX_RING_CHARS = 35;
+for (const [name, value] of Object.entries({ topText, bottomText })) {
+  if (value.length > MAX_RING_CHARS) {
+    throw new Error(
+      `Postmark ${name} "${value}" is ${value.length} characters; ` +
+        `the maximum that stays legible on the arc is ${MAX_RING_CHARS}.`
+    );
+  }
+}
+
+const width = 475;
+const height = 250;
+const centerX = 350;
+const centerY = 125;
+const radius = 100;
+const arcDegrees = 160;
+
+// Unique ids so multiple postmarks can coexist on one page.
+const uid = crypto.randomUUID().slice(0, 8);
+const ids = {
+  top: `postmark-top-${uid}`,
+  bottom: `postmark-bottom-${uid}`,
+  middle: `postmark-middle-${uid}`,
+};
+
+// Invisible guide paths; the ring is drawn entirely by the text on them.
+function arcPath(cy, clockwise) {
+  const angle = (((180 - arcDegrees) / 2) * Math.PI) / 180;
+  const startX = centerX - radius * Math.cos(angle);
+  const endX = centerX + radius * Math.cos(angle);
+  const largeArcFlag = arcDegrees > 180 ? 1 : 0;
+  const sweepFlag = clockwise ? 1 : 0;
+  return `M ${startX} ${cy} A ${radius} ${radius} 0 ${largeArcFlag} ${sweepFlag} ${endX} ${cy}`;
+}
+
+// Vertical offset between the chords of the top and bottom arcs.
+const halfGap = (radius * Math.sin(((180 - arcDegrees) * Math.PI) / 180)) / 2;
+const topPath = arcPath(centerY - halfGap, true);
+const bottomPath = arcPath(centerY + halfGap, false);
+const middlePath = `M ${centerX - radius} ${centerY} H ${centerX + radius}`;
+const arcLength = radius * ((arcDegrees * Math.PI) / 180);
+
+const wavePath = (y) =>
+  `M 0 ${y} c 13.2161 1.7877 54.0319 13.3995 79.3149 10.7328 c 25.283 -2.6667 49.288 -26.443 72.359 -28.388 c 23.071 -1.945 54.399 14.053 65.399 16.798`;
+const waveYs = Array.from({ length: waves }, (_, i) => 65 + i * 30);
+
+// Stretch text to fill the arc only when it is long enough that the result
+// still reads as a line of text; short strings render at natural width so a
+// value like "18F" is not scattered letter-by-letter around the ring.
+// 0.5em is the advance width of Inconsolata's monospaced glyphs.
+const ringFontSize = 16;
+const ringTextLength = (text) =>
+  text.length * ringFontSize * 0.5 >= arcLength * 0.55
+    ? arcLength
+    : undefined;
+---
+
+<svg
+  class:list={["postmark", className]}
+  viewBox={`0 0 ${width} ${height}`}
+  role="img"
+  aria-label={`Postmark: ${topText}, ${middleText}, ${bottomText}`}
+>
+  {waveYs.map((y) => <path class="wave" d={wavePath(y)} fill="none" />)}
+
+  <path id={ids.top} d={topPath} fill="none"></path>
+  <path id={ids.bottom} d={bottomPath} fill="none"></path>
+  <path id={ids.middle} d={middlePath} fill="none"></path>
+
+  <text class="ring-text">
+    <textPath
+      href={`#${ids.top}`}
+      text-anchor="middle"
+      startOffset="50%"
+      alignment-baseline="middle"
+      textLength={ringTextLength(topText)}
+    >
+      {topText}
+    </textPath>
+  </text>
+  <text class="ring-text">
+    <textPath
+      href={`#${ids.bottom}`}
+      text-anchor="middle"
+      startOffset="50%"
+      alignment-baseline="middle"
+      textLength={ringTextLength(bottomText)}
+    >
+      {bottomText}
+    </textPath>
+  </text>
+  <text class="middle-text">
+    <textPath href={`#${ids.middle}`} text-anchor="middle" startOffset="50%">
+      {middleText}
+    </textPath>
+  </text>
+</svg>
+
+<style>
+  .postmark {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .postmark text {
+    fill: hsl(var(--color-accent-1));
+    font-family: "Inconsolata Variable", monospace;
+  }
+  .ring-text {
+    font-size: 16px;
+    letter-spacing: 0.08em;
+  }
+  .middle-text {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .wave {
+    stroke: hsl(var(--color-accent-1));
+    stroke-width: 4;
+    stroke-linejoin: round;
+    stroke-linecap: butt;
+  }
+</style>
