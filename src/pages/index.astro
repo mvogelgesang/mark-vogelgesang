@@ -116,27 +116,7 @@ const postUrl = (post) =>
 <style>
   /* ---- Hero ---- */
   .hero {
-    position: relative;
-    isolation: isolate;
     padding: 3.5rem 0 3rem;
-  }
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: -1rem 0;
-    z-index: -1;
-    pointer-events: none;
-    background:
-      radial-gradient(
-        36rem 18rem at 85% 0%,
-        hsl(var(--color-accent-1) / 0.16),
-        transparent 70%
-      ),
-      radial-gradient(
-        28rem 16rem at 0% 100%,
-        hsl(var(--color-secondary) / 0.12),
-        transparent 70%
-      );
   }
   .eyebrow {
     font-size: 0.875rem;

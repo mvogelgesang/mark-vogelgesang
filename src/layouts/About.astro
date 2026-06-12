@@ -44,8 +44,6 @@ const { title, description, imgSrc, imgAlt, updatedDate } =
 
 <style>
   .profile {
-    position: relative;
-    isolation: isolate;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -59,19 +57,6 @@ const { title, description, imgSrc, imgAlt, updatedDate } =
       gap: 2.5rem;
     }
   }
-  .profile::before {
-    content: "";
-    position: absolute;
-    inset: -1rem 0;
-    z-index: -1;
-    pointer-events: none;
-    background: radial-gradient(
-      32rem 16rem at 90% 10%,
-      hsl(var(--color-accent-1) / 0.14),
-      transparent 70%
-    );
-  }
-
   .portrait-ring {
     flex-shrink: 0;
     padding: 5px;
