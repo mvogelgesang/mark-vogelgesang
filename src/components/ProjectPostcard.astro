@@ -1,0 +1,282 @@
+---
+import Postmark from "./Postmark.astro";
+import MaterialIcon from "./MaterialIcon.astro";
+
+const {
+  title,
+  summary,
+  org,
+  team,
+  timeframe,
+  role,
+  impact,
+  stack = [],
+  status = "complete",
+  url,
+  image,
+} = Astro.props;
+---
+
+<article class="postcard" data-postcard>
+  <div class="postcard-inner">
+    <div class="postcard-face postcard-front">
+      {
+        image ? (
+          <img class="front-image" src={image.src} alt={image.alt} loading="lazy" />
+        ) : (
+          <div class="front-placeholder">
+            <span class="front-title font-header">{title}</span>
+          </div>
+        )
+      }
+    </div>
+
+    <div class="postcard-face postcard-back">
+      <div class="back-message">
+        <h3 class="back-title font-header">
+          {url ? <a class="back-link" href={url}>{title}</a> : title}
+        </h3>
+        <p class="back-summary font-sans">{summary}</p>
+      </div>
+      <div class="back-divider" aria-hidden="true"></div>
+      <div class="back-address font-sans">
+        <div class="back-postmark">
+          <Postmark topText={org} bottomText={team} middleText={timeframe} />
+        </div>
+        <ul class="address-lines">
+          {role && <li>{role}</li>}
+          {impact && <li>{impact}</li>}
+          {stack.length > 0 && <li>{stack.join(", ")}</li>}
+        </ul>
+        {status && <span class="status-stamp">{status}</span>}
+      </div>
+    </div>
+  </div>
+
+  <button
+    class="flip-button"
+    type="button"
+    aria-pressed="false"
+    data-postcard-flip
+  >
+    <MaterialIcon iconName="autorenew" />
+    <span class="sr-only">Flip postcard</span>
+  </button>
+</article>
+
+<script>
+  function bindPostcards() {
+    for (const button of document.querySelectorAll("[data-postcard-flip]")) {
+      if (button.dataset.bound) continue;
+      button.dataset.bound = "true";
+      button.addEventListener("click", () => {
+        const card = button.closest("[data-postcard]");
+        const flipped = card.classList.toggle("is-flipped");
+        button.setAttribute("aria-pressed", String(flipped));
+      });
+    }
+  }
+  bindPostcards();
+  document.addEventListener("astro:page-load", bindPostcards);
+</script>
+
+<style>
+  .postcard {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    perspective: 1200px;
+    container-type: inline-size;
+  }
+  .postcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+  }
+  .postcard.is-flipped .postcard-inner {
+    transform: rotateY(180deg);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .postcard:hover .postcard-inner {
+      transform: rotateY(180deg);
+    }
+  }
+  /* Tabbing to the back's link flips the card so the focused element is visible */
+  .postcard:has(.back-link:focus-visible) .postcard-inner {
+    transform: rotateY(180deg);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .postcard-inner {
+      transition: none;
+    }
+  }
+
+  .postcard-face {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border: 1px solid hsl(var(--color-text) / 0.15);
+    border-radius: 0.75rem;
+    /* Opaque paper so the other face never shows through mid-flip */
+    background:
+      linear-gradient(hsl(var(--color-text) / 0.04), hsl(var(--color-text) / 0.04))
+      hsl(var(--color-bg));
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* ---- Front ---- */
+  .front-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Echoes the site backdrop: soft accent washes over the page background */
+  .front-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 1.5rem;
+    background:
+      radial-gradient(
+        24rem 12rem at 88% -10%,
+        hsl(var(--color-accent-1) / 0.18),
+        transparent 70%
+      ),
+      radial-gradient(
+        20rem 10rem at -8% 110%,
+        hsl(var(--color-secondary) / 0.14),
+        transparent 70%
+      ),
+      hsl(var(--color-bg));
+  }
+  .front-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-align: center;
+    color: hsl(var(--color-primary));
+  }
+
+  /* ---- Back ---- */
+  .postcard-back {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) auto minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1.25rem;
+    transform: rotateY(180deg);
+  }
+  .back-title {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    margin: 0 0 0.5rem;
+    color: hsl(var(--color-primary));
+  }
+  .back-link {
+    color: inherit;
+    text-decoration: none;
+  }
+  .back-link:hover {
+    text-decoration: underline;
+  }
+  .back-summary {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    color: hsl(var(--color-text));
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .back-divider {
+    width: 1px;
+    background-color: hsl(var(--color-text) / 0.25);
+  }
+  .back-message {
+    min-width: 0;
+  }
+  .back-address {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .back-postmark {
+    width: 100%;
+    min-width: 0;
+  }
+  .address-lines {
+    list-style: none;
+    margin: auto 0;
+    padding: 0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: hsl(var(--color-text));
+  }
+  .status-stamp {
+    /* The site palette has no red token; this stays muted in both themes */
+    align-self: flex-end;
+    border: 4px double hsl(8 65% 52% / 0.75);
+    border-radius: 0.2rem;
+    padding: 0.1rem 0.6rem;
+    color: hsl(8 65% 52% / 0.75);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transform: rotate(-8deg);
+  }
+
+  /* Compact type so the back still fits the 3:2 face on narrow cards */
+  @container (max-width: 430px) {
+    .postcard-back {
+      padding: 0.85rem;
+      gap: 0.6rem;
+    }
+    .back-title {
+      font-size: 1.05rem;
+    }
+    .back-summary {
+      font-size: 0.75rem;
+      -webkit-line-clamp: 5;
+    }
+    .address-lines {
+      font-size: 0.7rem;
+    }
+    .status-stamp {
+      font-size: 0.75rem;
+      border-width: 3px;
+    }
+  }
+
+  /* ---- Flip control ---- */
+  .flip-button {
+    position: absolute;
+    bottom: 0.6rem;
+    left: 0.6rem;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid hsl(var(--color-text) / 0.3);
+    border-radius: 9999px;
+    background-color: hsl(var(--color-bg) / 0.8);
+    color: hsl(var(--color-text) / 0.8);
+    cursor: pointer;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .flip-button:hover {
+    color: hsl(var(--color-accent-1));
+    border-color: hsl(var(--color-accent-1));
+  }
+  .flip-button:focus-visible {
+    outline: 2px solid hsl(var(--color-accent-1));
+    outline-offset: 2px;
+  }
+</style>

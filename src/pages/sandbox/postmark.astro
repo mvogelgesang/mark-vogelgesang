@@ -4,6 +4,7 @@
 import PageWrapper from "../../layouts/PageWrapper.astro";
 import SectionTitle from "../../components/SectionTitle.astro";
 import Postmark from "../../components/Postmark.astro";
+import ProjectPostcard from "../../components/ProjectPostcard.astro";
 ---
 
 <PageWrapper title="Postmark sandbox">
@@ -13,6 +14,14 @@ import Postmark from "../../components/Postmark.astro";
     const theme = new URLSearchParams(location.search).get("theme");
     if (theme === "dark" || theme === "light") {
       localStorage.setItem("theme", theme);
+    }
+    // ?flip=1 shows every postcard's back, for headless screenshots.
+    if (new URLSearchParams(location.search).get("flip")) {
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .querySelectorAll("[data-postcard]")
+          .forEach((card) => card.classList.add("is-flipped"));
+      });
     }
   </script>
   <div class="w-full">
@@ -45,6 +54,56 @@ import Postmark from "../../components/Postmark.astro";
     </section>
 
     <section>
+      <SectionTitle>Project postcards</SectionTitle>
+      <div class="postcard-grid">
+        <ProjectPostcard
+          title="21cIDEA Compliance Scanner"
+          summary="Automated scanning of federal websites against the 21st Century IDEA requirements. Crawled agency sites on a schedule, scored them with Lighthouse, and published compliance dashboards that agency teams used to prioritize fixes."
+          org="General Services Administration"
+          team="Office of Customer Experience"
+          timeframe="Fall 2008"
+          role="Lead Developer"
+          impact="20% compliance increase w/ 21cIDEA"
+          stack={["Node.js", "Puppeteer", "Lighthouse JS", "Astro"]}
+          status="complete"
+          url="https://example.com"
+          image={{
+            src: "/posts/20190419/robieHouse.jpeg",
+            alt: "Frank Lloyd Wright's Robie House",
+          }}
+        />
+        <ProjectPostcard
+          title="Design System Adoption"
+          summary="Drove a product-wide design system rollout: audited existing component usage, built migration tooling, and partnered with feature teams to retire one-off UI in favor of shared components."
+          org="Salesforce"
+          team="Product Management"
+          timeframe="2021 - 2023"
+          role="Director of Product Management"
+          impact="Unified 12 product teams on one system"
+          stack={["Figma", "LWC", "Storybook"]}
+          status="ongoing"
+        />
+      </div>
+    </section>
+
+    <section>
+      <SectionTitle>Postcard at mobile width (360px)</SectionTitle>
+      <div class="mobile-frame">
+        <ProjectPostcard
+          title="21cIDEA Compliance Scanner"
+          summary="Automated scanning of federal websites against the 21st Century IDEA requirements. Crawled agency sites on a schedule, scored them with Lighthouse, and published compliance dashboards that agency teams used to prioritize fixes."
+          org="General Services Administration"
+          team="Office of Customer Experience"
+          timeframe="Fall 2008"
+          role="Lead Developer"
+          impact="20% compliance increase w/ 21cIDEA"
+          stack={["Node.js", "Puppeteer", "Lighthouse JS", "Astro"]}
+          status="complete"
+        />
+      </div>
+    </section>
+
+    <section>
       <SectionTitle>At the character budget (34/35)</SectionTitle>
       <div class="demo-half">
         <Postmark
@@ -70,6 +129,19 @@ import Postmark from "../../components/Postmark.astro";
   }
   .demo-half {
     width: 240px;
+  }
+  .postcard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 640px) {
+    .postcard-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .mobile-frame {
+    width: 360px;
   }
   .card-surface {
     display: inline-block;
