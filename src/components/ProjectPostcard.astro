@@ -43,11 +43,26 @@ const {
         <div class="back-postmark">
           <Postmark topText={org} bottomText={team} middleText={timeframe} />
         </div>
-        <ul class="address-lines">
-          {role && <li>{role}</li>}
-          {impact && <li>{impact}</li>}
-          {stack.length > 0 && <li>{stack.join(", ")}</li>}
-        </ul>
+        <dl class="address-lines">
+          {role && (
+            <div class="address-line">
+              <dt>Role</dt>
+              <dd>{role}</dd>
+            </div>
+          )}
+          {impact && (
+            <div class="address-line">
+              <dt>Impact</dt>
+              <dd>{impact}</dd>
+            </div>
+          )}
+          {stack.length > 0 && (
+            <div class="address-line">
+              <dt>Stack</dt>
+              <dd>{stack.join(", ")}</dd>
+            </div>
+          )}
+        </dl>
         {status && <span class="status-stamp">{status}</span>}
       </div>
     </div>
@@ -207,13 +222,29 @@ const {
     width: 100%;
     min-width: 0;
   }
+  /* Ruled lines, like the printed address lines on a real postcard */
   .address-lines {
-    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     margin: auto 0;
-    padding: 0;
-    font-size: 0.85rem;
-    line-height: 1.6;
     color: hsl(var(--color-text));
+  }
+  .address-line {
+    border-bottom: 1px solid hsl(var(--color-text) / 0.25);
+    padding-bottom: 0.2rem;
+  }
+  .address-line dt {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: hsl(var(--color-text) / 0.55);
+  }
+  .address-line dd {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.35;
   }
   .status-stamp {
     /* The site palette has no red token; this stays muted in both themes */
@@ -243,6 +274,12 @@ const {
       -webkit-line-clamp: 5;
     }
     .address-lines {
+      gap: 0.35rem;
+    }
+    .address-line dt {
+      font-size: 0.5rem;
+    }
+    .address-line dd {
       font-size: 0.7rem;
     }
     .status-stamp {
